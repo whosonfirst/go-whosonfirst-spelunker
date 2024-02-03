@@ -10,6 +10,7 @@ import (
 	"github.com/aaronland/go-http-server"
 	"github.com/aaronland/go-http-server/handler"
 	"github.com/sfomuseum/go-flags/flagset"
+	sp_http "github.com/whosonfirst/go-whosonfirst-spelunker/http"
 )
 
 func Run(ctx context.Context, logger *slog.Logger) error {
@@ -21,7 +22,13 @@ func RunWithFlagSet(ctx context.Context, fs *flag.FlagSet, logger *slog.Logger) 
 
 	flagset.Parse(fs)
 
-	handlers := map[string]handler.RouteHandlerFunc{}
+	uris_table = &sp_http.URIs{
+		Id: "/id/",
+	}
+
+	handlers := map[string]handler.RouteHandlerFunc{
+		uris_table.Id: idHandlerFunc,
+	}
 
 	route_handler, err := handler.RouteHandler(handlers)
 
