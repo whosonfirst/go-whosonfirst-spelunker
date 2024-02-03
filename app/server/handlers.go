@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"net/http"
 
-	// "github.com/whosonfirst/go-whosonfirst-spelunker"
 	"github.com/whosonfirst/go-whosonfirst-spelunker/http/www"
 )
 
