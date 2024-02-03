@@ -5,7 +5,6 @@ import (
 	"log/slog"
 	"os"
 
-	_ "github.com/whosonfirst/go-reader-findingaid"
 	"github.com/whosonfirst/go-whosonfirst-spelunker/app/server"
 )
 
