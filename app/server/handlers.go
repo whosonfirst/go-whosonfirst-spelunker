@@ -3,11 +3,13 @@ package server
 import (
 	"context"
 	"fmt"
-	"log/slog"
 	"net/http"
+
+	// "github.com/whosonfirst/go-whosonfirst-spelunker"
+	"github.com/whosonfirst/go-whosonfirst-spelunker/http/www"
 )
 
-func idHandlerFunc(ctx context.Context) (http.Handler, error) {
+func geoJSONHandlerFunc(ctx context.Context) (http.Handler, error) {
 
 	setupCommonOnce.Do(setupCommon)
 
@@ -15,10 +17,9 @@ func idHandlerFunc(ctx context.Context) (http.Handler, error) {
 		return nil, fmt.Errorf("Failed to set up common configuration, %w", setupCommonError)
 	}
 
-	fn := func(rsp http.ResponseWriter, req *http.Request) {
-		slog.Info("HELLO WORLD")
-		return
+	opts := &www.GeoJSONHandlerOptions{
+		Spelunker: sp,
 	}
 
-	return http.HandlerFunc(fn), nil
+	return www.GeoJSONHandler(opts)
 }

@@ -9,7 +9,8 @@ import (
 
 type URIs struct {
 	// www URIs
-	Id string `json:"id"`
+	Id      string `json:"id"`
+	GeoJSON string `json:"geojson"`
 }
 
 func (u *URIs) ApplyPrefix(prefix string) error {

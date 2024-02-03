@@ -3,6 +3,7 @@ package spelunker
 import (
 	"context"
 	"fmt"
+	_ "log/slog"
 	"net/url"
 
 	"github.com/whosonfirst/go-reader"

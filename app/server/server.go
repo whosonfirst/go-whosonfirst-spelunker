@@ -23,11 +23,12 @@ func RunWithFlagSet(ctx context.Context, fs *flag.FlagSet, logger *slog.Logger) 
 	flagset.Parse(fs)
 
 	uris_table = &sp_http.URIs{
-		Id: "/id/",
+		Id:      "/id/",
+		GeoJSON: "/geojson",
 	}
 
 	handlers := map[string]handler.RouteHandlerFunc{
-		uris_table.Id: idHandlerFunc,
+		uris_table.GeoJSON: geoJSONHandlerFunc,
 	}
 
 	route_handler, err := handler.RouteHandler(handlers)
