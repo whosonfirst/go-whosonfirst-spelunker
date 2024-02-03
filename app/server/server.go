@@ -22,6 +22,8 @@ func RunWithFlagSet(ctx context.Context, fs *flag.FlagSet, logger *slog.Logger) 
 
 	flagset.Parse(fs)
 
+	slog.SetDefault(logger)
+
 	uris_table = &sp_http.URIs{
 		Id:      "/id/",
 		GeoJSON: "/geojson",
