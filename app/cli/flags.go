@@ -11,6 +11,8 @@ var command string
 
 var id int64
 
+var per_page int64
+
 func DefaultFlagSet() *flag.FlagSet {
 
 	fs := flagset.NewFlagSet("descendants")
@@ -18,6 +20,8 @@ func DefaultFlagSet() *flag.FlagSet {
 
 	fs.StringVar(&command, "command", "", "...")
 	fs.Int64Var(&id, "id", 0, "...")
+
+	fs.Int64Var(&per_page, "per-page", 10, "...")	
 
 	return fs
 }
