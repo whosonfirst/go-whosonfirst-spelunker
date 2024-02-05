@@ -7,6 +7,7 @@ import (
 	"github.com/whosonfirst/go-whosonfirst-spr/v2"
 )
 
+// NullSpelunker implements the [Spelunker] interface but returns an `ErrNotImplemented` error for every method.
 type NullSpelunker struct {
 	Spelunker
 }

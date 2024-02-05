@@ -21,8 +21,11 @@ type SpelunkerInitializationFunc func(ctx context.Context, uri string) (Spelunke
 
 // Spelunker is an interface for writing data to multiple sources or targets.
 type Spelunker interface {
+	// Retrieve an individual Who's On First record by its unique ID
 	GetById(context.Context, int64) ([]byte, error)
+	// Retrieve all the Who's On First record that are a descendant of a specific Who's On First ID.
 	GetDescendants(context.Context, int64, pagination.Options) (spr.StandardPlacesResults, pagination.Results, error)
+	// Retrieve all the Who's On First record that match a search criteria.	
 	Search(context.Context, *SearchOptions, pagination.Options) (spr.StandardPlacesResults, pagination.Results, error)
 
 	// Not implemented yet
