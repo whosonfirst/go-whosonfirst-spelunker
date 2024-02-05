@@ -30,3 +30,7 @@ func (s *NullSpelunker) GetById(ctx context.Context, id int64) ([]byte, error) {
 func (s *NullSpelunker) GetDescendants(ctx context.Context, id int64, pg_opts pagination.Options) (spr.StandardPlacesResults, pagination.Results, error) {
 	return nil, nil, ErrNotImplemented
 }
+
+func (s *NullSpelunker) Search(ctx context.Context, q *SearchOptions, pg_opts pagination.Options) (spr.StandardPlacesResults, pagination.Results, error) {
+	return nil, nil, ErrNotImplemented
+}

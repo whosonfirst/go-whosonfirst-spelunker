@@ -9,7 +9,7 @@ import (
 
 	"github.com/aaronland/go-pagination"
 	"github.com/aaronland/go-roster"
-	"github.com/whosonfirst/go-whosonfirst-placetypes"
+	_ "github.com/whosonfirst/go-whosonfirst-placetypes"
 	"github.com/whosonfirst/go-whosonfirst-spr/v2"
 )
 
@@ -23,27 +23,28 @@ type SpelunkerInitializationFunc func(ctx context.Context, uri string) (Spelunke
 type Spelunker interface {
 	GetById(context.Context, int64) ([]byte, error)
 	GetDescendants(context.Context, int64, pagination.Options) (spr.StandardPlacesResults, pagination.Results, error)
+	Search(context.Context, *SearchOptions, pagination.Options) (spr.StandardPlacesResults, pagination.Results, error)
 
-	Search(context.Context, *Query) ([][]byte, error)
+	// Not implemented yet
 
-	GetRecent(context.Context) ([][]byte, error)
-	GetCurrent(context.Context) ([][]byte, error)
+	/*
+		GetRecent(context.Context) ([][]byte, error)
+		GetCurrent(context.Context) ([][]byte, error)
 
-	GetPlacetypes(context.Context) ([]placetypes.WOFPlacetype, error)
-	GetPlacetype(context.Context, string) (placetypes.WOFPlacetype, error)
+		GetPlacetypes(context.Context) ([]placetypes.WOFPlacetype, error)
+		GetPlacetype(context.Context, string) (placetypes.WOFPlacetype, error)
 
-	GetFacetsForRecent(context.Context) (*Facets, error)
-	GetFacetsForDescendants(context.Context, int64) (*Facets, error)
-	GetFacetsForCurrent(context.Context) (*Facets, error)
-	GetFacetsForPlacetype(context.Context) (*Facets, error)
-	GetFacetsForSearch(context.Context, *Query) (*Facets, error)
+		GetFacetsForRecent(context.Context) (*Facets, error)
+		GetFacetsForDescendants(context.Context, int64) (*Facets, error)
+		GetFacetsForCurrent(context.Context) (*Facets, error)
+		GetFacetsForPlacetype(context.Context) (*Facets, error)
+		GetFacetsForSearch(context.Context, *SearchOptions) (*Facets, error)
 
-	// GetBrands()
-	// GetBrandById()
-	// GetFacetsForBrand()
+		GetLanguages(context.Context) ([]*Language, error)
+		GetLanguage(context.Context, string) (*Language, error)
+	*/
 
-	GetLanguages(context.Context) ([]*Language, error)
-	GetLanguage(context.Context, string) (*Language, error)
+	// TBD
 
 	/*
 
