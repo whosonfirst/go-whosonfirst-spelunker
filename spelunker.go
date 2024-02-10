@@ -25,6 +25,8 @@ type Spelunker interface {
 	GetById(context.Context, int64) ([]byte, error)
 	// Retrieve all the Who's On First record that are a descendant of a specific Who's On First ID.
 	GetDescendants(context.Context, int64, pagination.Options) (spr.StandardPlacesResults, pagination.Results, error)
+	// Return the total number of Who's On First records that are a descendant of a specific Who's On First ID.	
+	CountDescendants(context.Context, int64) (int64, error)
 	// Retrieve all the Who's On First record that match a search criteria.	
 	Search(context.Context, *SearchOptions, pagination.Options) (spr.StandardPlacesResults, pagination.Results, error)
 
