@@ -11,6 +11,7 @@ import (
 	"github.com/aaronland/go-roster"
 	_ "github.com/whosonfirst/go-whosonfirst-placetypes"
 	"github.com/whosonfirst/go-whosonfirst-spr/v2"
+	"github.com/whosonfirst/go-whosonfirst-uri"
 )
 
 var spelunker_roster roster.Roster
@@ -23,11 +24,13 @@ type SpelunkerInitializationFunc func(ctx context.Context, uri string) (Spelunke
 type Spelunker interface {
 	// Retrieve an individual Who's On First record by its unique ID
 	GetById(context.Context, int64) ([]byte, error)
+	// Retrieve an alternate geometry record for a Who's On First record by its unique ID.
+	GetAlternateGeometryById(context.Context, int64, *uri.AltGeom) ([]byte, error)
 	// Retrieve all the Who's On First record that are a descendant of a specific Who's On First ID.
 	GetDescendants(context.Context, int64, pagination.Options) (spr.StandardPlacesResults, pagination.Results, error)
-	// Return the total number of Who's On First records that are a descendant of a specific Who's On First ID.	
+	// Return the total number of Who's On First records that are a descendant of a specific Who's On First ID.
 	CountDescendants(context.Context, int64) (int64, error)
-	// Retrieve all the Who's On First record that match a search criteria.	
+	// Retrieve all the Who's On First record that match a search criteria.
 	Search(context.Context, *SearchOptions, pagination.Options) (spr.StandardPlacesResults, pagination.Results, error)
 
 	// Not implemented yet
