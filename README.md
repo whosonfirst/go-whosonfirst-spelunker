@@ -41,7 +41,9 @@ $> ./bin/wof-sqlite-index-features-mattn \
 	-database-uri mattn:///usr/local/data/ca.db \
 	-spatial-tables \
 	-ancestors \
+	-concordances \	
 	-search \
+	-index-alt-files \
 	/usr/local/data/whosonfirst-data-admin-ca
 ```
 
