@@ -24,7 +24,7 @@ func get_descendants(ctx context.Context, sp spelunker.Spelunker) error {
 	pg_opts.PerPage(per_page)
 	pg_opts.Pointer(page)
 
-	r, _, err := sp.GetDescendants(ctx, id, pg_opts)
+	r, _, err := sp.GetDescendants(ctx, pg_opts, id)
 
 	if err != nil {
 		return fmt.Errorf("Failed to retrieve descendants, %w", err)

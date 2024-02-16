@@ -28,7 +28,7 @@ func search(ctx context.Context, sp spelunker.Spelunker) error {
 		Query: query,
 	}
 
-	r, _, err := sp.Search(ctx, search_opts, pg_opts)
+	r, _, err := sp.Search(ctx, pg_opts, search_opts)
 
 	if err != nil {
 		return fmt.Errorf("Failed to retrieve descendants, %w", err)
