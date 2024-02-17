@@ -36,6 +36,9 @@ type Spelunker interface {
 	// Retrieve all the Who's On First records that have been modified with a window of time.
 	GetRecent(context.Context, pagination.Options, time.Duration, ...Filter) (spr.StandardPlacesResults, pagination.Results, error)
 
+	GetPlacetypes(context.Context) ([]*Facet, error)
+	GetConcordances(context.Context) ([]*Facet, error)
+
 	// Not implemented yet
 
 	/*
