@@ -1,4 +1,4 @@
-package filters
+package spelunker
 
 import (
 	"context"

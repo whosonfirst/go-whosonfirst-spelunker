@@ -1,21 +1,24 @@
-package filters
+package spelunker
 
 import (
 	"context"
 	"fmt"
 	"net/url"
-
-	"github.com/whosonfirst/go-whosonfirst-spelunker"
 )
 
 const COUNTRY_FILTER_SCHEME string = "country"
 
 type CountryFilter struct {
-	spelunker.Filter
+	Filter
 	code string
 }
 
-func NewCountryFilter(ctx context.Context, uri string) (spelunker.Filter, error) {
+func NewCountryFilterFromString(ctx context.Context, code string) (Filter, error) {
+	uri := fmt.Sprintf("%s://%s", COUNTRY_FILTER_SCHEME, code)
+	return NewCountryFilter(ctx, uri)
+}
+
+func NewCountryFilter(ctx context.Context, uri string) (Filter, error) {
 
 	u, err := url.Parse(uri)
 
