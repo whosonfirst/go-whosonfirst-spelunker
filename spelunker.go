@@ -29,6 +29,7 @@ type Spelunker interface {
 	GetAlternateGeometryById(context.Context, int64, *uri.AltGeom) ([]byte, error)
 	// Retrieve all the Who's On First record that are a descendant of a specific Who's On First ID.
 	GetDescendants(context.Context, pagination.Options, int64, ...Filter) (spr.StandardPlacesResults, pagination.Results, error)
+	FacetDescendants(context.Context, string, int64, ...Filter) ([]*Facet, error)
 	// Return the total number of Who's On First records that are a descendant of a specific Who's On First ID.
 	CountDescendants(context.Context, int64) (int64, error)
 	// Retrieve all the Who's On First records that match a search criteria.
