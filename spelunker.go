@@ -10,7 +10,7 @@ import (
 
 	"github.com/aaronland/go-pagination"
 	"github.com/aaronland/go-roster"
-	_ "github.com/whosonfirst/go-whosonfirst-placetypes"
+	"github.com/whosonfirst/go-whosonfirst-placetypes"
 	"github.com/whosonfirst/go-whosonfirst-spr/v2"
 	"github.com/whosonfirst/go-whosonfirst-uri"
 )
@@ -39,6 +39,8 @@ type Spelunker interface {
 
 	GetPlacetypes(context.Context) (*Faceting, error)
 	GetConcordances(context.Context) (*Faceting, error)
+
+	HasPlacetype(context.Context, pagination.Options, *placetypes.WOFPlacetype, []Filter) (spr.StandardPlacesResults, pagination.Results, error)
 
 	// Not implemented yet
 
