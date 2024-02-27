@@ -42,6 +42,8 @@ type Spelunker interface {
 
 	HasPlacetype(context.Context, pagination.Options, *placetypes.WOFPlacetype, []Filter) (spr.StandardPlacesResults, pagination.Results, error)
 
+	HasConcordance(context.Context, pagination.Options, string, string, string, []Filter) (spr.StandardPlacesResults, pagination.Results, error)
+
 	// Not implemented yet
 
 	/*
