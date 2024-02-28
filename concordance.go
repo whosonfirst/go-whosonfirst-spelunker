@@ -11,6 +11,10 @@ type Concordance struct {
 	value     any
 }
 
+func NewConcordanceFromString(str_concordance string) (*Concordance, error) {
+	return nil, ErrNotImplemented
+}
+
 func NewConcordanceFromTriple(namespace string, predicate string, value any) *Concordance {
 
 	c := &Concordance{
