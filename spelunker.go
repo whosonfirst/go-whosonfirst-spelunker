@@ -41,11 +41,11 @@ type Spelunker interface {
 	GetConcordances(context.Context) (*Faceting, error)
 
 	HasPlacetype(context.Context, pagination.Options, *placetypes.WOFPlacetype, []Filter) (spr.StandardPlacesResults, pagination.Results, error)
-	HasPlacetypeFaceted(context.Context, pagination.Options, *placetypes.WOFPlacetype, []Filter, []*Facet) ([]*Faceting, error)
+	HasPlacetypeFaceted(context.Context, *placetypes.WOFPlacetype, []Filter, []*Facet) ([]*Faceting, error)
 
 	// Update this to expect *Concordance instead of parts
 	HasConcordance(context.Context, pagination.Options, string, string, string, []Filter) (spr.StandardPlacesResults, pagination.Results, error)
-	HasConcordanceFaceted(context.Context, pagination.Options, string, string, string, []Filter, []*Facet) ([]*Faceting, error)
+	HasConcordanceFaceted(context.Context, string, string, string, []Filter, []*Facet) ([]*Faceting, error)
 
 	// TBD...
 	// Unclear whether this should implement all of https://github.com/whosonfirst/go-whosonfirst-spatial/blob/main/spatial.go#L11
