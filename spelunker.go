@@ -28,24 +28,27 @@ type Spelunker interface {
 	// Retrieve an alternate geometry record for a Who's On First record by its unique ID.
 	GetAlternateGeometryById(context.Context, int64, *uri.AltGeom) ([]byte, error)
 	// Retrieve all the Who's On First record that are a descendant of a specific Who's On First ID.
+	
 	GetDescendants(context.Context, pagination.Options, int64, []Filter) (spr.StandardPlacesResults, pagination.Results, error)
 	GetDescendantsFaceted(context.Context, int64, []Filter, []*Facet) ([]*Faceting, error)
 	// Return the total number of Who's On First records that are a descendant of a specific Who's On First ID.
 	CountDescendants(context.Context, int64) (int64, error)
+	
 	// Retrieve all the Who's On First records that match a search criteria.
 	Search(context.Context, pagination.Options, *SearchOptions) (spr.StandardPlacesResults, pagination.Results, error)
+	SearchFaceted(context.Context, *SearchOptions, []*Facet) ([]*Faceting, error)
+	
 	// Retrieve all the Who's On First records that have been modified with a window of time.
 	GetRecent(context.Context, pagination.Options, time.Duration, []Filter) (spr.StandardPlacesResults, pagination.Results, error)
+	GetRecentFaceted(context.Context, time.Duration, []Filter, []*Facet) ([]*Faceting, error)	
 
-	GetPlacetypes(context.Context) (*Faceting, error)
-	GetConcordances(context.Context) (*Faceting, error)
-
+	GetPlacetypes(context.Context) (*Faceting, error)	
 	HasPlacetype(context.Context, pagination.Options, *placetypes.WOFPlacetype, []Filter) (spr.StandardPlacesResults, pagination.Results, error)
 	HasPlacetypeFaceted(context.Context, *placetypes.WOFPlacetype, []Filter, []*Facet) ([]*Faceting, error)
 
-	// Update this to expect *Concordance instead of parts
-	HasConcordance(context.Context, pagination.Options, string, string, string, []Filter) (spr.StandardPlacesResults, pagination.Results, error)
-	HasConcordanceFaceted(context.Context, string, string, string, []Filter, []*Facet) ([]*Faceting, error)
+	GetConcordances(context.Context) (*Faceting, error)	
+	HasConcordance(context.Context, pagination.Options, string, string, any, []Filter) (spr.StandardPlacesResults, pagination.Results, error)
+	HasConcordanceFaceted(context.Context, string, string, any, []Filter, []*Facet) ([]*Faceting, error)
 
 	// TBD...
 	// Unclear whether this should implement all of https://github.com/whosonfirst/go-whosonfirst-spatial/blob/main/spatial.go#L11
@@ -67,24 +70,6 @@ type Spelunker interface {
 	// https://github.com/whosonfirst/go-whosonfirst-spatial-pmtiles/blob/main/database.go
 	//
 	// PointInPolygon(context.Context, orb.Point) (spr.StandardPlacesResults, error)
-
-	// Not implemented yet
-
-	/*
-		GetCurrent(context.Context) ([][]byte, error)
-
-		GetPlacetypes(context.Context) ([]placetypes.WOFPlacetype, error)
-		GetPlacetype(context.Context, string) (placetypes.WOFPlacetype, error)
-
-		GetFacetsForRecent(context.Context) (*Facets, error)
-		GetFacetsForDescendants(context.Context, int64) (*Facets, error)
-		GetFacetsForCurrent(context.Context) (*Facets, error)
-		GetFacetsForPlacetype(context.Context) (*Facets, error)
-		GetFacetsForSearch(context.Context, *SearchOptions) (*Facets, error)
-
-		GetLanguages(context.Context) ([]*Language, error)
-		GetLanguage(context.Context, string) (*Language, error)
-	*/
 
 	// TBD
 
