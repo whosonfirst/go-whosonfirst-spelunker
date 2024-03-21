@@ -9,13 +9,13 @@ require (
 	github.com/sfomuseum/go-flags v0.10.0
 	github.com/tidwall/gjson v1.17.0
 	github.com/tidwall/sjson v1.2.5
-	github.com/whosonfirst/go-whosonfirst-placetypes v0.7.0
+	github.com/whosonfirst/go-whosonfirst-placetypes v0.7.2
 	github.com/whosonfirst/go-whosonfirst-spr/v2 v2.3.7
 	github.com/whosonfirst/go-whosonfirst-uri v1.3.0
 )
 
 require (
-	github.com/dominikbraun/graph v0.16.1 // indirect
+	github.com/dominikbraun/graph v0.23.0 // indirect
 	github.com/jtacoma/uritemplates v1.0.0 // indirect
 	github.com/paulmach/orb v0.10.0 // indirect
 	github.com/tidwall/match v1.1.1 // indirect
