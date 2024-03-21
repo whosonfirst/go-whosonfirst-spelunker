@@ -35,8 +35,8 @@ type Spelunker interface {
 	CountDescendants(context.Context, int64) (int64, error)
 	
 	// Retrieve all the Who's On First records that match a search criteria.
-	Search(context.Context, pagination.Options, *SearchOptions) (spr.StandardPlacesResults, pagination.Results, error)
-	SearchFaceted(context.Context, *SearchOptions, []*Facet) ([]*Faceting, error)
+	Search(context.Context, pagination.Options, *SearchOptions, []Filter) (spr.StandardPlacesResults, pagination.Results, error)
+	SearchFaceted(context.Context, *SearchOptions, []Filter, []*Facet) ([]*Faceting, error)
 	
 	// Retrieve all the Who's On First records that have been modified with a window of time.
 	GetRecent(context.Context, pagination.Options, time.Duration, []Filter) (spr.StandardPlacesResults, pagination.Results, error)
