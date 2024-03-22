@@ -29,7 +29,7 @@ func search(ctx context.Context, sp spelunker.Spelunker) error {
 	}
 
 	filters := make([]spelunker.Filter, 0)
-	
+
 	r, _, err := sp.Search(ctx, pg_opts, search_opts, filters)
 
 	if err != nil {

@@ -3,7 +3,7 @@ package document
 import (
 	"context"
 	"fmt"
-	
+
 	"github.com/tidwall/gjson"
 	"testing"
 )

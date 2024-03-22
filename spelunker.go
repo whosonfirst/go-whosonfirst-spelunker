@@ -28,25 +28,25 @@ type Spelunker interface {
 	// Retrieve an alternate geometry record for a Who's On First record by its unique ID.
 	GetAlternateGeometryById(context.Context, int64, *uri.AltGeom) ([]byte, error)
 	// Retrieve all the Who's On First record that are a descendant of a specific Who's On First ID.
-	
+
 	GetDescendants(context.Context, pagination.Options, int64, []Filter) (spr.StandardPlacesResults, pagination.Results, error)
 	GetDescendantsFaceted(context.Context, int64, []Filter, []*Facet) ([]*Faceting, error)
 	// Return the total number of Who's On First records that are a descendant of a specific Who's On First ID.
 	CountDescendants(context.Context, int64) (int64, error)
-	
+
 	// Retrieve all the Who's On First records that match a search criteria.
 	Search(context.Context, pagination.Options, *SearchOptions, []Filter) (spr.StandardPlacesResults, pagination.Results, error)
 	SearchFaceted(context.Context, *SearchOptions, []Filter, []*Facet) ([]*Faceting, error)
-	
+
 	// Retrieve all the Who's On First records that have been modified with a window of time.
 	GetRecent(context.Context, pagination.Options, time.Duration, []Filter) (spr.StandardPlacesResults, pagination.Results, error)
-	GetRecentFaceted(context.Context, time.Duration, []Filter, []*Facet) ([]*Faceting, error)	
+	GetRecentFaceted(context.Context, time.Duration, []Filter, []*Facet) ([]*Faceting, error)
 
-	GetPlacetypes(context.Context) (*Faceting, error)	
+	GetPlacetypes(context.Context) (*Faceting, error)
 	HasPlacetype(context.Context, pagination.Options, *placetypes.WOFPlacetype, []Filter) (spr.StandardPlacesResults, pagination.Results, error)
 	HasPlacetypeFaceted(context.Context, *placetypes.WOFPlacetype, []Filter, []*Facet) ([]*Faceting, error)
 
-	GetConcordances(context.Context) (*Faceting, error)	
+	GetConcordances(context.Context) (*Faceting, error)
 	HasConcordance(context.Context, pagination.Options, string, string, any, []Filter) (spr.StandardPlacesResults, pagination.Results, error)
 	HasConcordanceFaceted(context.Context, string, string, any, []Filter, []*Facet) ([]*Faceting, error)
 
