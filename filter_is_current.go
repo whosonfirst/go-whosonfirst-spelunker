@@ -15,7 +15,7 @@ type IsCurrentFilter struct {
 }
 
 func NewIsCurrentFilterFromString(ctx context.Context, name string) (Filter, error) {
-	uri := fmt.Sprintf("%s://%s", IS_CURRENT_FILTER_SCHEME, name)
+	uri := fmt.Sprintf("%s://?flag=%s", IS_CURRENT_FILTER_SCHEME, name)
 	return NewIsCurrentFilter(ctx, uri)
 }
 
@@ -27,12 +27,18 @@ func NewIsCurrentFilter(ctx context.Context, uri string) (Filter, error) {
 		return nil, fmt.Errorf("Failed to parse URI, %w", err)
 	}
 
-	str_fl := u.Host
+	q := u.Query()
+
+	if !q.Has("flag"){
+		return nil, fmt.Errorf("Missing ?flag= parameter")
+	}
+	
+	str_fl := q.Get("flag")
 
 	fl, err := strconv.Atoi(str_fl)
 
 	if err != nil {
-		return nil, fmt.Errorf("Invalid is_current value")
+		return nil, fmt.Errorf("Invalid ?flag= parameter, %w", err)
 	}
 
 	f := &IsCurrentFilter{
