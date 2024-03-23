@@ -7,7 +7,7 @@ import (
 	"strconv"
 )
 
-const IS_CURRENT_FILTER_SCHEME string = "is_current"
+const IS_CURRENT_FILTER_SCHEME string = "iscurrent"
 
 type IsCurrentFilter struct {
 	Filter
