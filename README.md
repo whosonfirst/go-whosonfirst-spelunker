@@ -18,7 +18,7 @@ Specifically, the former (`whosonfirst-www-spelunker`) is written in Python and 
 
 ## A note about versioning
 
-Currently this package is unversioned reflecting the fact that it is still in flux. The rate of change is slowing down and will eventually be assigned version numbers less than 1.x for as long as it takes to produce the initial "minimal viable (and working)" Spelunker implementations. These versions (0.x.y) should not be considered to be backwards compatible and should be expected to change as the first stable interface is settled, specifically if and whether it will contain spatial functions.
+Currently this package is unversioned reflecting the fact that it is still in flux. The rate of change is slowing down and will eventually be assigned version numbers less than 1.x for as long as it takes to produce the initial "minimal viable (and working)" Spelunker implementations. These versions (0.x.y) should not be considered to be backwards compatible with each other and are expected to change as the first stable interface is settled, specifically if and whether it will contain spatial functions.
 
 Once a decision has been reached on that matter and everything is proven to work this package (and all the related packages, discussed below) will be bumped up to a "version 2.x" release, skipping version 1.x altogether, reflecting the fact that the original Python version of the Spelunker is "version 1" and that this code base is meaningfully different.
 
