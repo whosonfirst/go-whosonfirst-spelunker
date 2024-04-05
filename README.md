@@ -38,6 +38,8 @@ This package does not export any working implementations of the `Spelunker` inte
 
 The [whosonfirst/go-whosonfirst-spelunker-httpd](github.com/whosonfirst/go-whosonfirst-spelunker-httpd) package provides libraries for implementing a web-based spelunker service. While it does define a working `cmd/server` tool demonstrating how those libraries can be used, like the `go-whosonfirst-spelunker` package it does not export any working implementations of the `Spelunker` interface. 
 
+The server itself can be run and will serve requests because it's default database is the [NullSpelunker](https://github.com/whosonfirst/go-whosonfirst-spelunker/blob/main/spelunker_null.go) implementation but since that implementation simply returns "Not implemented" for every method in the Spelunker interface it probably won't be of much use.
+
 ### go-whosonfirst-spelunker-{DATABASE}
 
 #### go-whosonfirst-spelunker-opensearch
