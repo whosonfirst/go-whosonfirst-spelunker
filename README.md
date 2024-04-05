@@ -44,6 +44,8 @@ The server itself can be run and will serve requests because its default databas
 
 ### go-whosonfirst-spelunker-{DATABASE}
 
+These are packages that implement the [Spelunker](https://github.com/whosonfirst/go-whosonfirst-spelunker/blob/main/spelunker.go#L24-L82) interface for a particular database engine. Current implementations are:
+
 #### go-whosonfirst-spelunker-opensearch
 
 The [whosonfirst/go-whosonfirst-spelunker-opensearch](github.com/whosonfirst/go-whosonfirst-spelunker-opensearch) package implements the `Spelunker` interface using an [OpenSearch](https://opensearch.org/) document store, for example data indexed by the [whosonfirst/go-whosonfirst-opensearch](https://github.com/whosonfirst/go-whosonfirst-opensearch) package.
