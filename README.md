@@ -14,7 +14,7 @@ This is work in progress and you should expect things to change, break or simply
 
 This is a refactoring of both the [whosonfirst/whosonfirst-www-spelunker](github.com/whosonfirst/whosonfirst-www-spelunker) and [whosonfirst/go-whosonfirst-browser](github.com/whosonfirst/go-whosonfirst-browser) packages.
 
-Specifically, the former (`whosonfirst-www-spelunker`) is written in Python and has a sufficiently complex set of requirements that spinning up a new instance is difficult. By rewriting the spelunker tool in Go the hope is to eliminate or at least minimize these external requirements and to make it easier to deploy the spelunker to "serverless" environments like AWS Lambda or Function URLs. The latter (`go-whosonfirst-browser`) has developed a sufficiently large and complex code base that starting from scratch and simply copying, and adapting, existing functionality seemed easier than 
+Specifically, the former (`whosonfirst-www-spelunker`) is written in Python and has a sufficiently complex set of requirements that spinning up a new instance is difficult. By rewriting the spelunker tool in Go the hope is to eliminate or at least minimize these external requirements and to make it easier to deploy the spelunker to "serverless" environments like AWS Lambda or Function URLs. The latter (`go-whosonfirst-browser`) has developed a sufficiently large and complex code base that starting from scratch and simply copying, and adapting, existing functionality seemed easier than trying to refactor everything.
 
 ## A note about versioning
 
@@ -30,7 +30,7 @@ There are three "classes" of `go-whosonfirst-spelunker` packages:
 
 ### go-whosonfirst-spelunker
 
-That would be the package that you are looking at right now. It defines the [Spelunker](#) interface and exposes a package library for use by other packages to create a "spelunker-like" command-line tool.
+That would be the package that you are looking at right now. It defines the [Spelunker](https://github.com/whosonfirst/go-whosonfirst-spelunker/blob/main/spelunker.go#L24-L82) interface defining the minimal methods required for a Spelunker application be it a command-line application, a web application or something else.
 
 This package does not export any working implementations of the `Spelunker` interface. It simply defines the interface and other associated types.
 
@@ -38,7 +38,9 @@ This package does not export any working implementations of the `Spelunker` inte
 
 The [whosonfirst/go-whosonfirst-spelunker-httpd](github.com/whosonfirst/go-whosonfirst-spelunker-httpd) package provides libraries for implementing a web-based spelunker service. While it does define a working `cmd/server` tool demonstrating how those libraries can be used, like the `go-whosonfirst-spelunker` package it does not export any working implementations of the `Spelunker` interface. 
 
-The server itself can be run and will serve requests because it's default database is the [NullSpelunker](https://github.com/whosonfirst/go-whosonfirst-spelunker/blob/main/spelunker_null.go) implementation but since that implementation simply returns "Not implemented" for every method in the Spelunker interface it probably won't be of much use.
+The idea is to separate the interaction details and the mechanics of a web application from the details of how data is stored or queried from any given database containing Who's On First records. 
+
+The server itself can be run and will serve requests because its default database is the [NullSpelunker](https://github.com/whosonfirst/go-whosonfirst-spelunker/blob/main/spelunker_null.go) implementation but since that implementation simply returns "Not implemented" for every method in the Spelunker interface it probably won't be of much use.
 
 ### go-whosonfirst-spelunker-{DATABASE}
 
