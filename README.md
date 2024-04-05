@@ -92,6 +92,8 @@ func main() {
 }
 ```
 
+_So far this package has only been tested with SQLite databases and probably contains some SQLite-specific syntax. The hope is that database engine specifics can be handled in conditionals in the `go-whosonfirst-spelunker-sql` package itself leaving consumers none the wiser._
+
 #### go-whosonfirst-spelunker-sqlite
 
 This package builds on the `whosonfirst/go-whosonfirst-spelunker-sql` and the `whosonfirst/go-whosonfirst-spelunker-httpd` packages but also imports @psanford 's [sqlite3vfs](https://github.com/psanford?tab=repositories&q=sqlite3vfs&type=&language=&sort=) packages to enable the use of SQLite databases hosted on remote servers.
