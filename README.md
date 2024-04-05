@@ -48,6 +48,8 @@ The [whosonfirst/go-whosonfirst-spelunker-opensearch](github.com/whosonfirst/go-
 
 It imports both the `go-whosonfirst-spelunker` and `go-whosonfirst-spelunker-httpd` and exports local instances of the web-based server (`httpd`).
 
+_Set up and example(s) to be written..._
+
 #### go-whosonfirst-spelunker-sql
 
 The [whosonfirst/go-whosonfirst-spelunker-sqlite](github.com/whosonfirst/go-whosonfirst-spelunker-sql) package implements the `Spelunker` interface using a Go `database/sql` relational database source, for example SQLite databases produced by the [whosonfirst/go-whosonfirst-sqlite-features-index](https://github.com/whosonfirst/go-whosonfirst-sqlite-features-index) package.
