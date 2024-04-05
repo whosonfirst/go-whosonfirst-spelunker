@@ -38,7 +38,15 @@ This package does not export any working implementations of the `Spelunker` inte
 
 The [whosonfirst/go-whosonfirst-spelunker-httpd](github.com/whosonfirst/go-whosonfirst-spelunker-httpd) package provides libraries for implementing a web-based spelunker service. While it does define a working `cmd/server` tool demonstrating how those libraries can be used, like the `go-whosonfirst-spelunker` package it does not export any working implementations of the `Spelunker` interface. 
 
-### go-whosonfirst-spelunker-sql
+### go-whosonfirst-spelunker-{DATABASE}
+
+#### go-whosonfirst-spelunker-opensearch
+
+The [whosonfirst/go-whosonfirst-spelunker-opensearch](github.com/whosonfirst/go-whosonfirst-spelunker-opensearch) package implements the `Spelunker` interface using an [OpenSearch](https://opensearch.org/) document store, for example data indexes by the [whosonfirst/go-whosonfirst-opensearch](https://github.com/whosonfirst/go-whosonfirst-opensearch) package.
+
+It imports both the `go-whosonfirst-spelunker` and `go-whosonfirst-spelunker-httpd` and exports local instances of the web-based server (`httpd`).
+
+#### go-whosonfirst-spelunker-sql
 
 The [whosonfirst/go-whosonfirst-spelunker-sqlite](github.com/whosonfirst/go-whosonfirst-spelunker-sql) package implements the `Spelunker` interface using a Go `database/sql` relational database source, for example SQLite databases produced by the [whosonfirst/go-whosonfirst-sqlite-features-index](https://github.com/whosonfirst/go-whosonfirst-sqlite-features-index) package.
 
@@ -84,7 +92,7 @@ func main() {
 }
 ```
 
-### go-whosonfirst-spelunker-sqlite
+#### go-whosonfirst-spelunker-sqlite
 
 This package builds on the `whosonfirst/go-whosonfirst-spelunker-sql` and the `whosonfirst/go-whosonfirst-spelunker-httpd` packages but also imports @psanford 's [sqlite3vfs](https://github.com/psanford?tab=repositories&q=sqlite3vfs&type=&language=&sort=) packages to enable the use of SQLite databases hosted on remote servers.
 
@@ -162,6 +170,7 @@ _Note: In practice this (querying a SQLite database over HTTP) doesn't really wo
 
 ## See also
 
-* github.com/whosonfirst/go-whosonfirst-spelunker-httpd
-* github.com/whosonfirst/go-whosonfirst-spelunker-sql
-* github.com/whosonfirst/go-whosonfirst-spelunker-sqlite
+* https://github.com/whosonfirst/go-whosonfirst-spelunker-httpd
+* https://github.com/whosonfirst/go-whosonfirst-spelunker-opensearch
+* https://github.com/whosonfirst/go-whosonfirst-spelunker-sql
+* https://github.com/whosonfirst/go-whosonfirst-spelunker-sqlite
