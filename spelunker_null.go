@@ -79,6 +79,18 @@ func (s *NullSpelunker) HasPlacetypeFaceted(ctx context.Context, pt *placetypes.
 	return nil, ErrNotImplemented
 }
 
+func (s *NullSpelunker) GetAlternatePlacetypes(ctx context.Context) (*Faceting, error) {
+	return nil, ErrNotImplemented
+}
+
+func (s *NullSpelunker) HasAlternatePlacetype(ctx context.Context, pg_opts pagination.Options, pt string, filters []Filter) (spr.StandardPlacesResults, pagination.Results, error) {
+	return nil, nil, ErrNotImplemented
+}
+
+func (s *NullSpelunker) HasAlternatePlacetypeFaceted(ctx context.Context, pt string, filters []Filter, facets []*Facet) ([]*Faceting, error) {
+	return nil, ErrNotImplemented
+}
+
 func (s *NullSpelunker) GetConcordances(ctx context.Context) (*Faceting, error) {
 	return nil, ErrNotImplemented
 }

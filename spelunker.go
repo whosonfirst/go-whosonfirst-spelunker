@@ -48,6 +48,10 @@ type Spelunker interface {
 	HasPlacetype(context.Context, pagination.Options, *placetypes.WOFPlacetype, []Filter) (spr.StandardPlacesResults, pagination.Results, error)
 	HasPlacetypeFaceted(context.Context, *placetypes.WOFPlacetype, []Filter, []*Facet) ([]*Faceting, error)
 
+	GetAlternatePlacetypes(context.Context) (*Faceting, error)
+	HasAlternatePlacetype(context.Context, pagination.Options, string, []Filter) (spr.StandardPlacesResults, pagination.Results, error)
+	HasAlternatePlacetypeFaceted(context.Context, string, []Filter, []*Facet) ([]*Faceting, error)
+
 	GetConcordances(context.Context) (*Faceting, error)
 	HasConcordance(context.Context, pagination.Options, string, string, any, []Filter) (spr.StandardPlacesResults, pagination.Results, error)
 	HasConcordanceFaceted(context.Context, string, string, any, []Filter, []*Facet) ([]*Faceting, error)
