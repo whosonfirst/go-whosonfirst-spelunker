@@ -1,4 +1,4 @@
-package search
+package hasalternateplacetype
 
 import (
 	"context"
@@ -10,21 +10,21 @@ import (
 	"github.com/whosonfirst/go-whosonfirst-spelunker/command"
 )
 
-type SearchCommand struct {
+type HasAlternatePlacetypeCommand struct {
 	spelunker.Command
 }
 
 func init() {
 	ctx := context.Background()
-	spelunker.RegisterCommand(ctx, "search", NewSearchCommand)
+	spelunker.RegisterCommand(ctx, "hasalternateplacetype", NewHasAlternatePlacetypeCommand)
 }
 
-func NewSearchCommand(ctx context.Context, cmd string) (spelunker.Command, error) {
-	c := &SearchCommand{}
+func NewHasAlternatePlacetypeCommand(ctx context.Context, cmd string) (spelunker.Command, error) {
+	c := &HasAlternatePlacetypeCommand{}
 	return c, nil
 }
 
-func (c *SearchCommand) Run(ctx context.Context, args []string) error {
+func (c *HasAlternatePlacetypeCommand) Run(ctx context.Context, args []string) error {
 
 	fs := DefaultFlagSet()
 	fs.Parse(args)
@@ -46,15 +46,11 @@ func (c *SearchCommand) Run(ctx context.Context, args []string) error {
 	pg_opts.PerPage(per_page)
 	pg_opts.Pointer(page)
 
-	search_opts := &spelunker.SearchOptions{
-		Query: query,
-	}
-
 	filters := make([]spelunker.Filter, 0)
 
 	// To do: pagination
 
-	rsp, _, err := sp.Search(ctx, pg_opts, search_opts, filters)
+	rsp, _, err := sp.HasAlternatePlacetype(ctx, pg_opts, pt, filters)
 
 	if err != nil {
 		return fmt.Errorf("Failed to retrieve descendants, %w", err)
