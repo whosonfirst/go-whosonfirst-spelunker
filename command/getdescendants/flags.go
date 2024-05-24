@@ -10,7 +10,6 @@ var spelunker_uri string
 var id int64
 var per_page int64
 var page int64
-var query string
 
 func DefaultFlagSet() *flag.FlagSet {
 

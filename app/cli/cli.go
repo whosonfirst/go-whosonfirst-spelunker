@@ -6,8 +6,10 @@ import (
 	"os"
 
 	"github.com/whosonfirst/go-whosonfirst-spelunker"
+	_ "github.com/whosonfirst/go-whosonfirst-spelunker/command/getalternateplacetypes"
 	_ "github.com/whosonfirst/go-whosonfirst-spelunker/command/getbyid"
 	_ "github.com/whosonfirst/go-whosonfirst-spelunker/command/getdescendants"
+	_ "github.com/whosonfirst/go-whosonfirst-spelunker/command/getplacetypes"
 	_ "github.com/whosonfirst/go-whosonfirst-spelunker/command/search"
 )
 
