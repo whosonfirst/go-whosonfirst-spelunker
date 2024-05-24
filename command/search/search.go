@@ -1,4 +1,4 @@
-package cli
+package search
 
 import (
 	"context"
@@ -11,7 +11,30 @@ import (
 	"github.com/whosonfirst/go-whosonfirst-spelunker"
 )
 
-func search(ctx context.Context, sp spelunker.Spelunker) error {
+type SearchCommand struct {
+	spelunker.Command
+}
+
+func init() {
+	ctx := context.Background()
+	spelunker.RegisterCommand(ctx, "search", NewSearchCommand)
+}
+
+func NewSearchCommand(ctx context.Context, cmd string) (spelunker.Command, error) {
+	c := &SearchCommand{}
+	return c, nil
+}
+
+func (c *SearchCommand) Run(ctx context.Context, args []string) error {
+
+	fs := DefaultFlagSet()
+	fs.Parse(args)
+
+	sp, err := spelunker.NewSpelunker(ctx, spelunker_uri)
+
+	if err != nil {
+		return fmt.Errorf("Failed to create new spelunker, %w", err)
+	}
 
 	// Eventually we'll need to check if we're doing cursor-base pagination
 

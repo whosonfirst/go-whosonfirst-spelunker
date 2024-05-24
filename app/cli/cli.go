@@ -2,40 +2,51 @@ package cli
 
 import (
 	"context"
-	"flag"
 	"fmt"
-	"log/slog"
+	"os"
 
-	"github.com/sfomuseum/go-flags/flagset"
-	spelunker "github.com/whosonfirst/go-whosonfirst-spelunker"
+	"github.com/whosonfirst/go-whosonfirst-spelunker"
+	_ "github.com/whosonfirst/go-whosonfirst-spelunker/command/getbyid"
+	_ "github.com/whosonfirst/go-whosonfirst-spelunker/command/getdescendants"
+	_ "github.com/whosonfirst/go-whosonfirst-spelunker/command/search"
 )
 
-func Run(ctx context.Context, logger *slog.Logger) error {
-	fs := DefaultFlagSet()
-	return RunWithFlagSet(ctx, fs, logger)
-}
+func usage() {
 
-func RunWithFlagSet(ctx context.Context, fs *flag.FlagSet, logger *slog.Logger) error {
+	fmt.Println("Usage: wof-spelunker [CMD] [OPTIONS]")
+	fmt.Println("Valid commands are:")
 
-	flagset.Parse(fs)
-
-	slog.SetDefault(logger)
-
-	sp, err := spelunker.NewSpelunker(ctx, spelunker_uri)
-
-	if err != nil {
-		return fmt.Errorf("Failed to create new spelunker, %w", err)
+	for _, cmd := range spelunker.Commands() {
+		fmt.Printf("* %s\n", cmd)
 	}
 
-	switch command {
-	case "descendants":
-		return get_descendants(ctx, sp)
-	case "id":
-		return get_by_id(ctx, sp)
-	case "search":
-		return search(ctx, sp)
-	default:
-		return fmt.Errorf("Invalid or unsupported command")
+	os.Exit(0)
+}
+
+func Run(ctx context.Context) error {
+
+	if len(os.Args) < 2 {
+		usage()
+	}
+
+	cmd := os.Args[1]
+
+	c, err := spelunker.NewCommand(ctx, cmd)
+
+	if err != nil {
+		usage()
+	}
+
+	args := make([]string, 0)
+
+	if len(os.Args) > 2 {
+		args = os.Args[2:]
+	}
+
+	err = c.Run(ctx, args)
+
+	if err != nil {
+		return fmt.Errorf("Failed to run '%s' command, %w", cmd, err)
 	}
 
 	return nil

@@ -2,8 +2,7 @@ package main
 
 import (
 	"context"
-	"log/slog"
-	"os"
+	"log"
 
 	"github.com/whosonfirst/go-whosonfirst-spelunker/app/cli"
 )
@@ -11,12 +10,9 @@ import (
 func main() {
 
 	ctx := context.Background()
-	logger := slog.Default()
-
-	err := cli.Run(ctx, logger)
+	err := cli.Run(ctx)
 
 	if err != nil {
-		logger.Error("Failed to run spelunker application", "error", err)
-		os.Exit(1)
+		log.Fatal(err)
 	}
 }
