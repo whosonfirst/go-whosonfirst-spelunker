@@ -6,7 +6,7 @@ import (
 	"net/url"
 )
 
-const PLACETYPE_ALT_FILTER_SCHEME string = "placetype"
+const PLACETYPE_ALT_FILTER_SCHEME string = "placetype-alt"
 
 type PlacetypeAltFilter struct {
 	Filter
