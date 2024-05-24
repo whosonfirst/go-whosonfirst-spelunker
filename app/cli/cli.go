@@ -11,6 +11,7 @@ import (
 	_ "github.com/whosonfirst/go-whosonfirst-spelunker/command/getdescendants"
 	_ "github.com/whosonfirst/go-whosonfirst-spelunker/command/getplacetypes"
 	_ "github.com/whosonfirst/go-whosonfirst-spelunker/command/hasalternateplacetype"
+	_ "github.com/whosonfirst/go-whosonfirst-spelunker/command/hasalternateplacetypefaceted"	
 	_ "github.com/whosonfirst/go-whosonfirst-spelunker/command/search"
 )
 
