@@ -2,10 +2,7 @@ package search
 
 import (
 	"context"
-	"encoding/json"
 	"fmt"
-	_ "log/slog"
-	"os"
 
 	"github.com/aaronland/go-pagination/countable"
 	"github.com/whosonfirst/go-whosonfirst-spelunker"
@@ -53,17 +50,16 @@ func (c *SearchCommand) Run(ctx context.Context, args []string) error {
 
 	filters := make([]spelunker.Filter, 0)
 
-	r, _, err := sp.Search(ctx, pg_opts, search_opts, filters)
+	// To do: pagination
+
+	rsp, _, err := sp.Search(ctx, pg_opts, search_opts, filters)
 
 	if err != nil {
 		return fmt.Errorf("Failed to retrieve descendants, %w", err)
 	}
 
-	enc := json.NewEncoder(os.Stdout)
-	err = enc.Encode(r)
-
-	if err != nil {
-		return fmt.Errorf("Failed to encode descendants, %w", err)
+	for _, r := range rsp.Results() {
+		fmt.Printf("%s %s %s %s %0.6f %0.6f\n", r.Id(), r.Name(), r.Country(), r.Placetype(), r.Latitude(), r.Longitude())
 	}
 
 	return nil
