@@ -23,7 +23,7 @@ func NewPlacetypeAltFilter(ctx context.Context, uri string) (Filter, error) {
 	u, err := url.Parse(uri)
 
 	if err != nil {
-		return nil, fmt.Errorf("Failed to parse URI, %w", err)
+		return nil, fmt.Errorf("Failed to parse URI '%s', %w", uri, err)
 	}
 
 	pt := u.Host
