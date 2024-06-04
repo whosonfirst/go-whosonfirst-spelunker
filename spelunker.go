@@ -62,28 +62,6 @@ type Spelunker interface {
 
 	VisitingNullIsland(context.Context, pagination.Options, []Filter) (spr.StandardPlacesResults, pagination.Results, error)
 	VisitingNullIslandFaceted(context.Context, []Filter, []*Facet) ([]*Faceting, error)
-
-	// TBD...
-	// Unclear whether this should implement all of https://github.com/whosonfirst/go-whosonfirst-spatial/blob/main/spatial.go#L11
-	// or https://github.com/whosonfirst/go-whosonfirst-spatial/blob/main/database/database.go#L16
-	//
-	// See also:
-	// https://github.com/whosonfirst/go-whosonfirst-spatial-pip/blob/main/http/api/pointinpolygon.go
-	// which in turns requires implementing https://github.com/whosonfirst/go-whosonfirst-spatial/blob/main/app/app.go#L21
-	//
-	// So it all starts to be a bit much...
-	//
-	// Maybe all we want are the structs and helper methods from this
-	// https://github.com/whosonfirst/go-whosonfirst-spatial-pip/blob/main/pip.go
-	//
-	// But as twisty as all the spatial database stuff is when you start trying to make a simpler
-	// version you just always end up with the same problems and questions...
-	//
-	// See also:
-	// https://github.com/whosonfirst/go-whosonfirst-spatial-pmtiles/blob/main/database.go
-	//
-	// PointInPolygon(context.Context, orb.Point) (spr.StandardPlacesResults, error)
-
 }
 
 // RegisterSpelunker registers 'scheme' as a key pointing to 'init_func' in an internal lookup table
