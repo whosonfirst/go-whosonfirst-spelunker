@@ -1,15 +1,15 @@
 module github.com/whosonfirst/go-whosonfirst-spelunker
 
-go 1.22
+go 1.24.0
 
 require (
-	github.com/aaronland/go-pagination v0.2.0
+	github.com/aaronland/go-pagination v0.3.0
 	github.com/aaronland/go-roster v1.0.0
-	github.com/sfomuseum/go-edtf v1.1.1
+	github.com/sfomuseum/go-edtf v1.2.1
 	github.com/sfomuseum/go-flags v0.10.0
-	github.com/tidwall/gjson v1.17.0
+	github.com/tidwall/gjson v1.18.0
 	github.com/tidwall/sjson v1.2.5
-	github.com/whosonfirst/go-whosonfirst-placetypes v0.7.2
+	github.com/whosonfirst/go-whosonfirst-placetypes v0.7.3
 	github.com/whosonfirst/go-whosonfirst-spr/v2 v2.3.7
 	github.com/whosonfirst/go-whosonfirst-uri v1.3.0
 )
