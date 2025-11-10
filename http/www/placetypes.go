@@ -6,21 +6,21 @@ import (
 	"net/http"
 
 	"github.com/aaronland/go-http/v3/auth"
-	"github.com/aaronland/go-http/v3/slog"	
+	"github.com/aaronland/go-http/v3/slog"
 	"github.com/whosonfirst/go-whosonfirst-spelunker"
-	"github.com/whosonfirst/go-whosonfirst-spelunker/http"
+	wof_http "github.com/whosonfirst/go-whosonfirst-spelunker/http"
 )
 
 type PlacetypesHandlerOptions struct {
 	Spelunker     spelunker.Spelunker
 	Authenticator auth.Authenticator
 	Templates     *template.Template
-	URIs          *http.URIs
+	URIs          *wof_http.URIs
 }
 
 type PlacetypesHandlerVars struct {
 	PageTitle string
-	URIs      *http.URIs
+	URIs      *wof_http.URIs
 	Facets    []*spelunker.FacetCount
 	OpenGraph *OpenGraph
 }

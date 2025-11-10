@@ -8,12 +8,12 @@ import (
 	"time"
 
 	"github.com/aaronland/go-http/v3/auth"
-	"github.com/aaronland/go-http/v3/slog"	
+	"github.com/aaronland/go-http/v3/slog"
 	"github.com/aaronland/go-pagination"
 	"github.com/dustin/go-humanize"
 	"github.com/sfomuseum/iso8601duration"
 	"github.com/whosonfirst/go-whosonfirst-spelunker"
-	"github.com/whosonfirst/go-whosonfirst-spelunker/http"
+	wof_http "github.com/whosonfirst/go-whosonfirst-spelunker/http"
 	"github.com/whosonfirst/go-whosonfirst-spr/v2"
 )
 
@@ -21,12 +21,12 @@ type RecentHandlerOptions struct {
 	Spelunker     spelunker.Spelunker
 	Authenticator auth.Authenticator
 	Templates     *template.Template
-	URIs          *http.URIs
+	URIs          *wof_http.URIs
 }
 
 type RecentHandlerVars struct {
 	PageTitle     string
-	URIs          *http.URIs
+	URIs          *wof_http.URIs
 	Places        []spr.StandardPlacesResult
 	Pagination    pagination.Results
 	PaginationURL string
@@ -84,7 +84,7 @@ func RecentHandler(opts *RecentHandlerOptions) (http.Handler, error) {
 			return
 		}
 
-		pg_opts, err := http.PaginationOptionsFromRequest(req)
+		pg_opts, err := wof_http.PaginationOptionsFromRequest(req)
 
 		if err != nil {
 			logger.Error("Failed to create pagination options", "error", err)
@@ -92,9 +92,9 @@ func RecentHandler(opts *RecentHandlerOptions) (http.Handler, error) {
 			return
 		}
 
-		filter_params := http.DefaultFilterParams()
+		filter_params := wof_http.DefaultFilterParams()
 
-		filters, err := http.FiltersFromRequest(ctx, req, filter_params)
+		filters, err := wof_http.FiltersFromRequest(ctx, req, filter_params)
 
 		if err != nil {
 			logger.Error("Failed to derive filters from request", "error", err)
@@ -111,10 +111,10 @@ func RecentHandler(opts *RecentHandlerOptions) (http.Handler, error) {
 		}
 
 		// This is not ideal but I am not sure what is better yet...
-		pagination_url := http.URIForRecent(opts.URIs.Recent, str_d, filters, nil)
+		pagination_url := wof_http.URIForRecent(opts.URIs.Recent, str_d, filters, nil)
 
 		// This is not ideal but I am not sure what is better yet...
-		facets_url := http.URIForRecent(opts.URIs.RecentFaceted, str_d, filters, nil)
+		facets_url := wof_http.URIForRecent(opts.URIs.RecentFaceted, str_d, filters, nil)
 		facets_context_url := pagination_url
 
 		now := time.Now()

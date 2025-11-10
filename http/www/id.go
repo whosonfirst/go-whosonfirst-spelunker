@@ -8,11 +8,11 @@ import (
 	"strings"
 
 	"github.com/aaronland/go-http/v3/auth"
-	"github.com/aaronland/go-http/v3/slog"	
+	"github.com/aaronland/go-http/v3/slog"
 	"github.com/tidwall/gjson"
 	"github.com/whosonfirst/go-whosonfirst-placetypes"
 	"github.com/whosonfirst/go-whosonfirst-spelunker"
-	"github.com/whosonfirst/go-whosonfirst-spelunker/http"
+	wof_http "github.com/whosonfirst/go-whosonfirst-spelunker/http"
 	wof_funcs "github.com/whosonfirst/go-whosonfirst-spelunker/http/templates/funcs"
 	"github.com/whosonfirst/go-whosonfirst-uri"
 )
@@ -21,7 +21,7 @@ type IdHandlerOptions struct {
 	Spelunker     spelunker.Spelunker
 	Authenticator auth.Authenticator
 	Templates     *template.Template
-	URIs          *http.URIs
+	URIs          *wof_http.URIs
 }
 
 type IdHandlerAncestor struct {
@@ -34,7 +34,7 @@ type IdHandlerVars struct {
 	RequestId        string
 	URIArgs          *uri.URIArgs
 	PageTitle        string
-	URIs             *http.URIs
+	URIs             *wof_http.URIs
 	Properties       string
 	CountDescendants int64
 	Hierarchies      [][]*IdHandlerAncestor
@@ -61,9 +61,9 @@ func IdHandler(opts *IdHandlerOptions) (http.Handler, error) {
 	fn := func(rsp http.ResponseWriter, req *http.Request) {
 
 		ctx := req.Context()
-		logger := http.LoggerWithRequest(req, nil)
+		logger := slog.LoggerWithRequest(req, nil)
 
-		req_uri, err, status := slog.ParseURIFromRequest(req, nil)
+		req_uri, err, status := wof_http.ParseURIFromRequest(req, nil)
 
 		if err != nil {
 			logger.Error("Failed to parse URI from request", "error", err)
@@ -101,7 +101,7 @@ func IdHandler(opts *IdHandlerOptions) (http.Handler, error) {
 		country_rsp := gjson.GetBytes(f, "wof:country")
 		wof_country := country_rsp.String()
 
-		country_name, country_exists := http.CountryCodeLookup[wof_country]
+		country_name, country_exists := wof_http.CountryCodeLookup[wof_country]
 
 		if !country_exists {
 			country_name = wof_country
@@ -273,7 +273,7 @@ func IdHandler(opts *IdHandlerOptions) (http.Handler, error) {
 
 		// END OF put me in a function or something...
 
-		svg_url := http.URIForIdSimple(opts.URIs.SVG, wof_id)
+		svg_url := wof_http.URIForIdSimple(opts.URIs.SVG, wof_id)
 
 		og_image, err := opts.URIs.Abs(svg_url)
 

@@ -9,7 +9,7 @@ import (
 
 	"github.com/aaronland/go-http/v3/slog"
 	"github.com/whosonfirst/go-whosonfirst-spelunker"
-	"github.com/whosonfirst/go-whosonfirst-spelunker/http"
+	wof_http "github.com/whosonfirst/go-whosonfirst-spelunker/http"
 )
 
 type NavPlaceHandlerOptions struct {
@@ -39,11 +39,11 @@ func NavPlaceHandler(opts *NavPlaceHandlerOptions) (http.Handler, error) {
 
 		ids := strings.Split(base, ",")
 
-		uris := make([]*http.URI, len(ids))
+		uris := make([]*wof_http.URI, len(ids))
 
 		for idx, str_id := range ids {
 
-			req_uri, err, status := http.ParseURIFromPath(ctx, str_id, nil)
+			req_uri, err, status := wof_http.ParseURIFromPath(ctx, str_id, nil)
 
 			if err != nil {
 				logger.Error("Failed to parse URI from request", "id", str_id, "error", err)
@@ -73,7 +73,7 @@ func NavPlaceHandler(opts *NavPlaceHandlerOptions) (http.Handler, error) {
 
 		for i, req_uri := range uris {
 
-			r, err := http.FeatureFromRequestURI(ctx, opts.Spelunker, req_uri)
+			r, err := wof_http.FeatureFromRequestURI(ctx, opts.Spelunker, req_uri)
 
 			if err != nil {
 				logger.Error("Failed to retrieve record", "id", req_uri.Id, "error", err)

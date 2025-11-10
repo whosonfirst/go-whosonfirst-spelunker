@@ -6,11 +6,11 @@ import (
 	"net/http"
 
 	"github.com/aaronland/go-http/v3/auth"
-	"github.com/aaronland/go-http/v3/slog"	
+	"github.com/aaronland/go-http/v3/slog"
 	"github.com/aaronland/go-pagination"
 	"github.com/whosonfirst/go-whosonfirst-placetypes"
 	"github.com/whosonfirst/go-whosonfirst-spelunker"
-	"github.com/whosonfirst/go-whosonfirst-spelunker/http"
+	wof_http "github.com/whosonfirst/go-whosonfirst-spelunker/http"
 	wof_funcs "github.com/whosonfirst/go-whosonfirst-spelunker/http/templates/funcs"
 	"github.com/whosonfirst/go-whosonfirst-spr/v2"
 )
@@ -19,12 +19,12 @@ type HasPlacetypeHandlerOptions struct {
 	Spelunker     spelunker.Spelunker
 	Authenticator auth.Authenticator
 	Templates     *template.Template
-	URIs          *http.URIs
+	URIs          *wof_http.URIs
 }
 
 type HasPlacetypeHandlerVars struct {
 	PageTitle        string
-	URIs             *http.URIs
+	URIs             *wof_http.URIs
 	Placetype        *placetypes.WOFPlacetype
 	Places           []spr.StandardPlacesResult
 	Pagination       pagination.Results
@@ -59,7 +59,7 @@ func HasPlacetypeHandler(opts *HasPlacetypeHandlerOptions) (http.Handler, error)
 			return
 		}
 
-		pg_opts, err := http.PaginationOptionsFromRequest(req)
+		pg_opts, err := wof_http.PaginationOptionsFromRequest(req)
 
 		if err != nil {
 			logger.Error("Failed to create pagination options", "error", err)
@@ -67,9 +67,9 @@ func HasPlacetypeHandler(opts *HasPlacetypeHandlerOptions) (http.Handler, error)
 			return
 		}
 
-		filter_params := http.DefaultFilterParams()
+		filter_params := wof_http.DefaultFilterParams()
 
-		filters, err := http.FiltersFromRequest(ctx, req, filter_params)
+		filters, err := wof_http.FiltersFromRequest(ctx, req, filter_params)
 
 		if err != nil {
 			logger.Error("Failed to derive filters from request", "error", err)
@@ -85,10 +85,10 @@ func HasPlacetypeHandler(opts *HasPlacetypeHandlerOptions) (http.Handler, error)
 			return
 		}
 
-		pagination_url := http.URIForPlacetype(opts.URIs.Placetype, pt.Name, filters, nil)
+		pagination_url := wof_http.URIForPlacetype(opts.URIs.Placetype, pt.Name, filters, nil)
 
 		// This is not ideal but I am not sure what is better yet...
-		facets_url := http.URIForPlacetype(opts.URIs.PlacetypeFaceted, pt.Name, filters, nil)
+		facets_url := wof_http.URIForPlacetype(opts.URIs.PlacetypeFaceted, pt.Name, filters, nil)
 		facets_context_url := req.URL.Path
 
 		vars := HasPlacetypeHandlerVars{

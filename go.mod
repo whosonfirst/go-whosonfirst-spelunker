@@ -4,12 +4,12 @@ go 1.25.0
 
 require (
 	github.com/aaronland/go-http/v3 v3.2.0
-	github.com/aaronland/go-pagination v0.2.0
+	github.com/aaronland/go-pagination v0.3.0
 	github.com/aaronland/go-roster v1.0.0
 	github.com/dustin/go-humanize v1.0.1
 	github.com/jtacoma/uritemplates v1.0.0
-	github.com/sfomuseum/go-edtf v1.1.1
-	github.com/sfomuseum/go-flags v0.11.0
+	github.com/sfomuseum/go-edtf v1.2.1
+	github.com/sfomuseum/go-flags v0.12.1
 	github.com/sfomuseum/go-geojsonld v1.0.0
 	github.com/sfomuseum/go-template v1.10.1
 	github.com/sfomuseum/iso8601duration v1.1.0
@@ -17,12 +17,12 @@ require (
 	github.com/tidwall/sjson v1.2.5
 	github.com/whosonfirst/go-reader/v2 v2.1.0
 	github.com/whosonfirst/go-sanitize v0.1.0
-	github.com/whosonfirst/go-whosonfirst-placetypes v0.7.2
-	github.com/whosonfirst/go-whosonfirst-sources v0.1.0
-	github.com/whosonfirst/go-whosonfirst-spr/v2 v2.3.7
+	github.com/whosonfirst/go-whosonfirst-placetypes v0.9.0
+	github.com/whosonfirst/go-whosonfirst-sources v0.2.0
+	github.com/whosonfirst/go-whosonfirst-spr/v2 v2.3.8
 	github.com/whosonfirst/go-whosonfirst-svg v0.1.0
 	github.com/whosonfirst/go-whosonfirst-uri v1.3.0
-	golang.org/x/text v0.28.0
+	golang.org/x/text v0.30.0
 )
 
 require (
@@ -64,14 +64,14 @@ require (
 	github.com/hashicorp/go-multierror v1.1.1 // indirect
 	github.com/jmespath/go-jmespath v0.4.0 // indirect
 	github.com/paulmach/go.geojson v1.4.0 // indirect
-	github.com/paulmach/orb v0.10.0 // indirect
+	github.com/paulmach/orb v0.11.1 // indirect
 	github.com/skip2/go-qrcode v0.0.0-20200617195104-da1b6568686e // indirect
 	github.com/tidwall/match v1.1.1 // indirect
 	github.com/tidwall/pretty v1.2.0 // indirect
 	github.com/whosonfirst/go-geojson-svg v0.0.5 // indirect
 	github.com/whosonfirst/go-ioutil v1.0.2 // indirect
-	github.com/whosonfirst/go-whosonfirst-feature v0.0.27 // indirect
-	github.com/whosonfirst/go-whosonfirst-flags v0.5.1 // indirect
+	github.com/whosonfirst/go-whosonfirst-feature v0.0.29 // indirect
+	github.com/whosonfirst/go-whosonfirst-flags v0.5.2 // indirect
 	go.mongodb.org/mongo-driver v1.11.4 // indirect
 	go.opentelemetry.io/auto/sdk v1.1.0 // indirect
 	go.opentelemetry.io/otel v1.37.0 // indirect

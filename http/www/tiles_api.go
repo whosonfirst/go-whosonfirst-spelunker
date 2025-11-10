@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/jtacoma/uritemplates"
 	"github.com/aaronland/go-http/v3/slog"
+	"github.com/jtacoma/uritemplates"
 )
 
 const protomaps_api string = "https://api.protomaps.com/tiles/v3/{z}/{x}/{y}.mvt?key={key}"

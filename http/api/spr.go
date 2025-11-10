@@ -4,10 +4,10 @@ import (
 	"encoding/json"
 	"net/http"
 
-	"github.com/whosonfirst/go-whosonfirst-spelunker"
-	"github.com/whosonfirst/go-whosonfirst-spelunker/http"
-	"github.com/whosonfirst/go-whosonfirst-spr/v2"
 	"github.com/aaronland/go-http/v3/slog"
+	"github.com/whosonfirst/go-whosonfirst-spelunker"
+	wof_http "github.com/whosonfirst/go-whosonfirst-spelunker/http"
+	"github.com/whosonfirst/go-whosonfirst-spr/v2"
 )
 
 type SPRHandlerOptions struct {
@@ -21,7 +21,7 @@ func SPRHandler(opts *SPRHandlerOptions) (http.Handler, error) {
 		ctx := req.Context()
 		logger := slog.LoggerWithRequest(req, nil)
 
-		req_uri, err, status := http.ParseURIFromRequest(req, nil)
+		req_uri, err, status := wof_http.ParseURIFromRequest(req, nil)
 
 		if err != nil {
 			logger.Error("Failed to parse URI from request", "error", err)
@@ -37,7 +37,7 @@ func SPRHandler(opts *SPRHandlerOptions) (http.Handler, error) {
 		logger = logger.With("id", req_uri.Id)
 
 		/*
-			spr, err := http.SPRFromRequestURI(ctx, opts.Spelunker, req_uri)
+			spr, err := wof_http.SPRFromRequestURI(ctx, opts.Spelunker, req_uri)
 
 			if err != nil {
 				logger.Error("Failed to get by ID", "id", req_uri.Id, "error", err)
@@ -46,7 +46,7 @@ func SPRHandler(opts *SPRHandlerOptions) (http.Handler, error) {
 			}
 		*/
 
-		r, err := http.FeatureFromRequestURI(ctx, opts.Spelunker, req_uri)
+		r, err := wof_http.FeatureFromRequestURI(ctx, opts.Spelunker, req_uri)
 
 		if err != nil {
 			logger.Error("Failed to get by ID", "error", err)

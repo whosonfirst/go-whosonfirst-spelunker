@@ -3,17 +3,16 @@ package www
 import (
 	"encoding/json"
 	"fmt"
-	"log/slog"
 	"net/http"
 	"text/template"
 
 	"github.com/aaronland/go-http/v3/slog"
-	"github.com/whosonfirst/go-whosonfirst-spelunker/http"
+	wof_http "github.com/whosonfirst/go-whosonfirst-spelunker/http"
 )
 
 type URIsJSHandlerOptions struct {
 	Templates *template.Template
-	URIs      *http.URIs
+	URIs      *wof_http.URIs
 }
 
 type URIsJSVars struct {
@@ -30,7 +29,7 @@ func URIsJSHandler(opts *URIsJSHandlerOptions) (http.Handler, error) {
 
 	fn := func(rsp http.ResponseWriter, req *http.Request) {
 
-		logger = slog.LoggerWithRequest(res, nil)
+		logger := slog.LoggerWithRequest(req, nil)
 
 		enc_table, err := json.Marshal(opts.URIs)
 

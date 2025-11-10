@@ -5,7 +5,7 @@ import (
 
 	"github.com/aaronland/go-http/v3/slog"
 	"github.com/whosonfirst/go-whosonfirst-spelunker"
-	"github.com/whosonfirst/go-whosonfirst-spelunker/http"
+	wof_http "github.com/whosonfirst/go-whosonfirst-spelunker/http"
 )
 
 type FindingAidHandlerOptions struct {
@@ -19,7 +19,7 @@ func FindingAidHandler(opts *FindingAidHandlerOptions) (http.Handler, error) {
 		ctx := req.Context()
 		logger := slog.LoggerWithRequest(req, nil)
 
-		req_uri, err, status := http.ParseURIFromRequest(req, nil)
+		req_uri, err, status := wof_http.ParseURIFromRequest(req, nil)
 
 		if err != nil {
 			logger.Error("Failed to parse URI from request", "error", err)
@@ -27,7 +27,7 @@ func FindingAidHandler(opts *FindingAidHandlerOptions) (http.Handler, error) {
 			return
 		}
 
-		spr, err := http.SPRFromRequestURI(ctx, opts.Spelunker, req_uri)
+		spr, err := wof_http.SPRFromRequestURI(ctx, opts.Spelunker, req_uri)
 
 		if err != nil {
 			logger.Error("Failed to get by ID", "id", req_uri.Id, "error", err)

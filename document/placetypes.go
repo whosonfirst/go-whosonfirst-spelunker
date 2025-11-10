@@ -49,7 +49,7 @@ func AppendPlacetypeDetails(ctx context.Context, body []byte) ([]byte, error) {
 
 	alt_rsp := root.Get("wof:placetype_alt")
 
-	for _, a := range alt_rsp.Array(){
+	for _, a := range alt_rsp.Array() {
 		placetype_names = append(placetype_names, a.String())
 	}
 

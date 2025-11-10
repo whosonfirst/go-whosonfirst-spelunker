@@ -6,7 +6,7 @@ import (
 	"github.com/aaronland/go-http/v3/slog"
 	"github.com/sfomuseum/go-geojsonld"
 	"github.com/whosonfirst/go-whosonfirst-spelunker"
-	"github.com/whosonfirst/go-whosonfirst-spelunker/http"
+	wof_http "github.com/whosonfirst/go-whosonfirst-spelunker/http"
 )
 
 type GeoJSONLDHandlerOptions struct {
@@ -20,7 +20,7 @@ func GeoJSONLDHandler(opts *GeoJSONLDHandlerOptions) (http.Handler, error) {
 		ctx := req.Context()
 		logger := slog.LoggerWithRequest(req, nil)
 
-		req_uri, err, status := http.ParseURIFromRequest(req, nil)
+		req_uri, err, status := wof_http.ParseURIFromRequest(req, nil)
 
 		if err != nil {
 			logger.Error("Failed to parse URI from request", "error", err)
@@ -35,7 +35,7 @@ func GeoJSONLDHandler(opts *GeoJSONLDHandlerOptions) (http.Handler, error) {
 
 		logger = logger.With("id", req_uri.Id)
 
-		r, err := http.FeatureFromRequestURI(ctx, opts.Spelunker, req_uri)
+		r, err := wof_http.FeatureFromRequestURI(ctx, opts.Spelunker, req_uri)
 
 		if err != nil {
 			logger.Error("Failed to get by ID", "error", err)

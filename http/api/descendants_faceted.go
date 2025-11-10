@@ -6,9 +6,9 @@ import (
 
 	// TBD...
 	// "github.com/aaronland/go-http/v3/auth"
-	"github.com/aaronland/go-http/v3/slog"	
+	"github.com/aaronland/go-http/v3/slog"
 	"github.com/whosonfirst/go-whosonfirst-spelunker"
-	"github.com/whosonfirst/go-whosonfirst-spelunker/http"
+	wof_http "github.com/whosonfirst/go-whosonfirst-spelunker/http"
 )
 
 type DescendantsFacetedHandlerOptions struct {
@@ -24,7 +24,7 @@ func DescendantsFacetedHandler(opts *DescendantsFacetedHandlerOptions) (http.Han
 		ctx := req.Context()
 		logger := slog.LoggerWithRequest(req, nil)
 
-		uri, err, status := http.ParseURIFromRequest(req, nil)
+		uri, err, status := wof_http.ParseURIFromRequest(req, nil)
 
 		if err != nil {
 			logger.Error("Failed to parse URI from request", "error", err)
@@ -34,9 +34,9 @@ func DescendantsFacetedHandler(opts *DescendantsFacetedHandlerOptions) (http.Han
 
 		logger = logger.With("wofid", uri.Id)
 
-		filter_params := http.DefaultFilterParams()
+		filter_params := wof_http.DefaultFilterParams()
 
-		filters, err := http.FiltersFromRequest(ctx, req, filter_params)
+		filters, err := wof_http.FiltersFromRequest(ctx, req, filter_params)
 
 		if err != nil {
 			logger.Error("Failed to derive filters from request", "error", err)
@@ -44,7 +44,7 @@ func DescendantsFacetedHandler(opts *DescendantsFacetedHandlerOptions) (http.Han
 			return
 		}
 
-		facets, err := http.FacetsFromRequest(ctx, req, filter_params)
+		facets, err := wof_http.FacetsFromRequest(ctx, req, filter_params)
 
 		if err != nil {
 			logger.Error("Failed to derive facets from requrst", "error", err)

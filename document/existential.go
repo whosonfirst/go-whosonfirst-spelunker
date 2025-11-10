@@ -4,7 +4,7 @@ import (
 	"context"
 	"fmt"
 	_ "log/slog"
-	
+
 	"github.com/sfomuseum/go-edtf"
 	"github.com/tidwall/gjson"
 	"github.com/tidwall/sjson"
@@ -34,7 +34,7 @@ func AppendExistentialDetails(ctx context.Context, body []byte) ([]byte, error) 
 	ceased_rsp := root.Get("edtf:cessation")
 
 	if ceased_rsp.Exists() {
-		
+
 		if ceased_rsp.String() != edtf.UNKNOWN && ceased_rsp.String() != edtf.UNKNOWN_2012 {
 			is_ceased = 1
 		}

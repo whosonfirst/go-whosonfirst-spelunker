@@ -6,10 +6,10 @@ import (
 	"net/http"
 
 	"github.com/aaronland/go-http/v3/auth"
-	"github.com/aaronland/go-http/v3/slog"	
+	"github.com/aaronland/go-http/v3/slog"
 	"github.com/aaronland/go-pagination"
 	"github.com/whosonfirst/go-whosonfirst-spelunker"
-	"github.com/whosonfirst/go-whosonfirst-spelunker/http"
+	wof_http "github.com/whosonfirst/go-whosonfirst-spelunker/http"
 	"github.com/whosonfirst/go-whosonfirst-spr/v2"
 )
 
@@ -17,12 +17,12 @@ type NullIslandHandlerOptions struct {
 	Spelunker     spelunker.Spelunker
 	Authenticator auth.Authenticator
 	Templates     *template.Template
-	URIs          *http.URIs
+	URIs          *wof_http.URIs
 }
 
 type NullIslandHandlerVars struct {
 	PageTitle        string
-	URIs             *http.URIs
+	URIs             *wof_http.URIs
 	Places           []spr.StandardPlacesResult
 	Pagination       pagination.Results
 	PaginationURL    string
@@ -44,7 +44,7 @@ func NullIslandHandler(opts *NullIslandHandlerOptions) (http.Handler, error) {
 		ctx := req.Context()
 		logger := slog.LoggerWithRequest(req, nil)
 
-		pg_opts, err := http.PaginationOptionsFromRequest(req)
+		pg_opts, err := wof_http.PaginationOptionsFromRequest(req)
 
 		if err != nil {
 			logger.Error("Failed to create pagination options", "error", err)
@@ -52,9 +52,9 @@ func NullIslandHandler(opts *NullIslandHandlerOptions) (http.Handler, error) {
 			return
 		}
 
-		filter_params := http.DefaultFilterParams()
+		filter_params := wof_http.DefaultFilterParams()
 
-		filters, err := http.FiltersFromRequest(ctx, req, filter_params)
+		filters, err := wof_http.FiltersFromRequest(ctx, req, filter_params)
 
 		if err != nil {
 			logger.Error("Failed to derive filters from request", "error", err)
@@ -71,10 +71,10 @@ func NullIslandHandler(opts *NullIslandHandlerOptions) (http.Handler, error) {
 		}
 
 		// This is not ideal but I am not sure what is better yet...
-		pagination_url := http.URIForNullIsland(opts.URIs.NullIsland, filters, nil)
+		pagination_url := wof_http.URIForNullIsland(opts.URIs.NullIsland, filters, nil)
 
 		// This is not ideal but I am not sure what is better yet...
-		facets_url := http.URIForNullIsland(opts.URIs.NullIslandFaceted, filters, nil)
+		facets_url := wof_http.URIForNullIsland(opts.URIs.NullIslandFaceted, filters, nil)
 		facets_context_url := pagination_url
 
 		vars := NullIslandHandlerVars{
@@ -86,7 +86,7 @@ func NullIslandHandler(opts *NullIslandHandlerOptions) (http.Handler, error) {
 			FacetsContextURL: facets_context_url,
 		}
 
-		svg_url := http.URIForIdSimple(opts.URIs.SVG, 0)
+		svg_url := wof_http.URIForIdSimple(opts.URIs.SVG, 0)
 
 		og_image, err := opts.URIs.Abs(svg_url)
 

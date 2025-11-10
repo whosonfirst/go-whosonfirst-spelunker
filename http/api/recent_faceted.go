@@ -7,10 +7,10 @@ import (
 	"regexp"
 
 	// "github.com/aaronland/go-http/v3/auth"
-	"github.com/aaronland/go-http/v3/slog"	
+	"github.com/aaronland/go-http/v3/slog"
 	"github.com/sfomuseum/iso8601duration"
 	"github.com/whosonfirst/go-whosonfirst-spelunker"
-	"github.com/whosonfirst/go-whosonfirst-spelunker/http"
+	wof_http "github.com/whosonfirst/go-whosonfirst-spelunker/http"
 )
 
 type RecentFacetedHandlerOptions struct {
@@ -58,9 +58,9 @@ func RecentFacetedHandler(opts *RecentFacetedHandlerOptions) (http.Handler, erro
 			return
 		}
 
-		filter_params := http.DefaultFilterParams()
+		filter_params := wof_http.DefaultFilterParams()
 
-		filters, err := http.FiltersFromRequest(ctx, req, filter_params)
+		filters, err := wof_http.FiltersFromRequest(ctx, req, filter_params)
 
 		if err != nil {
 			logger.Error("Failed to derive filters from request", "error", err)
@@ -68,7 +68,7 @@ func RecentFacetedHandler(opts *RecentFacetedHandlerOptions) (http.Handler, erro
 			return
 		}
 
-		facets, err := http.FacetsFromRequest(ctx, req, filter_params)
+		facets, err := wof_http.FacetsFromRequest(ctx, req, filter_params)
 
 		if err != nil {
 			logger.Error("Failed to derive facets from requrst", "error", err)

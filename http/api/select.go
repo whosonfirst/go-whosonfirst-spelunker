@@ -6,10 +6,10 @@ import (
 
 	"encoding/json"
 	"github.com/aaronland/go-http/v3/sanitize"
-	"github.com/aaronland/go-http/v3/slog"	
+	"github.com/aaronland/go-http/v3/slog"
 	"github.com/tidwall/gjson"
 	"github.com/whosonfirst/go-whosonfirst-spelunker"
-	"github.com/whosonfirst/go-whosonfirst-spelunker/http"
+	wof_http "github.com/whosonfirst/go-whosonfirst-spelunker/http"
 )
 
 type SelectHandlerOptions struct {
@@ -41,7 +41,7 @@ func SelectHandler(opts *SelectHandlerOptions) (http.Handler, error) {
 			return
 		}
 
-		req_uri, err, status := http.ParseURIFromRequest(req, nil)
+		req_uri, err, status := wof_http.ParseURIFromRequest(req, nil)
 
 		if err != nil {
 			logger.Error("Failed to parse URI from request", "error", err)
@@ -56,7 +56,7 @@ func SelectHandler(opts *SelectHandlerOptions) (http.Handler, error) {
 
 		logger = logger.With("id", req_uri.Id)
 
-		r, err := http.FeatureFromRequestURI(ctx, opts.Spelunker, req_uri)
+		r, err := wof_http.FeatureFromRequestURI(ctx, opts.Spelunker, req_uri)
 
 		if err != nil {
 			logger.Error("Failed to get by ID", "error", err)

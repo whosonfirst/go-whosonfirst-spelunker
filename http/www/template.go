@@ -6,8 +6,8 @@ import (
 	"net/http"
 
 	"github.com/aaronland/go-http/v3/auth"
-	"github.com/aaronland/go-http/v3/slog"	
-	"github.com/whosonfirst/go-whosonfirst-spelunker/http"
+	"github.com/aaronland/go-http/v3/slog"
+	wof_http "github.com/whosonfirst/go-whosonfirst-spelunker/http"
 )
 
 type TemplateHandlerOptions struct {
@@ -15,13 +15,13 @@ type TemplateHandlerOptions struct {
 	Templates     *template.Template
 	TemplateName  string
 	PageTitle     string
-	URIs          *http.URIs
+	URIs          *wof_http.URIs
 }
 
 type TemplateHandlerVars struct {
 	Id         int64
 	PageTitle  string
-	URIs       *http.URIs
+	URIs       *wof_http.URIs
 	Properties string
 	OpenGraph  *OpenGraph
 }

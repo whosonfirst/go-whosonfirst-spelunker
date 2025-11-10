@@ -7,9 +7,9 @@ import (
 
 	// TBD...
 	// "github.com/aaronland/go-http/v3/auth"
-	"github.com/aaronland/go-http/v3/slog"	
+	"github.com/aaronland/go-http/v3/slog"
 	"github.com/whosonfirst/go-whosonfirst-spelunker"
-	"github.com/whosonfirst/go-whosonfirst-spelunker/http"
+	wof_http "github.com/whosonfirst/go-whosonfirst-spelunker/http"
 )
 
 type HasConcordanceFacetedHandlerOptions struct {
@@ -50,9 +50,9 @@ func HasConcordanceFacetedHandler(opts *HasConcordanceFacetedHandlerOptions) (ht
 		logger = logger.With("predicate", pred)
 		logger = logger.With("value", value)
 
-		filter_params := http.DefaultFilterParams()
+		filter_params := wof_http.DefaultFilterParams()
 
-		filters, err := http.FiltersFromRequest(ctx, req, filter_params)
+		filters, err := wof_http.FiltersFromRequest(ctx, req, filter_params)
 
 		if err != nil {
 			logger.Error("Failed to derive filters from request", "error", err)
@@ -60,7 +60,7 @@ func HasConcordanceFacetedHandler(opts *HasConcordanceFacetedHandlerOptions) (ht
 			return
 		}
 
-		facets, err := http.FacetsFromRequest(ctx, req, filter_params)
+		facets, err := wof_http.FacetsFromRequest(ctx, req, filter_params)
 
 		if err != nil {
 			logger.Error("Failed to derive facets from requrst", "error", err)

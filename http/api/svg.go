@@ -8,7 +8,7 @@ import (
 	"github.com/tidwall/gjson"
 	"github.com/whosonfirst/go-sanitize"
 	"github.com/whosonfirst/go-whosonfirst-spelunker"
-	"github.com/whosonfirst/go-whosonfirst-spelunker/http"
+	wof_http "github.com/whosonfirst/go-whosonfirst-spelunker/http"
 	"github.com/whosonfirst/go-whosonfirst-svg"
 )
 
@@ -59,7 +59,7 @@ func SVGHandler(opts *SVGHandlerOptions) (http.Handler, error) {
 		ctx := req.Context()
 		logger := slog.LoggerWithRequest(req, nil)
 
-		req_uri, err, status := http.ParseURIFromRequest(req, nil)
+		req_uri, err, status := wof_http.ParseURIFromRequest(req, nil)
 
 		if err != nil {
 
@@ -76,7 +76,7 @@ func SVGHandler(opts *SVGHandlerOptions) (http.Handler, error) {
 
 		logger = logger.With("id", req_uri.Id)
 
-		f, err := http.FeatureFromRequestURI(ctx, opts.Spelunker, req_uri)
+		f, err := wof_http.FeatureFromRequestURI(ctx, opts.Spelunker, req_uri)
 
 		if err != nil {
 			logger.Error("Failed to get by ID", "id", req_uri.Id, "error", err)

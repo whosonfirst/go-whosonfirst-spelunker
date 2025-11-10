@@ -6,11 +6,11 @@ import (
 	"net/http"
 
 	"github.com/aaronland/go-http/v3/auth"
-	"github.com/aaronland/go-http/v3/slog"	
+	"github.com/aaronland/go-http/v3/slog"
 	"github.com/aaronland/go-pagination"
 	"github.com/aaronland/go-pagination/countable"
 	"github.com/whosonfirst/go-whosonfirst-spelunker"
-	"github.com/whosonfirst/go-whosonfirst-spelunker/http"
+	wof_http "github.com/whosonfirst/go-whosonfirst-spelunker/http"
 	"github.com/whosonfirst/go-whosonfirst-spr/v2"
 )
 
@@ -18,13 +18,13 @@ type DescendantsHandlerOptions struct {
 	Spelunker     spelunker.Spelunker
 	Authenticator auth.Authenticator
 	Templates     *template.Template
-	URIs          *http.URIs
+	URIs          *wof_http.URIs
 }
 
 type DescendantsHandlerVars struct {
 	PageTitle        string
 	Id               int64
-	URIs             *http.URIs
+	URIs             *wof_http.URIs
 	Places           []spr.StandardPlacesResult
 	Pagination       pagination.Results
 	PaginationURL    string
@@ -45,7 +45,7 @@ func DescendantsHandler(opts *DescendantsHandlerOptions) (http.Handler, error) {
 		ctx := req.Context()
 		logger := slog.LoggerWithRequest(req, nil)
 
-		uri, err, status := http.ParseURIFromRequest(req, nil)
+		uri, err, status := wof_http.ParseURIFromRequest(req, nil)
 
 		if err != nil {
 			logger.Error("Failed to parse URI from request", "error", err)
@@ -63,15 +63,15 @@ func DescendantsHandler(opts *DescendantsHandlerOptions) (http.Handler, error) {
 			return
 		}
 
-		pg, pg_err := http.ParsePageNumberFromRequest(req)
+		pg, pg_err := wof_http.ParsePageNumberFromRequest(req)
 
 		if pg_err == nil {
 			pg_opts.Pointer(pg)
 		}
 
-		filter_params := http.DefaultFilterParams()
+		filter_params := wof_http.DefaultFilterParams()
 
-		filters, err := http.FiltersFromRequest(ctx, req, filter_params)
+		filters, err := wof_http.FiltersFromRequest(ctx, req, filter_params)
 
 		if err != nil {
 			logger.Error("Failed to derive filters from request", "error", err)
@@ -88,10 +88,10 @@ func DescendantsHandler(opts *DescendantsHandlerOptions) (http.Handler, error) {
 		}
 
 		// This is not ideal but I am not sure what is better yet...
-		pagination_url := http.URIForId(opts.URIs.Descendants, uri.Id, filters, nil)
+		pagination_url := wof_http.URIForId(opts.URIs.Descendants, uri.Id, filters, nil)
 
 		// This is not ideal but I am not sure what is better yet...
-		facets_url := http.URIForId(opts.URIs.DescendantsFaceted, uri.Id, filters, nil)
+		facets_url := wof_http.URIForId(opts.URIs.DescendantsFaceted, uri.Id, filters, nil)
 		facets_context_url := pagination_url
 
 		vars := DescendantsHandlerVars{

@@ -8,11 +8,11 @@ import (
 	"strconv"
 
 	"github.com/aaronland/go-http/v3/auth"
-	"github.com/aaronland/go-http/v3/slog"	
 	"github.com/aaronland/go-http/v3/sanitize"
+	"github.com/aaronland/go-http/v3/slog"
 	"github.com/aaronland/go-pagination"
 	"github.com/whosonfirst/go-whosonfirst-spelunker"
-	"github.com/whosonfirst/go-whosonfirst-spelunker/http"
+	wof_http "github.com/whosonfirst/go-whosonfirst-spelunker/http"
 	"github.com/whosonfirst/go-whosonfirst-spr/v2"
 	"github.com/whosonfirst/go-whosonfirst-uri"
 )
@@ -21,12 +21,12 @@ type SearchHandlerOptions struct {
 	Spelunker     spelunker.Spelunker
 	Authenticator auth.Authenticator
 	Templates     *template.Template
-	URIs          *http.URIs
+	URIs          *wof_http.URIs
 }
 
 type SearchHandlerVars struct {
 	PageTitle        string
-	URIs             *http.URIs
+	URIs             *wof_http.URIs
 	Places           []spr.StandardPlacesResult
 	Pagination       pagination.Results
 	PaginationURL    string
@@ -97,7 +97,7 @@ func SearchHandler(opts *SearchHandlerOptions) (http.Handler, error) {
 			return
 		}
 
-		pg_opts, err := http.PaginationOptionsFromRequest(req)
+		pg_opts, err := wof_http.PaginationOptionsFromRequest(req)
 
 		if err != nil {
 			logger.Error("Failed to create pagination options", "error", err)
@@ -109,9 +109,9 @@ func SearchHandler(opts *SearchHandlerOptions) (http.Handler, error) {
 			Query: q,
 		}
 
-		filter_params := http.DefaultFilterParams()
+		filter_params := wof_http.DefaultFilterParams()
 
-		filters, err := http.FiltersFromRequest(ctx, req, filter_params)
+		filters, err := wof_http.FiltersFromRequest(ctx, req, filter_params)
 
 		if err != nil {
 			logger.Error("Failed to derive filters from request", "error", err)
@@ -136,9 +136,9 @@ func SearchHandler(opts *SearchHandlerOptions) (http.Handler, error) {
 		vars.Places = r.Results()
 		vars.Pagination = pg_r
 
-		pagination_url := http.URIForSearch(opts.URIs.Search, q, filters, nil)
-		facets_url := http.URIForSearch(opts.URIs.SearchFaceted, q, filters, nil)
-		facets_context_url := http.URIForSearch(opts.URIs.Search, q, filters, nil)
+		pagination_url := wof_http.URIForSearch(opts.URIs.Search, q, filters, nil)
+		facets_url := wof_http.URIForSearch(opts.URIs.SearchFaceted, q, filters, nil)
+		facets_context_url := wof_http.URIForSearch(opts.URIs.Search, q, filters, nil)
 
 		vars.PaginationURL = pagination_url
 		vars.FacetsURL = facets_url

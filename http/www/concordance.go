@@ -7,11 +7,11 @@ import (
 	"strings"
 
 	"github.com/aaronland/go-http/v3/auth"
-	"github.com/aaronland/go-http/v3/slog"	
+	"github.com/aaronland/go-http/v3/slog"
 	"github.com/aaronland/go-pagination"
 	"github.com/whosonfirst/go-whosonfirst-sources"
 	"github.com/whosonfirst/go-whosonfirst-spelunker"
-	"github.com/whosonfirst/go-whosonfirst-spelunker/http"
+	wof_http "github.com/whosonfirst/go-whosonfirst-spelunker/http"
 	"github.com/whosonfirst/go-whosonfirst-spr/v2"
 )
 
@@ -19,12 +19,12 @@ type HasConcordanceHandlerOptions struct {
 	Spelunker     spelunker.Spelunker
 	Authenticator auth.Authenticator
 	Templates     *template.Template
-	URIs          *http.URIs
+	URIs          *wof_http.URIs
 }
 
 type HasConcordanceHandlerVars struct {
 	PageTitle        string
-	URIs             *http.URIs
+	URIs             *wof_http.URIs
 	Concordance      *spelunker.Concordance
 	Places           []spr.StandardPlacesResult
 	Pagination       pagination.Results
@@ -74,7 +74,7 @@ func HasConcordanceHandler(opts *HasConcordanceHandlerOptions) (http.Handler, er
 
 		c := spelunker.NewConcordanceFromTriple(ns, pred, value)
 
-		pg_opts, err := http.PaginationOptionsFromRequest(req)
+		pg_opts, err := wof_http.PaginationOptionsFromRequest(req)
 
 		if err != nil {
 			logger.Error("Failed to create pagination options", "error", err)
@@ -82,9 +82,9 @@ func HasConcordanceHandler(opts *HasConcordanceHandlerOptions) (http.Handler, er
 			return
 		}
 
-		filter_params := http.DefaultFilterParams()
+		filter_params := wof_http.DefaultFilterParams()
 
-		filters, err := http.FiltersFromRequest(ctx, req, filter_params)
+		filters, err := wof_http.FiltersFromRequest(ctx, req, filter_params)
 
 		if err != nil {
 			logger.Error("Failed to derive filters from request", "error", err)
@@ -121,26 +121,26 @@ func HasConcordanceHandler(opts *HasConcordanceHandlerOptions) (http.Handler, er
 
 		switch {
 		case ns != "" && pred != "" && value != "":
-			pagination_url = http.URIForConcordanceTriple(opts.URIs.ConcordanceTriple, ns, pred, value, filters, nil)
-			facets_url = http.URIForConcordanceTriple(opts.URIs.ConcordanceTripleFaceted, ns, pred, value, filters, nil)
+			pagination_url = wof_http.URIForConcordanceTriple(opts.URIs.ConcordanceTriple, ns, pred, value, filters, nil)
+			facets_url = wof_http.URIForConcordanceTriple(opts.URIs.ConcordanceTripleFaceted, ns, pred, value, filters, nil)
 		case ns != "" && pred != "":
-			pagination_url = http.URIForConcordanceNSPred(opts.URIs.ConcordanceNSPred, ns, pred, filters, nil)
-			facets_url = http.URIForConcordanceNSPred(opts.URIs.ConcordanceNSPredFaceted, ns, pred, filters, nil)
+			pagination_url = wof_http.URIForConcordanceNSPred(opts.URIs.ConcordanceNSPred, ns, pred, filters, nil)
+			facets_url = wof_http.URIForConcordanceNSPred(opts.URIs.ConcordanceNSPredFaceted, ns, pred, filters, nil)
 		case pred != "" && value != "":
-			pagination_url = http.URIForConcordanceTriple(opts.URIs.ConcordanceTriple, "*", pred, value, filters, nil)
-			facets_url = http.URIForConcordanceTriple(opts.URIs.ConcordanceTripleFaceted, "*", pred, value, filters, nil)
+			pagination_url = wof_http.URIForConcordanceTriple(opts.URIs.ConcordanceTriple, "*", pred, value, filters, nil)
+			facets_url = wof_http.URIForConcordanceTriple(opts.URIs.ConcordanceTripleFaceted, "*", pred, value, filters, nil)
 		case ns != "" && value != "":
-			pagination_url = http.URIForConcordanceTriple(opts.URIs.ConcordanceTriple, ns, "*", value, filters, nil)
-			facets_url = http.URIForConcordanceTriple(opts.URIs.ConcordanceTripleFaceted, ns, "*", value, filters, nil)
+			pagination_url = wof_http.URIForConcordanceTriple(opts.URIs.ConcordanceTriple, ns, "*", value, filters, nil)
+			facets_url = wof_http.URIForConcordanceTriple(opts.URIs.ConcordanceTripleFaceted, ns, "*", value, filters, nil)
 		case ns != "":
-			pagination_url = http.URIForConcordanceNS(opts.URIs.ConcordanceNS, ns, filters, nil)
-			facets_url = http.URIForConcordanceNS(opts.URIs.ConcordanceNSFaceted, ns, filters, nil)
+			pagination_url = wof_http.URIForConcordanceNS(opts.URIs.ConcordanceNS, ns, filters, nil)
+			facets_url = wof_http.URIForConcordanceNS(opts.URIs.ConcordanceNSFaceted, ns, filters, nil)
 		case pred != "":
-			pagination_url = http.URIForConcordanceTriple(opts.URIs.ConcordanceTriple, "*", pred, "*", filters, nil)
-			facets_url = http.URIForConcordanceTriple(opts.URIs.ConcordanceTripleFaceted, "*", pred, "*", filters, nil)
+			pagination_url = wof_http.URIForConcordanceTriple(opts.URIs.ConcordanceTriple, "*", pred, "*", filters, nil)
+			facets_url = wof_http.URIForConcordanceTriple(opts.URIs.ConcordanceTripleFaceted, "*", pred, "*", filters, nil)
 		case value != "":
-			pagination_url = http.URIForConcordanceTriple(opts.URIs.ConcordanceTriple, "*", "*", value, filters, nil)
-			facets_url = http.URIForConcordanceTriple(opts.URIs.ConcordanceTripleFaceted, "*", "*", value, filters, nil)
+			pagination_url = wof_http.URIForConcordanceTriple(opts.URIs.ConcordanceTriple, "*", "*", value, filters, nil)
+			facets_url = wof_http.URIForConcordanceTriple(opts.URIs.ConcordanceTripleFaceted, "*", "*", value, filters, nil)
 		default:
 			logger.Info("WUT")
 		}
