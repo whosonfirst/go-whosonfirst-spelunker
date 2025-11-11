@@ -4,7 +4,7 @@ import (
 	"context"
 	"log"
 
-	"github.com/whosonfirst/go-whosonfirst-spelunker/app/cli"
+	"github.com/whosonfirst/go-whosonfirst-spelunker/v2/app/cli"
 )
 
 func main() {

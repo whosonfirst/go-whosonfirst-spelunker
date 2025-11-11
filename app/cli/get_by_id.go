@@ -4,7 +4,7 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/whosonfirst/go-whosonfirst-spelunker"
+	"github.com/whosonfirst/go-whosonfirst-spelunker/v2"
 	"github.com/whosonfirst/go-whosonfirst-uri"
 )
 

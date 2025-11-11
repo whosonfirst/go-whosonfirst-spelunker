@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"log/slog"
 
-	"github.com/whosonfirst/go-whosonfirst-spelunker"
+	"github.com/whosonfirst/go-whosonfirst-spelunker/v2"
 )
 
 func (s *SQLSpelunker) facetLabel(f *spelunker.Facet) string {

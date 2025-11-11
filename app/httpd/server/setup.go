@@ -8,7 +8,7 @@ import (
 
 	"github.com/aaronland/go-http/v3/auth"
 	"github.com/rs/cors"
-	"github.com/whosonfirst/go-whosonfirst-spelunker"
+	"github.com/whosonfirst/go-whosonfirst-spelunker/v2"
 )
 
 func setupCommon() {

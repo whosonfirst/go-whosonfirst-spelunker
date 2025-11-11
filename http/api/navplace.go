@@ -8,8 +8,8 @@ import (
 	"strings"
 
 	"github.com/aaronland/go-http/v3/slog"
-	"github.com/whosonfirst/go-whosonfirst-spelunker"
-	wof_http "github.com/whosonfirst/go-whosonfirst-spelunker/http"
+	"github.com/whosonfirst/go-whosonfirst-spelunker/v2"
+	wof_http "github.com/whosonfirst/go-whosonfirst-spelunker/v2/http"
 )
 
 type NavPlaceHandlerOptions struct {

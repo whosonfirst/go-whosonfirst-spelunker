@@ -6,7 +6,7 @@ import (
 	"net/http"
 
 	"github.com/aaronland/go-http/v3/sanitize"
-	"github.com/whosonfirst/go-whosonfirst-spelunker"
+	"github.com/whosonfirst/go-whosonfirst-spelunker/v2"
 )
 
 func FacetsFromRequest(ctx context.Context, req *http.Request, params []string) ([]*spelunker.Facet, error) {

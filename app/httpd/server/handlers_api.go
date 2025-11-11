@@ -7,7 +7,7 @@ import (
 	"net/http"
 	"regexp"
 
-	"github.com/whosonfirst/go-whosonfirst-spelunker/http/api"
+	"github.com/whosonfirst/go-whosonfirst-spelunker/v2/http/api"
 )
 
 func findingAidHandlerFunc(ctx context.Context) (http.Handler, error) {

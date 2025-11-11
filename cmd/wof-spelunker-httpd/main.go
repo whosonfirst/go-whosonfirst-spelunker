@@ -4,7 +4,7 @@ import (
 	"context"
 	"log"
 
-	"github.com/whosonfirst/go-whosonfirst-spelunker/app/httpd/server"
+	"github.com/whosonfirst/go-whosonfirst-spelunker/v2/app/httpd/server"
 )
 
 func main() {

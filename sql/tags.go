@@ -8,7 +8,7 @@ import (
 	"context"
 
 	"github.com/aaronland/go-pagination"
-	"github.com/whosonfirst/go-whosonfirst-spelunker"
+	"github.com/whosonfirst/go-whosonfirst-spelunker/v2"
 	wof_spr "github.com/whosonfirst/go-whosonfirst-spr/v2"
 )
 

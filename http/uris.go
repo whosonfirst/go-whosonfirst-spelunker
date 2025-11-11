@@ -7,7 +7,7 @@ import (
 	"reflect"
 	"strings"
 
-	"github.com/whosonfirst/go-whosonfirst-spelunker"
+	"github.com/whosonfirst/go-whosonfirst-spelunker/v2"
 )
 
 type URIs struct {

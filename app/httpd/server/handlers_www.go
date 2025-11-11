@@ -8,9 +8,9 @@ import (
 
 	"github.com/sfomuseum/go-http-opensearch" // as in: opensearch the browser search protocol not "opensearch" the document store
 	opensearch_http "github.com/sfomuseum/go-http-opensearch/http"
-	"github.com/whosonfirst/go-whosonfirst-spelunker/http/templates/javascript"
-	"github.com/whosonfirst/go-whosonfirst-spelunker/http/templates/text"
-	"github.com/whosonfirst/go-whosonfirst-spelunker/http/www"
+	"github.com/whosonfirst/go-whosonfirst-spelunker/v2/http/templates/javascript"
+	"github.com/whosonfirst/go-whosonfirst-spelunker/v2/http/templates/text"
+	"github.com/whosonfirst/go-whosonfirst-spelunker/v2/http/www"
 )
 
 func robotsTxtHandlerFunc(ctx context.Context) (http.Handler, error) {

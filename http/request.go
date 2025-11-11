@@ -14,8 +14,8 @@ import (
 	"github.com/aaronland/go-pagination/countable"
 	"github.com/aaronland/go-pagination/cursor"
 	"github.com/whosonfirst/go-reader/v2"
-	"github.com/whosonfirst/go-whosonfirst-spelunker"
-	"github.com/whosonfirst/go-whosonfirst-spelunker/http/webfinger"
+	"github.com/whosonfirst/go-whosonfirst-spelunker/v2"
+	"github.com/whosonfirst/go-whosonfirst-spelunker/v2/http/webfinger"
 	"github.com/whosonfirst/go-whosonfirst-spr/v2"
 	wof_uri "github.com/whosonfirst/go-whosonfirst-uri"
 )

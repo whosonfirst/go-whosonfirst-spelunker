@@ -6,7 +6,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/whosonfirst/go-whosonfirst-spelunker"
+	"github.com/whosonfirst/go-whosonfirst-spelunker/v2"
 )
 
 // Something something something do all of this with templates...
@@ -264,13 +264,13 @@ func (s *OpenSearchSpelunker) searchFacetedQuery(search_opts *spelunker.SearchOp
 func (s *OpenSearchSpelunker) searchQueryCriteria(search_opts *spelunker.SearchOptions, filters []spelunker.Filter) string {
 
 	// This is a short-term fix to address these issues:
-	// https://github.com/whosonfirst/go-whosonfirst-spelunker-opensearch/issues/4
-	// https://github.com/whosonfirst/go-whosonfirst-spelunker-httpd/issues/20
+	// https://github.com/whosonfirst/go-whosonfirst-spelunker/v2-opensearch/issues/4
+	// https://github.com/whosonfirst/go-whosonfirst-spelunker/v2-httpd/issues/20
 	// In advance of addressing the actual problem:
 	// https://github.com/whosonfirst/whosonfirst-opensearch/issues/2
 	lower_q := strings.ToLower(search_opts.Query)
 
-	// https://github.com/whosonfirst/go-whosonfirst-spelunker-opensearch/issues/6
+	// https://github.com/whosonfirst/go-whosonfirst-spelunker/v2-opensearch/issues/6
 	// switch to https://opensearch.org/docs/latest/query-dsl/full-text/query-string/
 	// https://opensearch.org/docs/latest/query-dsl/full-text/simple-query-string/
 

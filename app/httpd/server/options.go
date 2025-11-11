@@ -12,10 +12,10 @@ import (
 	"github.com/mitchellh/copystructure"
 	"github.com/sfomuseum/go-flags/flagset"
 	sfom_funcs "github.com/sfomuseum/go-template/funcs"
-	wof_http "github.com/whosonfirst/go-whosonfirst-spelunker/http"
-	"github.com/whosonfirst/go-whosonfirst-spelunker/http/static"
-	wof_funcs "github.com/whosonfirst/go-whosonfirst-spelunker/http/templates/funcs"
-	"github.com/whosonfirst/go-whosonfirst-spelunker/http/templates/html"
+	wof_http "github.com/whosonfirst/go-whosonfirst-spelunker/v2/http"
+	"github.com/whosonfirst/go-whosonfirst-spelunker/v2/http/static"
+	wof_funcs "github.com/whosonfirst/go-whosonfirst-spelunker/v2/http/templates/funcs"
+	"github.com/whosonfirst/go-whosonfirst-spelunker/v2/http/templates/html"
 )
 
 type RunOptions struct {

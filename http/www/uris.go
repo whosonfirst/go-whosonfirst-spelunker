@@ -7,7 +7,7 @@ import (
 	"text/template"
 
 	"github.com/aaronland/go-http/v3/slog"
-	wof_http "github.com/whosonfirst/go-whosonfirst-spelunker/http"
+	wof_http "github.com/whosonfirst/go-whosonfirst-spelunker/v2/http"
 )
 
 type URIsJSHandlerOptions struct {

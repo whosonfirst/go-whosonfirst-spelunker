@@ -3,5 +3,5 @@
 package cli
 
 import (
-	_ "github.com/whosonfirst/go-whosonfirst-spelunker/opensearch"
+	_ "github.com/whosonfirst/go-whosonfirst-spelunker/v2/opensearch"
 )

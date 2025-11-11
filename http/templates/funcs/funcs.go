@@ -53,7 +53,7 @@ func IsAPlacetype(pt string) string {
 		return "a custom placetype"
 	}
 
-	// https://github.com/whosonfirst/go-whosonfirst-spelunker-httpd/issues/46
+	// https://github.com/whosonfirst/go-whosonfirst-spelunker/v2-httpd/issues/46
 
 	vowels := []string{
 		"a", "e", "i", "o", "u",

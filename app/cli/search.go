@@ -8,7 +8,7 @@ import (
 	"os"
 
 	"github.com/aaronland/go-pagination/countable"
-	"github.com/whosonfirst/go-whosonfirst-spelunker"
+	"github.com/whosonfirst/go-whosonfirst-spelunker/v2"
 )
 
 func search(ctx context.Context, sp spelunker.Spelunker) error {

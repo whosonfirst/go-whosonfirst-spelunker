@@ -8,7 +8,7 @@ import (
 	"fmt"
 
 	"github.com/sfomuseum/go-flags/flagset"
-	spelunker "github.com/whosonfirst/go-whosonfirst-spelunker"
+	spelunker "github.com/whosonfirst/go-whosonfirst-spelunker/v2"
 )
 
 func Run(ctx context.Context) error {
