@@ -57,6 +57,81 @@ whosonfirst.spelunker.maps = (function(){
 	    return map;
 	},
 
+	map2: function(map_el){
+
+	    return new Promise((resolve, reject) => {
+		
+		const map_id = map_el.getAttribute("id");
+		
+		if (_maps[map_id]){
+		    resolve(maps[map_id]);
+		    return;
+		}
+
+		fetch("/maps.json").then(rsp =>
+		    rsp.json()
+		).then((cfg) => {
+		    
+		    const map = L.map(map_el);
+		    
+		    var bbox_pane = map.createPane(bbox_pane_name);
+		    bbox_pane.style.zIndex = bbox_pane_zindex;
+		    
+		    var parent_pane = map.createPane(parent_pane_name);
+		    parent_pane.style.zIndex = parent_pane_zindex;
+		    
+		    var poly_pane = map.createPane(poly_pane_name);
+		    poly_pane.style.zIndex = poly_pane_zindex;
+		    
+		    var centroids_pane = map.createPane(centroids_pane_name);
+		    centroids_pane.style.zIndex = centroids_pane_zindex;
+		    
+		    var tooltips_pane = map.createPane(tooltips_pane_name);
+		    tooltips_pane.style.zIndex = tooltips_pane_zindex;
+
+		    switch (cfg.provider) {
+			case "leaflet":
+			    
+			    var tile_url = cfg.tile_url;
+			    
+			    var tile_layer = L.tileLayer(tile_url, {
+				maxZoom: 19,
+			    });
+			    
+			    tile_layer.addTo(map);
+			    break;
+			    
+			case "protomaps":
+			    
+			    var tile_url = cfg.tile_url;
+
+			    var pm_args = {
+				url: tile_url,
+				theme: cfg.protomaps.theme,
+			    };
+
+			    if ("max_data_zoom" in cfg){
+				pm_args.maxDataZoom = cfg.max_data_zoom;
+			    }
+			    
+			    var tile_layer = protomapsL.leafletLayer(pm_args)
+			    tile_layer.addTo(map);
+			    break;
+			    
+			default:
+			    reject("Unsupported map tile provider");
+			    return;
+		    }
+		    
+		    _maps[map_id] = map;	    
+		    resolver(map);
+		    
+		}).catch((err) => {
+		    reject(err);
+		});
+	    });
+	},
+	
 	bbox_pane_name: bbox_pane_name,
 	parent_pane_name: parent_pane_name,
 	poly_pane_name: poly_pane_name,
