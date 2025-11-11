@@ -35,7 +35,7 @@ window.addEventListener("load", function load(event){
 	    extra: alt_extra,
 	};
 
-	whosonfirst.spelunker.maps.map2(map_el).then((map) => {
+	whosonfirst.spelunker.maps.map(map_el).then((map) => {
 	    
 	    whosonfirst.spelunker.feature.fetch(wof_id, uri_args).then((f) => {
 

@@ -21,43 +21,8 @@ whosonfirst.spelunker.maps = (function(){
     var _maps = {};
     
     var self = {
-
-	map: function(map_el){
-
-	    const map_id = map_el.getAttribute("id");
-
-	    if (_maps[map_id]){
-		return maps[map_id];
-	    }
-	    
-	    var tiles_url = map_el.getAttribute("data-tiles-url");	    
-	    tiles_url = decodeURIComponent(tiles_url);
-
-	    const map = L.map(map_el);
-
-	    var bbox_pane = map.createPane(bbox_pane_name);
-	    bbox_pane.style.zIndex = bbox_pane_zindex;
-	    
-	    var parent_pane = map.createPane(parent_pane_name);
-	    parent_pane.style.zIndex = parent_pane_zindex;
-	    
-	    var poly_pane = map.createPane(poly_pane_name);
-	    poly_pane.style.zIndex = poly_pane_zindex;
-	    
-	    var centroids_pane = map.createPane(centroids_pane_name);
-	    centroids_pane.style.zIndex = centroids_pane_zindex;
-
-	    var tooltips_pane = map.createPane(tooltips_pane_name);
-	    tooltips_pane.style.zIndex = tooltips_pane_zindex;
-	    
-	    var layer = protomapsL.leafletLayer({url: tiles_url, theme: 'white'});
-	    layer.addTo(map);
-
-	    _maps[map_id] = map;	    
-	    return map;
-	},
 	
-	map2: function(map_el){
+	map: function(map_el){
 
 	    return  new Promise((resolve, reject) => {
 		
@@ -68,31 +33,33 @@ whosonfirst.spelunker.maps = (function(){
 		    return;
 		}
 
-		console.log("FETCH");
+		console.debug("Fetch map config");
 		
 		fetch("/maps.json").then(rsp =>
 		    rsp.json()
 		).then((cfg) => {
 
-		    console.log("CONFIG", cfg);
+		    console.debug("Retrieved map config", cfg);
 		    
 		    const map = L.map(map_el);
 		    
-		    var bbox_pane = map.createPane(bbox_pane_name);
+		    const bbox_pane = map.createPane(bbox_pane_name);
 		    bbox_pane.style.zIndex = bbox_pane_zindex;
 		    
-		    var parent_pane = map.createPane(parent_pane_name);
+		    const parent_pane = map.createPane(parent_pane_name);
 		    parent_pane.style.zIndex = parent_pane_zindex;
 		    
-		    var poly_pane = map.createPane(poly_pane_name);
+		    const poly_pane = map.createPane(poly_pane_name);
 		    poly_pane.style.zIndex = poly_pane_zindex;
 		    
-		    var centroids_pane = map.createPane(centroids_pane_name);
+		    const centroids_pane = map.createPane(centroids_pane_name);
 		    centroids_pane.style.zIndex = centroids_pane_zindex;
 		    
-		    var tooltips_pane = map.createPane(tooltips_pane_name);
+		    const tooltips_pane = map.createPane(tooltips_pane_name);
 		    tooltips_pane.style.zIndex = tooltips_pane_zindex;
 
+		    console.debug("Configure map provider", cfg.provider);
+		    
 		    switch (cfg.provider) {
 			case "leaflet":
 			    
@@ -131,7 +98,7 @@ whosonfirst.spelunker.maps = (function(){
 		    resolve(map);
 		    
 		}).catch((err) => {
-		    console.log("SAD", err);
+		    console.error("Invalid or unsupported map provider", err);
 		    reject(err);
 		});
 	    });

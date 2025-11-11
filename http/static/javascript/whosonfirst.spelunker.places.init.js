@@ -68,56 +68,61 @@ window.addEventListener("load", function load(event){
     // console.log("Feature", f);
     
     var map_el = document.querySelector("#map");
-    map_el.style.display = "block";
+
     
-    const map = whosonfirst.spelunker.maps.map(map_el);
+    whosonfirst.spelunker.maps.map(map_el).then((map) => {
 
-    switch (coords.length){
-	case 0:
-	// Null Island
-	    coords.push([ 0.0, 0.0 ]);
-	    f.geometry.coords = coords;
-	    map.setView([coords[0][1], coords[0][0]], 3);
-	    break;
-	case 1:
-	    // TO DO: set zoom based on placetype or mz:min/max_zoom (requires fetching the record...)
-	    map.setView([coords[0][1], coords[0][0]], 12);
-	    break;
-	default:
+    map_el.style.display = "block";	
 
-	    // START OF wrap me in a common function
-	    
-	    var bounds = whosonfirst.spelunker.geojson.derive_bounds(f);
-	    var sw = bounds[0];
-	    var ne = bounds[1];
-
-	    // TO DO: set zoom based on placetype or mz:min/max_zoom (requires fetching all the records so... maybe not?)	    
-	    if ((sw[0] == ne[0]) && (sw[1] == ne[1])){
-		map.setView(sw, 12);
-	    } else {
-		map.fitBounds(bounds);
-	    }
-
-	    // END OF wrap me in a common function
-	    
-	    break;
-    }
-    
-    var pt_handler_layer_args = {
-	pane: whosonfirst.spelunker.maps.centroids_pane_name,
-	tooltips_pane: whosonfirst.spelunker.maps.tooltips_pane_name,	
-    };
+	switch (coords.length){
+	    case 0:
+		// Null Island
+		coords.push([ 0.0, 0.0 ]);
+		f.geometry.coords = coords;
+		map.setView([coords[0][1], coords[0][0]], 3);
+		break;
+	    case 1:
+		// TO DO: set zoom based on placetype or mz:min/max_zoom (requires fetching the record...)
+		map.setView([coords[0][1], coords[0][0]], 12);
+		break;
+	    default:
 		
-    var pt_handler = whosonfirst.spelunker.leaflet.handlers.point(pt_handler_layer_args);
-    var lbl_style = whosonfirst.spelunker.leaflet.styles.search_centroid();
-
-    var points_layer_args = {
-	style: lbl_style,
-	pointToLayer: pt_handler,
-	pane: whosonfirst.spelunker.maps.centroids_pane_name,
-    }
-    
-    var points_layer = L.geoJSON(f, points_layer_args);
-    points_layer.addTo(map);
-
+		// START OF wrap me in a common function
+		
+		var bounds = whosonfirst.spelunker.geojson.derive_bounds(f);
+		var sw = bounds[0];
+		var ne = bounds[1];
+		
+		// TO DO: set zoom based on placetype or mz:min/max_zoom (requires fetching all the records so... maybe not?)	    
+		if ((sw[0] == ne[0]) && (sw[1] == ne[1])){
+		    map.setView(sw, 12);
+		} else {
+		    map.fitBounds(bounds);
+		}
+		
+		// END OF wrap me in a common function
+		
+		break;
+	}
+	
+	var pt_handler_layer_args = {
+	    pane: whosonfirst.spelunker.maps.centroids_pane_name,
+	    tooltips_pane: whosonfirst.spelunker.maps.tooltips_pane_name,	
+	};
+	
+	var pt_handler = whosonfirst.spelunker.leaflet.handlers.point(pt_handler_layer_args);
+	var lbl_style = whosonfirst.spelunker.leaflet.styles.search_centroid();
+	
+	var points_layer_args = {
+	    style: lbl_style,
+	    pointToLayer: pt_handler,
+	    pane: whosonfirst.spelunker.maps.centroids_pane_name,
+	}
+	
+	var points_layer = L.geoJSON(f, points_layer_args);
+	points_layer.addTo(map);
+	
+    }).catch((err) => {
+	console.log("Failed to retrieve map", err);
+    });
 });
