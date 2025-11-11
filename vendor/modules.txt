@@ -389,9 +389,10 @@ github.com/whosonfirst/go-rfc-5646
 # github.com/whosonfirst/go-sanitize v0.1.0
 ## explicit; go 1.12
 github.com/whosonfirst/go-sanitize
-# github.com/whosonfirst/go-whosonfirst-database v0.4.1
+# github.com/whosonfirst/go-whosonfirst-database v0.5.0
 ## explicit; go 1.25.0
 github.com/whosonfirst/go-whosonfirst-database/opensearch/client
+github.com/whosonfirst/go-whosonfirst-database/opensearch/document
 github.com/whosonfirst/go-whosonfirst-database/sql/tables
 # github.com/whosonfirst/go-whosonfirst-feature v0.0.29
 ## explicit; go 1.22
@@ -415,9 +416,6 @@ github.com/whosonfirst/go-whosonfirst-placetypes
 ## explicit; go 1.18
 github.com/whosonfirst/go-whosonfirst-sources
 github.com/whosonfirst/go-whosonfirst-sources/sources
-# github.com/whosonfirst/go-whosonfirst-spelunker v0.0.7
-## explicit; go 1.24.0
-github.com/whosonfirst/go-whosonfirst-spelunker/document
 # github.com/whosonfirst/go-whosonfirst-spr/v2 v2.3.8
 ## explicit; go 1.24
 github.com/whosonfirst/go-whosonfirst-spr/v2
@@ -519,7 +517,7 @@ golang.org/x/net/trace
 golang.org/x/sys/unix
 golang.org/x/sys/windows
 golang.org/x/sys/windows/registry
-# golang.org/x/text v0.30.0
+# golang.org/x/text v0.31.0
 ## explicit; go 1.24.0
 golang.org/x/text/feature/plural
 golang.org/x/text/internal
