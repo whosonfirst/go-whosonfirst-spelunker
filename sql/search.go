@@ -6,9 +6,9 @@ import (
 	"strings"
 
 	"github.com/aaronland/go-pagination"
+	"github.com/whosonfirst/go-whosonfirst-database/sql/tables"
 	"github.com/whosonfirst/go-whosonfirst-spelunker"
 	wof_spr "github.com/whosonfirst/go-whosonfirst-spr/v2"
-	"github.com/whosonfirst/go-whosonfirst-database/sql/tables"
 )
 
 func (s *SQLSpelunker) Search(ctx context.Context, pg_opts pagination.Options, search_opts *spelunker.SearchOptions, filters []spelunker.Filter) (wof_spr.StandardPlacesResults, pagination.Results, error) {

@@ -7,8 +7,8 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/whosonfirst/go-whosonfirst-spelunker"
 	"github.com/whosonfirst/go-whosonfirst-database/sql/tables"
+	"github.com/whosonfirst/go-whosonfirst-spelunker"
 )
 
 func (s *SQLSpelunker) facetSPR(ctx context.Context, facet *spelunker.Facet, where string, args ...interface{}) ([]*spelunker.FacetCount, error) {

@@ -16,9 +16,9 @@ import (
 
 	"github.com/aaronland/go-pagination"
 	"github.com/aaronland/go-pagination/countable"
+	"github.com/whosonfirst/go-whosonfirst-database/sql/tables"
 	"github.com/whosonfirst/go-whosonfirst-spelunker"
 	wof_spr "github.com/whosonfirst/go-whosonfirst-spr/v2"
-	"github.com/whosonfirst/go-whosonfirst-database/sql/tables"
 	"github.com/whosonfirst/go-whosonfirst-sqlite-spr"
 )
 

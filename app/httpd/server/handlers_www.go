@@ -6,7 +6,7 @@ import (
 	"log/slog"
 	"net/http"
 
-	"github.com/sfomuseum/go-http-opensearch"	// as in: opensearch the browser search protocol not "opensearch" the document store
+	"github.com/sfomuseum/go-http-opensearch" // as in: opensearch the browser search protocol not "opensearch" the document store
 	opensearch_http "github.com/sfomuseum/go-http-opensearch/http"
 	"github.com/whosonfirst/go-whosonfirst-spelunker/http/templates/javascript"
 	"github.com/whosonfirst/go-whosonfirst-spelunker/http/templates/text"

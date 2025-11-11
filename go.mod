@@ -8,6 +8,7 @@ require (
 	github.com/aaronland/go-roster v1.0.0
 	github.com/dustin/go-humanize v1.0.1
 	github.com/jtacoma/uritemplates v1.0.0
+	github.com/mattn/go-sqlite3 v1.14.32
 	github.com/mitchellh/copystructure v1.2.0
 	github.com/opensearch-project/opensearch-go/v4 v4.5.0
 	github.com/rs/cors v1.11.1
@@ -78,7 +79,6 @@ require (
 	github.com/hashicorp/errwrap v1.0.0 // indirect
 	github.com/hashicorp/go-multierror v1.1.1 // indirect
 	github.com/jmespath/go-jmespath v0.4.0 // indirect
-	github.com/mattn/go-sqlite3 v1.14.32 // indirect
 	github.com/mitchellh/reflectwalk v1.0.2 // indirect
 	github.com/patrickmn/go-cache v2.1.0+incompatible // indirect
 	github.com/paulmach/go.geojson v1.4.0 // indirect

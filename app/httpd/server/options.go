@@ -22,7 +22,7 @@ type RunOptions struct {
 	ServerURI         string                               `json:"server_uri"`
 	SpelunkerURI      string                               `json:"spelunker_uri"`
 	AuthenticatorURI  string                               `json:"authenticator_uri"`
-	URIs              *wof_http.URIs                          `json:"uris"`
+	URIs              *wof_http.URIs                       `json:"uris"`
 	HTMLTemplates     []io_fs.FS                           `json:"templates,omitemtpy"`
 	HTMLTemplateFuncs html_template.FuncMap                `json:"template_funcs,omitempty"`
 	StaticAssets      io_fs.FS                             `json:"static_assets,omitempty"`
@@ -59,7 +59,7 @@ func RunOptionsFromFlagSet(ctx context.Context, fs *flag.FlagSet) (*RunOptions, 
 	if err != nil {
 		return nil, fmt.Errorf("Failed to assign flags from environment variables, %w", err)
 	}
-	
+
 	return RunOptionsFromParsedFlags(ctx)
 }
 
