@@ -6,9 +6,9 @@ import (
 	"fmt"
 	"strings"
 
+	"github.com/whosonfirst/go-whosonfirst-database/opensearch/document"
 	"github.com/whosonfirst/go-whosonfirst-database/sql/tables"
 	"github.com/whosonfirst/go-whosonfirst-spelunker/v2"
-	"github.com/whosonfirst/go-whosonfirst-spelunker/v2/document"
 	wof_spr "github.com/whosonfirst/go-whosonfirst-spr/v2"
 	"github.com/whosonfirst/go-whosonfirst-sqlite-spr"
 	"github.com/whosonfirst/go-whosonfirst-uri"
