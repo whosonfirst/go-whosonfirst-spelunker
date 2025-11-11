@@ -6,6 +6,7 @@ import (
 	"log/slog"
 	"net/http"
 
+	"github.com/aaronland/go-http-maps/v2"
 	"github.com/sfomuseum/go-http-opensearch" // as in: opensearch the browser search protocol not "opensearch" the document store
 	opensearch_http "github.com/sfomuseum/go-http-opensearch/http"
 	"github.com/whosonfirst/go-whosonfirst-spelunker/v2/http/templates/javascript"
@@ -361,4 +362,22 @@ func tilesHandlerFunc(ctx context.Context) (http.Handler, error) {
 	}
 
 	return www.TilesAPIHandler(opts)
+}
+
+func mapConfigHandlerFunction(ctx context.Context) (http.Handler, error) {
+
+	opts := &maps.AssignMapConfigHandlerOptions{
+		MapProvider:          map_provider,
+		MapTileURI:           map_tile_uri,
+		ProtomapsTheme:       protomaps_theme,
+		ProtomapsMaxDataZoom: protomaps_max_data_zoom,
+	}
+
+	map_cfg_handler, err := maps.MapConfigHandlerFromOptions(opts)
+
+	if err != nil {
+		return nil, err
+	}
+
+	return map_cfg_handler, nil
 }

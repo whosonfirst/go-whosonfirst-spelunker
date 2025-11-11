@@ -26,6 +26,8 @@ github.com/GoogleCloudPlatform/opentelemetry-operations-go/internal/resourcemapp
 github.com/GoogleCloudPlatform/opentelemetry-operations-go/internal/resourcemapping v0.53.0/go.mod h1:cSgYe11MCNYunTnRXrKiR/tHc0eoKjICUuWpNZoVCOo=
 github.com/aaronland/go-aws/v3 v3.1.0 h1:aXyo5lS8Dkx0YmF20gKHGc52FWMsuWn6jLSIdx/jSFs=
 github.com/aaronland/go-aws/v3 v3.1.0/go.mod h1:ki8AAFdRCjJ8LTRGybRObGYPFs91AwJBMu2ceOe4t1U=
+github.com/aaronland/go-http-maps/v2 v2.3.1 h1:rvfkSvLgFO7j4j2NTCuBfO3TKSGiApOKEGX7/ifAUL4=
+github.com/aaronland/go-http-maps/v2 v2.3.1/go.mod h1:2iK8mL62rgujrLUa3Thq45G5z6eY6ym8OSNKfEvRiDQ=
 github.com/aaronland/go-http-rewrite v1.1.0 h1:HhsltNyYRnIz2FR+qANZLx2ykiRuNuNK1JgPonKBLHQ=
 github.com/aaronland/go-http-rewrite v1.1.0/go.mod h1:iA9jQBureJrzO6fTzmRLS+fkbAI1Fna71iTb1hP8n3k=
 github.com/aaronland/go-http/v3 v3.2.0 h1:TyyaelGSL/gDP9pvpOsVw7wEwbHa3ml8LJwWomcAV18=
@@ -274,6 +276,8 @@ github.com/whosonfirst/go-whosonfirst-placetypes v0.9.0/go.mod h1:4kUVNaG1uuWHjP
 github.com/whosonfirst/go-whosonfirst-sources v0.1.0/go.mod h1:EUMHyGzUmqPPxlMmOp+28BFeoBdxxE0HCKRd67lkqGM=
 github.com/whosonfirst/go-whosonfirst-sources v0.2.0 h1:G5U5lgtNUYHdJloEsI+uqQx5s+Q+zaQpq17nDMx2r2o=
 github.com/whosonfirst/go-whosonfirst-sources v0.2.0/go.mod h1:oAYirIVWxBmpE4/J0p7kpYqmgtQVDCyff2qJ8JzhdHc=
+github.com/whosonfirst/go-whosonfirst-spelunker v0.0.7 h1:TvPjFiGaA0OtDrw6lsYOk80mXcNtzZDAkPIzICp08kc=
+github.com/whosonfirst/go-whosonfirst-spelunker v0.0.7/go.mod h1:mR+bU4GkfliIL0i0nlJ7o9eSxm6FNgt5dEtB21gShn8=
 github.com/whosonfirst/go-whosonfirst-spr/v2 v2.2.1/go.mod h1:3P6fiSVGtIbM3UcyaVMs4i1N6Hi88GmTsdouuXzlr78=
 github.com/whosonfirst/go-whosonfirst-spr/v2 v2.3.8 h1:UNl4QuSdOD8ciZE2vNoZ8nSE38Z5ItWBJVeNS00pCeE=
 github.com/whosonfirst/go-whosonfirst-spr/v2 v2.3.8/go.mod h1:fWGHEhgG0799kSiGQapLuHV9ibXiQkuy48YLJN8gp6U=

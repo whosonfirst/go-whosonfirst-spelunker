@@ -3,6 +3,7 @@ module github.com/whosonfirst/go-whosonfirst-spelunker/v2
 go 1.25.0
 
 require (
+	github.com/aaronland/go-http-maps/v2 v2.3.1
 	github.com/aaronland/go-http/v3 v3.2.0
 	github.com/aaronland/go-pagination v0.3.0
 	github.com/aaronland/go-roster v1.0.0
@@ -92,6 +93,7 @@ require (
 	github.com/whosonfirst/go-rfc-5646 v0.1.0 // indirect
 	github.com/whosonfirst/go-whosonfirst-feature v0.0.29 // indirect
 	github.com/whosonfirst/go-whosonfirst-names v0.1.0 // indirect
+	github.com/whosonfirst/go-whosonfirst-spelunker v0.0.7 // indirect
 	go.mongodb.org/mongo-driver v1.11.4 // indirect
 	go.opentelemetry.io/auto/sdk v1.1.0 // indirect
 	go.opentelemetry.io/otel v1.37.0 // indirect
