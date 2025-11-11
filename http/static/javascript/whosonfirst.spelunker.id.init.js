@@ -40,7 +40,7 @@ window.addEventListener("load", function load(event){
 	    map_el.style.display = "block";
 
 	    // const map = whosonfirst.spelunker.maps.map(map_el);
-	    const map = await whosonfirst.spelunker.maps.map2(map_el);
+	    const map = whosonfirst.spelunker.maps.map2(map_el);
 	    
 	    if (f.geometry.type == "Point"){
 

@@ -57,9 +57,9 @@ whosonfirst.spelunker.maps = (function(){
 	    return map;
 	},
 
-	map2: function(map_el){
+	map2: async function(map_el){
 
-	    return new Promise((resolve, reject) => {
+	    return await new Promise((resolve, reject) => {
 		
 		const map_id = map_el.getAttribute("id");
 		
@@ -124,7 +124,7 @@ whosonfirst.spelunker.maps = (function(){
 		    }
 		    
 		    _maps[map_id] = map;	    
-		    resolver(map);
+		    resolve(map);
 		    
 		}).catch((err) => {
 		    reject(err);
