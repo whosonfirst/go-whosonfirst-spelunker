@@ -56,6 +56,7 @@ func RunWithOptions(ctx context.Context, opts *RunOptions) error {
 
 		// Common handler things
 		"/robots.txt": robotsTxtHandlerFunc,
+		"/maps.json":  mapConfigHandlerFunction,
 
 		// WWW/human-readable
 		run_options.URIs.Placetypes:        placetypesHandlerFunc,

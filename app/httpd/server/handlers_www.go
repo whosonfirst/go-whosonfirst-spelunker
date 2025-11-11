@@ -373,11 +373,15 @@ func mapConfigHandlerFunction(ctx context.Context) (http.Handler, error) {
 		ProtomapsMaxDataZoom: protomaps_max_data_zoom,
 	}
 
-	map_cfg_handler, err := maps.MapConfigHandlerFromOptions(opts)
+	map_cfg, err := maps.MapConfigFromOptions(opts)
 
 	if err != nil {
 		return nil, err
 	}
+
+	map_cfg_handler := maps.MapConfigHandler(map_cfg)
+
+	// Something something something tiles...
 
 	return map_cfg_handler, nil
 }
