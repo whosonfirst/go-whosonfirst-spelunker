@@ -1,25 +1,24 @@
 package cli
 
+// To do: model this after the "commands" in whosonfirst/wof-cli
+
 import (
 	"context"
 	"flag"
 	"fmt"
-	"log/slog"
 
 	"github.com/sfomuseum/go-flags/flagset"
 	spelunker "github.com/whosonfirst/go-whosonfirst-spelunker"
 )
 
-func Run(ctx context.Context, logger *slog.Logger) error {
+func Run(ctx context.Context) error {
 	fs := DefaultFlagSet()
-	return RunWithFlagSet(ctx, fs, logger)
+	return RunWithFlagSet(ctx, fs)
 }
 
-func RunWithFlagSet(ctx context.Context, fs *flag.FlagSet, logger *slog.Logger) error {
+func RunWithFlagSet(ctx context.Context, fs *flag.FlagSet) error {
 
 	flagset.Parse(fs)
-
-	slog.SetDefault(logger)
 
 	sp, err := spelunker.NewSpelunker(ctx, spelunker_uri)
 

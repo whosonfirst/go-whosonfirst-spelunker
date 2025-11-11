@@ -8,9 +8,12 @@ require (
 	github.com/aaronland/go-roster v1.0.0
 	github.com/dustin/go-humanize v1.0.1
 	github.com/jtacoma/uritemplates v1.0.0
+	github.com/mitchellh/copystructure v1.2.0
+	github.com/rs/cors v1.11.1
 	github.com/sfomuseum/go-edtf v1.2.1
 	github.com/sfomuseum/go-flags v0.12.1
 	github.com/sfomuseum/go-geojsonld v1.0.0
+	github.com/sfomuseum/go-http-opensearch v0.0.2
 	github.com/sfomuseum/go-template v1.10.1
 	github.com/sfomuseum/iso8601duration v1.1.0
 	github.com/tidwall/gjson v1.18.0
@@ -27,7 +30,10 @@ require (
 
 require (
 	github.com/aaronland/go-aws/v3 v3.0.0 // indirect
+	github.com/aaronland/go-http-rewrite v1.1.0 // indirect
 	github.com/aaronland/gocloud v1.0.0 // indirect
+	github.com/akrylysov/algnhsa v1.1.0 // indirect
+	github.com/aws/aws-lambda-go v1.49.0 // indirect
 	github.com/aws/aws-sdk-go v1.55.7 // indirect
 	github.com/aws/aws-sdk-go-v2 v1.38.0 // indirect
 	github.com/aws/aws-sdk-go-v2/aws/protocol/eventstream v1.7.0 // indirect
@@ -63,6 +69,7 @@ require (
 	github.com/hashicorp/errwrap v1.0.0 // indirect
 	github.com/hashicorp/go-multierror v1.1.1 // indirect
 	github.com/jmespath/go-jmespath v0.4.0 // indirect
+	github.com/mitchellh/reflectwalk v1.0.2 // indirect
 	github.com/paulmach/go.geojson v1.4.0 // indirect
 	github.com/paulmach/orb v0.11.1 // indirect
 	github.com/skip2/go-qrcode v0.0.0-20200617195104-da1b6568686e // indirect
