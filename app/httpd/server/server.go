@@ -56,7 +56,8 @@ func RunWithOptions(ctx context.Context, opts *RunOptions) error {
 
 		// Common handler things
 		"/robots.txt": robotsTxtHandlerFunc,
-		"/maps.json":  mapConfigHandlerFunction,
+
+		// Map tile handler/config stuff is dealth with below
 
 		// WWW/human-readable
 		run_options.URIs.Placetypes:        placetypesHandlerFunc,
@@ -98,6 +99,22 @@ func RunWithOptions(ctx context.Context, opts *RunOptions) error {
 		run_options.URIs.Select:                   selectHandlerFunc,
 		run_options.URIs.SPR:                      sprHandlerFunc,
 		run_options.URIs.SVG:                      svgHandlerFunc,
+	}
+
+	map_cfg_handler, map_tile_handler, map_tile_url, err := mapConfigHandlers(ctx)
+
+	if err != nil {
+		return fmt.Errorf("Failed to derive map config handlers, %w", err)
+	}
+
+	mux_handlers["/maps.json"] = func(ctx context.Context) (http.Handler, error) {
+		return map_cfg_handler, nil
+	}
+
+	if map_tile_handler != nil {
+		mux_handlers[map_tile_url] = func(ctx context.Context) (http.Handler, error) {
+			return map_tile_handler, nil
+		}
 	}
 
 	assign_handlers := func(handler_map map[string]handlers.RouteHandlerFunc, paths []string, handler_func handlers.RouteHandlerFunc) {

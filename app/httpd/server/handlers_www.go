@@ -364,7 +364,7 @@ func tilesHandlerFunc(ctx context.Context) (http.Handler, error) {
 	return www.TilesAPIHandler(opts)
 }
 
-func mapConfigHandlerFunction(ctx context.Context) (http.Handler, error) {
+func mapConfigHandlers(ctx context.Context) (http.Handler, http.Handler, string, error) {
 
 	opts := &maps.AssignMapConfigHandlerOptions{
 		MapProvider:          map_provider,
@@ -376,12 +376,18 @@ func mapConfigHandlerFunction(ctx context.Context) (http.Handler, error) {
 	map_cfg, err := maps.MapConfigFromOptions(opts)
 
 	if err != nil {
-		return nil, err
+		return nil, nil, "", err
 	}
 
 	map_cfg_handler := maps.MapConfigHandler(map_cfg)
 
-	// Something something something tiles...
+	var tile_url_handler http.Handler
+	var tile_url string
 
-	return map_cfg_handler, nil
+	if map_cfg.TileURLHandler != nil {
+		tile_url_handler = map_cfg.TileURLHandler
+		tile_url = map_cfg.TileURL
+	}
+
+	return map_cfg_handler, tile_url_handler, tile_url, nil
 }
