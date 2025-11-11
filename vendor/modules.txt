@@ -1,7 +1,7 @@
 # github.com/aaronland/go-aws/v3 v3.1.0
 ## explicit; go 1.25.0
 github.com/aaronland/go-aws/v3/auth
-# github.com/aaronland/go-http-maps/v2 v2.3.1
+# github.com/aaronland/go-http-maps/v2 v2.4.0
 ## explicit; go 1.24.0
 github.com/aaronland/go-http-maps/v2
 # github.com/aaronland/go-http-rewrite v1.1.0

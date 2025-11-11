@@ -3,7 +3,7 @@ module github.com/whosonfirst/go-whosonfirst-spelunker/v2
 go 1.25.0
 
 require (
-	github.com/aaronland/go-http-maps/v2 v2.3.1
+	github.com/aaronland/go-http-maps/v2 v2.4.0
 	github.com/aaronland/go-http/v3 v3.2.0
 	github.com/aaronland/go-pagination v0.3.0
 	github.com/aaronland/go-roster v1.0.0
