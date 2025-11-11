@@ -34,161 +34,165 @@ window.addEventListener("load", function load(event){
 	    function: alt_function,
 	    extra: alt_extra,
 	};
-	
-	whosonfirst.spelunker.feature.fetch(wof_id, uri_args).then((f) => {
 
-	    map_el.style.display = "block";
-
-	    // const map = whosonfirst.spelunker.maps.map(map_el);
-	    const map = whosonfirst.spelunker.maps.map2(map_el);
+	whosonfirst.spelunker.maps.map2(map_el).then((map) => {
 	    
-	    if (f.geometry.type == "Point"){
+	    whosonfirst.spelunker.feature.fetch(wof_id, uri_args).then((f) => {
 
-		var coords = f.geometry.coordinates;
+		map_el.style.display = "block";
 		
-		var pt = [ coords[1], coords[0] ];
-		var zm = 12;
-
-		if (f.properties["mz:min_zoom"]){
-		    zm = Math.max(12, f.properties["mz:min_zoom"]);
+		if (f.geometry.type == "Point"){
+		    
+		    var coords = f.geometry.coordinates;
+		    
+		    var pt = [ coords[1], coords[0] ];
+		    var zm = 12;
+		    
+		    if (f.properties["mz:min_zoom"]){
+			zm = Math.max(12, f.properties["mz:min_zoom"]);
+		    }
+		    
+		    map.setView(pt, zm);
+		    
+		} else {
+		    var bounds = whosonfirst.spelunker.geojson.derive_bounds(f);
+		    map.fitBounds(bounds);
 		}
 		
-		map.setView(pt, zm);
+		// http://localhost:8080/id/1259472055
+		if (f.geometry.type == "Point"){
+		    
+		    var pt_handler_layer_args = {
+			pane: whosonfirst.spelunker.maps.centroids_pane_name,
+			tooltips_pane: whosonfirst.spelunker.maps.tooltips_pane_name,
+		    };
+		    
+		    var pt_handler = whosonfirst.spelunker.leaflet.handlers.point(pt_handler_layer_args);
+		    var lbl_style = whosonfirst.spelunker.leaflet.styles.label_centroid();
+		    
+		    var layer_args = {
+			style: lbl_style,
+			pointToLayer: pt_handler,
+			pane: centroids_pane_name,
+		    }
+		    
+		    whosonfirst.spelunker.leaflet.draw_point(map, f, layer_args);
+		    return;
+		}
 		
-	    } else {
-		var bounds = whosonfirst.spelunker.geojson.derive_bounds(f);
-		map.fitBounds(bounds);
-	    }
-	    
-	    // http://localhost:8080/id/1259472055
-	    if (f.geometry.type == "Point"){
-
+		var bbox_style = whosonfirst.spelunker.leaflet.styles.bbox();
+		
+		var bbox_layer_args = {
+		    style: bbox_style,
+		    pane: bbox_pane_name,
+		}
+		
+		whosonfirst.spelunker.leaflet.draw_bbox(map, f, bbox_layer_args);
+		
+		var pt_handler = whosonfirst.spelunker.leaflet.handlers.point(pt_handler_layer_args);	    
+		var poly_style = whosonfirst.spelunker.leaflet.styles.consensus_polygon();
+		
+		var poly_layer_args = {
+		    style: poly_style,
+		    pointToLayer: pt_handler,		
+		    pane: poly_pane_name,
+		};
+		
+		whosonfirst.spelunker.leaflet.draw_poly(map, f, poly_layer_args);
+		
+		var props = f.properties;
+		
 		var pt_handler_layer_args = {
 		    pane: whosonfirst.spelunker.maps.centroids_pane_name,
 		    tooltips_pane: whosonfirst.spelunker.maps.tooltips_pane_name,
 		};
 		
 		var pt_handler = whosonfirst.spelunker.leaflet.handlers.point(pt_handler_layer_args);
-		var lbl_style = whosonfirst.spelunker.leaflet.styles.label_centroid();
-
-		var layer_args = {
-		    style: lbl_style,
-		    pointToLayer: pt_handler,
-		    pane: centroids_pane_name,
-		}
 		
-		whosonfirst.spelunker.leaflet.draw_point(map, f, layer_args);
-		return;
-	    }
-	    
-	    var bbox_style = whosonfirst.spelunker.leaflet.styles.bbox();
-
-	    var bbox_layer_args = {
-		style: bbox_style,
-		pane: bbox_pane_name,
-	    }
-	    
-	    whosonfirst.spelunker.leaflet.draw_bbox(map, f, bbox_layer_args);
-
-	    var pt_handler = whosonfirst.spelunker.leaflet.handlers.point(pt_handler_layer_args);	    
-	    var poly_style = whosonfirst.spelunker.leaflet.styles.consensus_polygon();
-	    
-	    var poly_layer_args = {
-		style: poly_style,
-		pointToLayer: pt_handler,		
-		pane: poly_pane_name,
-	    };
-	    
-	    whosonfirst.spelunker.leaflet.draw_poly(map, f, poly_layer_args);
-
-	    var props = f.properties;
-
-	    var pt_handler_layer_args = {
-		pane: whosonfirst.spelunker.maps.centroids_pane_name,
-		tooltips_pane: whosonfirst.spelunker.maps.tooltips_pane_name,
-	    };
-	    
-	    var pt_handler = whosonfirst.spelunker.leaflet.handlers.point(pt_handler_layer_args);
-	    
-	    if ((props["lbl:longitude"]) && (props["lbl:latitude"])){
-		
-		var lbl_centroid = [ props["lbl:longitude"], props["lbl:latitude" ] ];
-		
-		var lbl_f = {
-		    "type": "Feature",
-		    "properties": { "lflt:label_text": "label centroid" },
-		    "geometry": { "type": "Point", "coordinates": lbl_centroid }
-		};
-		
-		var lbl_style = whosonfirst.spelunker.leaflet.styles.label_centroid();
-		
-		var lbl_layer_args = {
-		    style: lbl_style,
-		    pointToLayer: pt_handler,
-		    pane: centroids_pane_name,
-		};
-		
-		whosonfirst.spelunker.leaflet.draw_point(map, lbl_f, lbl_layer_args);		
-	    }
-
-	    if ((props["geom:longitude"]) && (props["geom:latitude"])){
-		
-		var math_centroid = [ props["geom:longitude"], props["geom:latitude" ] ];
-		
-		var math_f = {
-		    "type": "Feature",
-		    "properties": { "lflt:label_text": "math centroid" },
-		    "geometry": { "type": "Point", "coordinates": math_centroid }
-		};	    
-		
-		var math_style = whosonfirst.spelunker.leaflet.styles.math_centroid();
-		
-		var math_layer_args = {
-		    style: math_style,
-		    pointToLayer: pt_handler,
-		    pane: centroids_pane_name,
-		};
-		
-		whosonfirst.spelunker.leaflet.draw_point(map, math_f, math_layer_args);
-	    }
-	    
-	    // Draw parent here...
-
-	    var parent_id = f.properties["wof:parent_id"];
-
-	    if ((parent_id) && (parent_id > 0)){
-		
-		// console.log("Fetch parent", parent_id);
-		
-		whosonfirst.spelunker.feature.fetch(parent_id).then((parent_f) => {
+		if ((props["lbl:longitude"]) && (props["lbl:latitude"])){
 		    
-		    if (! parent_f.geometry.type.endsWith("Polygon")){
-			return;
-		    }
+		    var lbl_centroid = [ props["lbl:longitude"], props["lbl:latitude" ] ];
 		    
-		    var parent_style = whosonfirst.spelunker.leaflet.styles.parent_polygon();
-		    
-		    var parent_layer_args = {
-			style: parent_style,
-			pane: parent_pane_name,
+		    var lbl_f = {
+			"type": "Feature",
+			"properties": { "lflt:label_text": "label centroid" },
+			"geometry": { "type": "Point", "coordinates": lbl_centroid }
 		    };
 		    
-		    whosonfirst.spelunker.leaflet.draw_poly(map, parent_f, parent_layer_args);
+		    var lbl_style = whosonfirst.spelunker.leaflet.styles.label_centroid();
 		    
-		}).catch((err) => {
-		    console.log("Failed to fetch parent record", parent_id, err);
-		})
-	    }
+		    var lbl_layer_args = {
+			style: lbl_style,
+			pointToLayer: pt_handler,
+			pane: centroids_pane_name,
+		    };
+		    
+		    whosonfirst.spelunker.leaflet.draw_point(map, lbl_f, lbl_layer_args);		
+		}
+		
+		if ((props["geom:longitude"]) && (props["geom:latitude"])){
+		    
+		    var math_centroid = [ props["geom:longitude"], props["geom:latitude" ] ];
+		    
+		    var math_f = {
+			"type": "Feature",
+			"properties": { "lflt:label_text": "math centroid" },
+			"geometry": { "type": "Point", "coordinates": math_centroid }
+		    };	    
+		    
+		    var math_style = whosonfirst.spelunker.leaflet.styles.math_centroid();
+		    
+		    var math_layer_args = {
+			style: math_style,
+			pointToLayer: pt_handler,
+			pane: centroids_pane_name,
+		    };
+		    
+		    whosonfirst.spelunker.leaflet.draw_point(map, math_f, math_layer_args);
+		}
+		
+		// Draw parent here...
+		    
+		    var parent_id = f.properties["wof:parent_id"];
+		
+		if ((parent_id) && (parent_id > 0)){
+		    
+		    // console.log("Fetch parent", parent_id);
+		    
+		    whosonfirst.spelunker.feature.fetch(parent_id).then((parent_f) => {
+			
+			if (! parent_f.geometry.type.endsWith("Polygon")){
+			    return;
+			}
+			
+			var parent_style = whosonfirst.spelunker.leaflet.styles.parent_polygon();
+			
+			var parent_layer_args = {
+			    style: parent_style,
+			    pane: parent_pane_name,
+			};
+			
+			whosonfirst.spelunker.leaflet.draw_poly(map, parent_f, parent_layer_args);
+			
+		    }).catch((err) => {
+			console.log("Failed to fetch parent record", parent_id, err);
+		    })
+		}
+		
+	    }).catch((err) => {
+		console.log("Failed to initialize map", err);
+		throw(err);
+	    });
 	    
 	}).catch((err) => {
-	    console.log("Failed to initialize map", err);
-	    throw(err);
+	    console.log("Failed to retrievex map", err);
+	    svg_el.style.display = "block";	    	
 	});
-	
+
     } catch (err) {
-	console.log("Failed to initialize map", err);
-	svg_el.style.display = "block";	    	
-    }
+	    console.log("Failed to initialize map", err);
+	    svg_el.style.display = "block";	    		
+    };
     
     // END OF wrap me in a webcomponent    
     

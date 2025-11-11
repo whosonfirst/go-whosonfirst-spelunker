@@ -56,10 +56,10 @@ whosonfirst.spelunker.maps = (function(){
 	    _maps[map_id] = map;	    
 	    return map;
 	},
+	
+	map2: function(map_el){
 
-	map2: async function(map_el){
-
-	    return await new Promise((resolve, reject) => {
+	    return  new Promise((resolve, reject) => {
 		
 		const map_id = map_el.getAttribute("id");
 		
@@ -68,9 +68,13 @@ whosonfirst.spelunker.maps = (function(){
 		    return;
 		}
 
+		console.log("FETCH");
+		
 		fetch("/maps.json").then(rsp =>
 		    rsp.json()
 		).then((cfg) => {
+
+		    console.log("CONFIG", cfg);
 		    
 		    const map = L.map(map_el);
 		    
@@ -127,6 +131,7 @@ whosonfirst.spelunker.maps = (function(){
 		    resolve(map);
 		    
 		}).catch((err) => {
+		    console.log("SAD", err);
 		    reject(err);
 		});
 	    });
