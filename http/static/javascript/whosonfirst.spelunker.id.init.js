@@ -185,7 +185,7 @@ window.addEventListener("load", function load(event){
 	    });
 	    
 	}).catch((err) => {
-	    console.log("Failed to retrievex map", err);
+	    console.log("Failed to retrieve map", err);
 	    svg_el.style.display = "block";	    	
 	});
 
