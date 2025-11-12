@@ -613,3 +613,9 @@ pre {
 	margin-top: 10px;
 	font-size: small;
 }
+
+/* This is important as the default margin: 12px 0px; make OSM leaflet tiles sad */
+
+.whosonfirst-image-box, img {
+	margin: 0px 0px !important;
+}
