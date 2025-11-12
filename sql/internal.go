@@ -218,7 +218,7 @@ func (s *SQLSpelunker) querySearchWithFilters(ctx context.Context, pg_opts pagin
 
 func (s *SQLSpelunker) querySearchDo(ctx context.Context, pg_opts pagination.Options, q string, args ...interface{}) (wof_spr.StandardPlacesResults, pagination.Results, error) {
 
-	slog.Info("SEARCH", "q", q)
+	slog.Debug("Do search", "q", q)
 
 	// https://www.sqlite.org/fts5.html
 
@@ -249,7 +249,7 @@ func (s *SQLSpelunker) querySearchDo(ctx context.Context, pg_opts pagination.Opt
 			return
 		}
 
-		slog.Info("SEARCH", "query", q, "count", count)
+		slog.Debug("Pagination", "query", q, "count", count)
 
 		pg_results, err := countable.NewResultsFromCountWithOptions(pg_opts, count)
 
@@ -267,7 +267,7 @@ func (s *SQLSpelunker) querySearchDo(ctx context.Context, pg_opts pagination.Opt
 			done_ch <- true
 		}()
 
-		slog.Info("SEARCH", "do", q, "args", args)
+		slog.Debug("Do search", "q", q, "args", args)
 
 		rows, err := s.db.QueryContext(ctx, q, args...)
 

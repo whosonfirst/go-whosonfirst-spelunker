@@ -30,7 +30,6 @@ type URIs struct {
 	About             string   `json:"about"`
 	Code              string   `json:"code"`
 	HowTo             string   `json:"how_to"`
-	Tiles             string   `json:"tiles"`
 	OpenSearch        string   `json:"opensearch"`
 
 	// Static assets
@@ -121,7 +120,6 @@ func DefaultURIs() *URIs {
 		},
 		Id:          "/id/{id}",
 		Descendants: "/id/{id}/descendants",
-		Tiles:       "/tiles/{z}/{x}/{y}",
 		OpenSearch:  "/opensearch",
 
 		// Static Assets

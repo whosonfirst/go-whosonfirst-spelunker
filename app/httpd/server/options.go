@@ -27,7 +27,6 @@ type RunOptions struct {
 	HTMLTemplateFuncs html_template.FuncMap                `json:"template_funcs,omitempty"`
 	StaticAssets      io_fs.FS                             `json:"static_assets,omitempty"`
 	CustomHandlers    map[string]handlers.RouteHandlerFunc `json:"custom_handlers,omitempty"`
-	ProtomapsApiKey   string                               `json:"protomaps_api_key"`
 }
 
 func (o *RunOptions) Clone() (*RunOptions, error) {
@@ -106,7 +105,6 @@ func RunOptionsFromParsedFlags(ctx context.Context, args ...string) (*RunOptions
 		HTMLTemplates:     []io_fs.FS{html.FS},
 		HTMLTemplateFuncs: t_funcs,
 		StaticAssets:      static.FS,
-		ProtomapsApiKey:   protomaps_api_key,
 	}
 
 	return opts, nil

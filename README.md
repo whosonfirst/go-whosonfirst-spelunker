@@ -1,186 +1,176 @@
 # go-whosonfirst-spelunker
 
-Go package implementing a common interface for Who's On First "spelunker"-ing.
-
-## Documentation
-
-Documentation is incomplete at this time.
-
-## Important
-
-This is work in progress and you should expect things to change, break or simply not work yet.
+Go package implementing tools and a common interface for querying (or "spelunking") an index Who's On First data.
 
 ## Motivation
 
 This is a refactoring of both the [whosonfirst/whosonfirst-www-spelunker](github.com/whosonfirst/whosonfirst-www-spelunker) and [whosonfirst/go-whosonfirst-browser](github.com/whosonfirst/go-whosonfirst-browser) packages.
 
-Specifically, the former (`whosonfirst-www-spelunker`) is written in Python and has a sufficiently complex set of requirements that spinning up a new instance is difficult. By rewriting the spelunker tool in Go the hope is to eliminate or at least minimize these external requirements and to make it easier to deploy the spelunker to "serverless" environments like AWS Lambda or Function URLs. The latter (`go-whosonfirst-browser`) has developed a sufficiently large and complex code base that starting from scratch and simply copying, and adapting, existing functionality seemed easier than trying to refactor everything.
-
-## A note about versioning
-
-Currently this package is unversioned reflecting the fact that it is still in flux. The rate of change is slowing down and will eventually be assigned version numbers less than 1.x for as long as it takes to produce the initial "minimal viable (and working)" Spelunker implementations. These versions (0.x.y) should not be considered to be backwards compatible with each other and are expected to change as the first stable interface is settled, specifically if and whether it will contain spatial functions.
-
-Once a decision has been reached on that matter and everything is proven to work this package (and all the related packages, discussed below) will be bumped up to a "version 2.x" release, skipping version 1.x altogether, reflecting the fact that the original Python version of the Spelunker is "version 1" and that this code base is meaningfully different.
-
-After the "v2" release this package (and related packages) will follow the standard Go convention of incrementing version numbers if and when there are changes to the underlying Spelunker interface.
+Specifically, the former (`whosonfirst-www-spelunker`) is written in Python and ha a sufficiently complex set of requirements that spinning up a new instance was difficult. By rewriting the spelunker tool in Go the hope is to eliminate or at least minimize these external requirements and to make it easier to deploy the spelunker to "serverless" environments like AWS Lambda or Function URLs. The latter (`go-whosonfirst-browser`) has developed a sufficiently large and complex code base that starting from scratch and simply copying, and adapting, existing functionality seemed easier than trying to refactor everything.
 
 ## Structure
 
-There are three "classes" of `go-whosonfirst-spelunker` packages:
+```
+// Spelunker is an interface for reading and querying Who's On First style data from an "index" (a database or queryable datafile).
+type Spelunker interface {
 
-### go-whosonfirst-spelunker
+	// Retrieve properties (or more specifically the "document") for...
+	GetRecordForId(context.Context, int64, *uri.URIArgs) ([]byte, error)
+	// Retrieve the `spr.StandardPlaceResult` instance for a given ID.
+	GetSPRForId(context.Context, int64, *uri.URIArgs) (spr.StandardPlacesResult, error)
+	// Retrieve the GeoJSON Feature record for a given ID.
+	GetFeatureForId(context.Context, int64, *uri.URIArgs) ([]byte, error)
 
-That would be the package that you are looking at right now. It defines the [Spelunker](https://github.com/whosonfirst/go-whosonfirst-spelunker/blob/main/spelunker.go#L24-L82) interface defining the minimal methods required for a Spelunker application be it a command-line application, a web application or something else.
+	// Retrieve all the Who's On First record that are a descendant of a specific Who's On First ID.
+	GetDescendants(context.Context, pagination.Options, int64, []Filter) (spr.StandardPlacesResults, pagination.Results, error)
+	// Retrieve faceted properties for records that are a descendant of a specific Who's On First ID.
+	GetDescendantsFaceted(context.Context, int64, []Filter, []*Facet) ([]*Faceting, error)
+	// Return the total number of Who's On First records that are a descendant of a specific Who's On First ID.
+	CountDescendants(context.Context, int64) (int64, error)
 
-This package does not export any working implementations of the `Spelunker` interface. It simply defines the interface and other associated types.
+	// Retrieve all the Who's On First records that match a search criteria.
+	Search(context.Context, pagination.Options, *SearchOptions, []Filter) (spr.StandardPlacesResults, pagination.Results, error)
+	// Retrieve faceted properties for records match a search criteria.
+	SearchFaceted(context.Context, *SearchOptions, []Filter, []*Facet) ([]*Faceting, error)
 
-### go-whosonfirst-spelunker-httpd
+	// Retrieve all the Who's On First records that have been modified with a window of time.
+	GetRecent(context.Context, pagination.Options, time.Duration, []Filter) (spr.StandardPlacesResults, pagination.Results, error)
+	// Retrieve faceted properties for records that have been modified with a window of time.
+	GetRecentFaceted(context.Context, time.Duration, []Filter, []*Facet) ([]*Faceting, error)
 
-The [whosonfirst/go-whosonfirst-spelunker-httpd](github.com/whosonfirst/go-whosonfirst-spelunker-httpd) package provides libraries for implementing a web-based spelunker service. While it does define a working `cmd/server` tool demonstrating how those libraries can be used, like the `go-whosonfirst-spelunker` package it does not export any working implementations of the `Spelunker` interface. 
+	// Retrieve the list of unique placetypes in a Spleunker index.
+	GetPlacetypes(context.Context) (*Faceting, error)
+	// Retrieve the list of records with a given placetype.
+	HasPlacetype(context.Context, pagination.Options, *placetypes.WOFPlacetype, []Filter) (spr.StandardPlacesResults, pagination.Results, error)
+	// Retrieve faceted properties for records with a given placetype.
+	HasPlacetypeFaceted(context.Context, *placetypes.WOFPlacetype, []Filter, []*Facet) ([]*Faceting, error)
 
-The idea is to separate the interaction details and the mechanics of a web application from the details of how data is stored or queried from any given database containing Who's On First records. 
+	// Retrieve the list of unique concordances in a Spleunker index.
+	GetConcordances(context.Context) (*Faceting, error)
+	// Retrieve the list of records with a given concordance.
+	HasConcordance(context.Context, pagination.Options, string, string, any, []Filter) (spr.StandardPlacesResults, pagination.Results, error)
+	// Retrieve faceted properties for records with a given concordance.
+	HasConcordanceFaceted(context.Context, string, string, any, []Filter, []*Facet) ([]*Faceting, error)
 
-The server itself can be run and will serve requests because its default database is the [NullSpelunker](https://github.com/whosonfirst/go-whosonfirst-spelunker/blob/main/spelunker_null.go) implementation but since that implementation simply returns "Not implemented" for every method in the Spelunker interface it probably won't be of much use.
+	// Retrieve the list of unique tags in a Spelunker index.
+	GetTags(context.Context) (*Faceting, error)
+	// Retrieve the list of records that have a given tag.
+	HasTag(context.Context, pagination.Options, string, []Filter) (spr.StandardPlacesResults, pagination.Results, error)
+	// Retrieve faceted properties for records that have a given tag.
+	HasTagFaceted(context.Context, string, []Filter, []*Facet) ([]*Faceting, error)
 
-### go-whosonfirst-spelunker-{DATABASE}
+	// Retrieve the list of records that are "visiting Null Island" (have a latitude, longitude value of "0.0, 0.0".
+	VisitingNullIsland(context.Context, pagination.Options, []Filter) (spr.StandardPlacesResults, pagination.Results, error)
+	// Retrieve faceted properties for records that are "visiting Null Island" (have a latitude, longitude value of "0.0, 0.0".
+	VisitingNullIslandFaceted(context.Context, []Filter, []*Facet) ([]*Faceting, error)
+}
+```
 
-These are packages that implement the [Spelunker](https://github.com/whosonfirst/go-whosonfirst-spelunker/blob/main/spelunker.go#L24-L82) interface for a particular database engine. Current implementations are:
+## Databases
 
-#### go-whosonfirst-spelunker-opensearch
+The Who's On First Spelunker attempts to be database agnostic. It does not define or require support for any specific database engine. Instead it works with implementations of the `Spelunker` interface which handle database interactions independent of any specific Spelunker-like application.
 
-The [whosonfirst/go-whosonfirst-spelunker-opensearch](github.com/whosonfirst/go-whosonfirst-spelunker-opensearch) package implements the `Spelunker` interface using an [OpenSearch](https://opensearch.org/) document store, for example data indexed by the [whosonfirst/go-whosonfirst-opensearch](https://github.com/whosonfirst/go-whosonfirst-opensearch) package.
+As of this writing there is default support for two classes of database engines:
 
-It imports both the `go-whosonfirst-spelunker` and `go-whosonfirst-spelunker-httpd` and exports local instances of the web-based server (`httpd`).
+* Anything which supports the Go language `database/sql` interface. In practice this really means SQLite. Support for MySQL and Postgres is available but has not been fully tested and may still contain bugs or gotachas.
 
-_Set up and example(s) to be written..._
+* The [OpenSearch](#) document store.
 
-#### go-whosonfirst-spelunker-sql
-
-The [whosonfirst/go-whosonfirst-spelunker-sqlite](github.com/whosonfirst/go-whosonfirst-spelunker-sql) package implements the `Spelunker` interface using a Go `database/sql` relational database source, for example SQLite databases produced by the [whosonfirst/go-whosonfirst-sqlite-features-index](https://github.com/whosonfirst/go-whosonfirst-sqlite-features-index) package.
-
-It imports both the `go-whosonfirst-spelunker` and `go-whosonfirst-spelunker-httpd` and exports local instances of the "spelunker" command-line tool and web-based server. For example, to create a database for use by the SQLite implementation of the `Spelunker` interface:
+### database/sql
 
 ```
-$> cd /usr/local/whosonfirst/go-whosonfirst-sqlite-features-index
-$> ./bin/wof-sqlite-index-features-mattn \
-	-timings \
-	-database-uri mattn:///usr/local/data/ca.db \
-	-spelunker-tables \
-	-index-alt geojson \
-	/usr/local/data/whosonfirst-data-admin-ca
+sql://{DATABASE_ENGINE}?dsn={DATABASE_ENGINE_DSN}
 ```
 
-And then to use that database with a local (`go-whosonfirst-spelunker-sql`) instance of server code exported by the `go-whosonfirst-spelunker-httpd` package:
+For example:
 
 ```
-$> cd /usr/local/whosonfirst/go-whosonfirst-spelunker-sql
-$> ./bin/server \
-	-server-uri http://localhost:8080 \
-	-spelunker-uri sql://sqlite3?dsn=file:/usr/local/data/ca.db
+import (
+       "context"
+
+       "github.com/whosonfirst/go-whosonfirst-spelunker"
+       _ "github.com/whosonfirst/go-whosonfirst-spelunker/sql"       
+)
+
+sp, _ := spelunker.NewSpelunker(context.Background(), "sql://sqlite3?dsn=example.db")
 ```
 
-This is what the code for the server tool looks like (with error handling omitted for the sake of brevity):
+See [sql/README.md](sql/README.md) for details.
+
+### OpenSearch
 
 ```
-package main
+opensearch://?client_uri={GO_WHOSONFIRST_DATABASE_OPENSEARCH_CLIENT_URI}
+```
 
+For example:
+
+```
+import (
+       "context"
+       "net/url"
+       
+       "github.com/whosonfirst/go-whosonfirst-spelunker"
+       _ "github.com/whosonfirst/go-whosonfirst-spelunker/opensearch"       
+)
+
+client_uri := ""
+enc_client_uri, _ := url.QueryEscape(client_uri)
+
+sp, _ := spelunker.NewSpelunker(context.Background(), "opensearch://?client_uri=" + enc_client-uri)
+```
+
+See [opensearch/README.md](opensearch/README.md) for details.
+
+### Implementing ...
+
+This is what the code for the HTTP server tool would look something like this:
+
+```
 import (
         "context"
-        "log/slog"
-
-        _ "github.com/mattn/go-sqlite3"
-        "github.com/whosonfirst/go-whosonfirst-spelunker-httpd/app/server"
-        _ "github.com/whosonfirst/go-whosonfirst-spelunker-sql"
+        "log"
+	
+        "github.com/whosonfirst/go-whosonfirst-spelunker/app/httpd/server"
+        _ "github.com/whosonfirst/go-whosonfirst-spelunker-CUSTOM_DB"	
 )
 
 func main() {
         ctx := context.Background()
-        logger := slog.Default()
-        server.Run(ctx, logger)
+        server.Run(ctx)
 }
 ```
 
-_So far this package has only been tested with SQLite databases and probably contains some SQLite-specific syntax. The hope is that database engine specifics can be handled in conditionals in the `go-whosonfirst-spelunker-sql` package itself leaving consumers none the wiser._
+_Error handling removed for the sake of brevity._
 
-#### go-whosonfirst-spelunker-sqlite
+## Tools
 
-This package builds on the `whosonfirst/go-whosonfirst-spelunker-sql` and the `whosonfirst/go-whosonfirst-spelunker-httpd` packages but also imports @psanford 's [sqlite3vfs](https://github.com/psanford?tab=repositories&q=sqlite3vfs&type=&language=&sort=) packages to enable the use of SQLite databases hosted on remote servers.
+### wof-spelunker-httpd
 
-It modifies the default `go-whosonfirst-spelunker-httpd` options and flags and then launches the spelunker server using the `RunWithOptions` method. For example (with error handling omitted for the sake of brevity):
+Start the Spelunker web application.
 
 ```
-import (
-	"context"
-	"fmt"
-	"github.com/psanford/sqlite3vfs"
-	"github.com/psanford/sqlite3vfshttp"
-	"log/slog"
-	"net/http"
-	"net/url"
-	"os"
-	"path/filepath"
-
-	_ "github.com/mattn/go-sqlite3"
-	"github.com/whosonfirst/go-whosonfirst-spelunker-httpd/app/server"
-	_ "github.com/whosonfirst/go-whosonfirst-spelunker-sql"
-)
-
-func main() {
-
-	ctx := context.Background()
-	logger := slog.Default()
-
-	fs := server.DefaultFlagSet()
-
-	opts, _ := server.RunOptionsFromFlagSet(ctx, fs)
-
-	is_vfs, vfs_uri, _ := checkVFS(opts.SpelunkerURI)
-
-	if is_vfs {
-		opts.SpelunkerURI = vfs_uri
-	}
-
-	server.RunWithOptions(ctx, opts, logger)
-}
-
-func checkVFS(spelunker_uri string) (bool, string, error) {
-
-	u, _ := url.Parse(spelunker_uri)
-
-	q := u.Query()
-
-	if !q.Has("vfs") {
-		return false, spelunker_uri, nil
-	}
-
-	vfs_url := q.Get("vfs")
-
-	vfs := sqlite3vfshttp.HttpVFS{
-		URL: vfs_url,
-		// Consult cmd/server/main.go for roundTripper; it has been
-		// excluded here for the sake of brevity
-		RoundTripper: &roundTripper{
-			referer:   q.Get("vfs-referer"),
-			userAgent: q.Get("vfs-user-agent"),
-		},
-	}
-
-	sqlite3vfs.RegisterVFS("httpvfs", &vfs)
-
-	dsn := "spelunker.db?vfs=httpvfs&mode=ro"
-	q.Set("dsn", dsn)
-	q.Del("vfs")
-
-	u.RawQuery = q.Encode()
-	return true, u.String(), nil
-}
+$> ./bin/wof-spelunker-httpd -h
+Start the Spelunker web application.
+Usage:
+	./bin/wof-spelunker-httpd [options]
+Valid options are:
+  -authenticator-uri string
+    	A valid aaronland/go-http/v3/auth.Authenticator URI. This is future-facing work and can be ignored for now. (default "null://")
+  -map-provider string
+    	Valid options are: leaflet, protomaps (default "leaflet")
+  -map-tile-uri string
+    	A valid Leaflet tile layer URI. See documentation for special-case (interpolated tile) URIs. (default "https://tile.openstreetmap.org/{z}/{x}/{y}.png")
+  -protomaps-max-data-zoom int
+    	The maximum zoom (tile) level for data in a PMTiles database
+  -protomaps-theme string
+    	A valid Protomaps theme label. (default "white")
+  -root-url string
+    	The root URL for all public-facing URLs and links. If empty then the value of the -server-uri flag will be used.
+  -server-uri string
+    	A valid `aaronland/go-http/v3/server.Server URI. (default "http://localhost:8080")
+  -spelunker-uri string
+    	A URI in the form of '{SPELUNKER_SCHEME}://{IMPLEMENTATION_DETAILS}' referencing the underlying Spelunker database. For example: sql://sqlite3?dsn=spelunker.db (default "null://")
 ```
 
-_Note: In practice this (querying a SQLite database over HTTP) doesn't really work in a Spelunker context. Specifically, it works for simple atomic queries but the moment the application starts to do multiple overlapping queries in the same session/context there are database locks and everything times out. Maybe I am doing something wrong? I would love to know what and how to fix it if that's the case since this is a super-compelling deployment strategy. Until then it should probably best be understood as a reference implementation only._
-
-## See also
-
-* https://github.com/whosonfirst/go-whosonfirst-spelunker-httpd
-* https://github.com/whosonfirst/go-whosonfirst-spelunker-opensearch
-* https://github.com/whosonfirst/go-whosonfirst-spelunker-sql
-* https://github.com/whosonfirst/go-whosonfirst-spelunker-sqlite
+See [cmd/wof-spelunker-httpd/README.md](cmd/wof-spelunker-httpd/README.md) for details.

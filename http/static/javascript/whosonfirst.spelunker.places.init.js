@@ -69,9 +69,12 @@ window.addEventListener("load", function load(event){
     
     var map_el = document.querySelector("#map");
 
+    console.log("Get map");
     
     whosonfirst.spelunker.maps.map(map_el).then((map) => {
 
+	console.log("Got map", map);
+	
     map_el.style.display = "block";	
 
 	switch (coords.length){

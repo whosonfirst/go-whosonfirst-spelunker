@@ -14,7 +14,6 @@ import (
 	"github.com/aaronland/go-pagination"
 	"github.com/aaronland/go-pagination/countable"
 	"github.com/aaronland/go-pagination/cursor"
-	// opensearch "github.com/opensearch-project/opensearch-go/v4"
 	opensearchapi "github.com/opensearch-project/opensearch-go/v4/opensearchapi"
 	"github.com/tidwall/gjson"
 	"github.com/whosonfirst/go-cache"

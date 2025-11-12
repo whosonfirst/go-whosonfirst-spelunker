@@ -75,7 +75,6 @@ func RunWithOptions(ctx context.Context, opts *RunOptions) error {
 		run_options.URIs.Code:              codeHandlerFunc,
 		run_options.URIs.HowTo:             howtoHandlerFunc,
 		run_options.URIs.Index:             indexHandlerFunc,
-		run_options.URIs.Tiles:             tilesHandlerFunc,
 		run_options.URIs.OpenSearch:        openSearchHandlerFunc,
 
 		// Static assets
