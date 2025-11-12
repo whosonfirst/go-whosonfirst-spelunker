@@ -5,6 +5,8 @@ package webfinger
 
 const ContentType string = "application/jrd+json"
 
+const Endpoint string = "/.well-known/webfinger"
+
 type Resource struct {
 	Subject    string            `json:"subject,omitempty"`
 	Aliases    []string          `json:"aliases,omitempty"`
@@ -13,9 +15,9 @@ type Resource struct {
 }
 
 type Link struct {
-	HRef       string             `json:"href"`
-	Type       string             `json:"type,omitempty"`
-	Rel        string             `json:"rel"`
-	Properties map[string]*string `json:"properties,omitempty"`
-	Titles     map[string]string  `json:"titles,omitempty"`
+	HRef       string            `json:"href"`
+	Type       string            `json:"type,omitempty"`
+	Rel        string            `json:"rel"`
+	Properties map[string]string `json:"properties,omitempty"`
+	Titles     map[string]string `json:"titles,omitempty"`
 }

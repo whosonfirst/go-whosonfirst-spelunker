@@ -30,8 +30,8 @@ github.com/aaronland/go-http-maps/v2 v2.4.0 h1:anzYkV96VfngNjFJFOx3gn7f75T1QRRfd
 github.com/aaronland/go-http-maps/v2 v2.4.0/go.mod h1:2iK8mL62rgujrLUa3Thq45G5z6eY6ym8OSNKfEvRiDQ=
 github.com/aaronland/go-http-rewrite v1.1.0 h1:HhsltNyYRnIz2FR+qANZLx2ykiRuNuNK1JgPonKBLHQ=
 github.com/aaronland/go-http-rewrite v1.1.0/go.mod h1:iA9jQBureJrzO6fTzmRLS+fkbAI1Fna71iTb1hP8n3k=
-github.com/aaronland/go-http/v3 v3.2.0 h1:TyyaelGSL/gDP9pvpOsVw7wEwbHa3ml8LJwWomcAV18=
-github.com/aaronland/go-http/v3 v3.2.0/go.mod h1:eTQ2Cdc/7KFQ4UNfzyOnILS7TI3VNsOoc0+uYfNU8O0=
+github.com/aaronland/go-http/v3 v3.3.0 h1:59XqOTaG+VTGmRShr/+QtqqGgdTylMopesoMWFV1E0s=
+github.com/aaronland/go-http/v3 v3.3.0/go.mod h1:eTQ2Cdc/7KFQ4UNfzyOnILS7TI3VNsOoc0+uYfNU8O0=
 github.com/aaronland/go-json-query v0.1.2/go.mod h1:kkCl5KrO+fVSL2M8b/i3qO5PsnCpmajGXkbJHpEQPY8=
 github.com/aaronland/go-pagination v0.2.0/go.mod h1:zrYVkUTBoe6yJ23l6OyTyfSpTyg6s/cNxZxNztXNQpQ=
 github.com/aaronland/go-pagination v0.3.0 h1:5YHm2ylZtWj40m+hyncrt4vaZxjZ5v6szi2F4OqkqO4=

@@ -4,7 +4,7 @@ go 1.25.0
 
 require (
 	github.com/aaronland/go-http-maps/v2 v2.4.0
-	github.com/aaronland/go-http/v3 v3.2.0
+	github.com/aaronland/go-http/v3 v3.3.0
 	github.com/aaronland/go-pagination v0.3.0
 	github.com/aaronland/go-roster v1.0.0
 	github.com/dustin/go-humanize v1.0.1
@@ -20,7 +20,6 @@ require (
 	github.com/sfomuseum/go-template v1.10.1
 	github.com/sfomuseum/iso8601duration v1.1.0
 	github.com/tidwall/gjson v1.18.0
-	github.com/tidwall/sjson v1.2.5
 	github.com/whosonfirst/go-cache v0.5.3
 	github.com/whosonfirst/go-reader-cachereader/v2 v2.0.0
 	github.com/whosonfirst/go-reader/v2 v2.1.0
@@ -88,6 +87,7 @@ require (
 	github.com/skip2/go-qrcode v0.0.0-20200617195104-da1b6568686e // indirect
 	github.com/tidwall/match v1.1.1 // indirect
 	github.com/tidwall/pretty v1.2.1 // indirect
+	github.com/tidwall/sjson v1.2.5 // indirect
 	github.com/whosonfirst/go-geojson-svg v0.0.5 // indirect
 	github.com/whosonfirst/go-ioutil v1.0.2 // indirect
 	github.com/whosonfirst/go-rfc-5646 v0.1.0 // indirect

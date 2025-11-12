@@ -9,8 +9,8 @@ import (
 	"regexp"
 	"strings"
 
-	"github.com/golang-jwt/jwt/v5"
 	"github.com/aaronland/gocloud/runtimevar"
+	"github.com/golang-jwt/jwt/v5"
 )
 
 const AUTHORIZATION_HEADER string = "Authentication"
