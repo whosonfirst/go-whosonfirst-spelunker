@@ -14,6 +14,3 @@ leaflet:
 protomaps:
 	curl -s -o javascript/protomaps-leaflet-$(PROTOMAPS_LEAFLET_VERSION4).js https://unpkg.com/protomaps-leaflet@$(PROTOMAPS_LEAFLET_VERSION4)/dist/protomaps-leaflet.js
 	curl -s -o javascript/protomaps-leaflet-$(PROTOMAPS_LEAFLET_VERSION5).js https://unpkg.com/protomaps-leaflet@$(PROTOMAPS_LEAFLET_VERSION5)/dist/protomaps-leaflet.js
-
-wofjs:
-	curl -s -o javascript/whosonfirst.bundle.min.js https://raw.githubusercontent.com/whosonfirst/js-whosonfirst/refs/heads/main/dist/whosonfirst.bundle.min.js
