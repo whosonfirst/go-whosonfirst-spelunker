@@ -24,6 +24,7 @@ require (
 	github.com/whosonfirst/go-reader/v2 v2.1.0
 	github.com/whosonfirst/go-sanitize v0.1.0
 	github.com/whosonfirst/go-whosonfirst-database v0.5.0
+	github.com/whosonfirst/go-whosonfirst-derivatives v0.0.4
 	github.com/whosonfirst/go-whosonfirst-flags v0.5.2
 	github.com/whosonfirst/go-whosonfirst-placetypes v0.9.0
 	github.com/whosonfirst/go-whosonfirst-sources v0.2.0
@@ -46,6 +47,8 @@ require (
 	github.com/aws/aws-sdk-go-v2/aws/protocol/eventstream v1.7.1 // indirect
 	github.com/aws/aws-sdk-go-v2/config v1.31.12 // indirect
 	github.com/aws/aws-sdk-go-v2/credentials v1.18.16 // indirect
+	github.com/aws/aws-sdk-go-v2/feature/dynamodb/attributevalue v1.19.5 // indirect
+	github.com/aws/aws-sdk-go-v2/feature/dynamodb/expression v1.7.87 // indirect
 	github.com/aws/aws-sdk-go-v2/feature/ec2/imds v1.18.9 // indirect
 	github.com/aws/aws-sdk-go-v2/feature/s3/manager v1.17.84 // indirect
 	github.com/aws/aws-sdk-go-v2/internal/configsources v1.4.9 // indirect
@@ -53,9 +56,12 @@ require (
 	github.com/aws/aws-sdk-go-v2/internal/ini v1.8.3 // indirect
 	github.com/aws/aws-sdk-go-v2/internal/v4a v1.4.7 // indirect
 	github.com/aws/aws-sdk-go-v2/service/cognitoidentity v1.33.6 // indirect
+	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.51.0 // indirect
+	github.com/aws/aws-sdk-go-v2/service/dynamodbstreams v1.26.0 // indirect
 	github.com/aws/aws-sdk-go-v2/service/iam v1.47.7 // indirect
 	github.com/aws/aws-sdk-go-v2/service/internal/accept-encoding v1.13.1 // indirect
 	github.com/aws/aws-sdk-go-v2/service/internal/checksum v1.8.7 // indirect
+	github.com/aws/aws-sdk-go-v2/service/internal/endpoint-discovery v1.11.9 // indirect
 	github.com/aws/aws-sdk-go-v2/service/internal/presigned-url v1.13.9 // indirect
 	github.com/aws/aws-sdk-go-v2/service/internal/s3shared v1.19.7 // indirect
 	github.com/aws/aws-sdk-go-v2/service/s3 v1.88.1 // indirect
@@ -71,6 +77,8 @@ require (
 	github.com/go-logr/logr v1.4.3 // indirect
 	github.com/go-logr/stdr v1.2.2 // indirect
 	github.com/golang-jwt/jwt/v5 v5.3.0 // indirect
+	github.com/google/go-github/v74 v74.0.0 // indirect
+	github.com/google/go-querystring v1.1.0 // indirect
 	github.com/google/uuid v1.6.0 // indirect
 	github.com/google/wire v0.6.0 // indirect
 	github.com/googleapis/gax-go/v2 v2.15.0 // indirect
@@ -88,8 +96,11 @@ require (
 	github.com/tidwall/sjson v1.2.5 // indirect
 	github.com/whosonfirst/go-geojson-svg v0.0.5 // indirect
 	github.com/whosonfirst/go-ioutil v1.0.2 // indirect
+	github.com/whosonfirst/go-reader-findingaid/v2 v2.1.1 // indirect
+	github.com/whosonfirst/go-reader-github/v2 v2.0.1 // indirect
 	github.com/whosonfirst/go-rfc-5646 v0.1.0 // indirect
 	github.com/whosonfirst/go-whosonfirst-feature v0.0.29 // indirect
+	github.com/whosonfirst/go-whosonfirst-findingaid/v2 v2.11.0 // indirect
 	github.com/whosonfirst/go-whosonfirst-names v0.1.0 // indirect
 	go.mongodb.org/mongo-driver v1.11.4 // indirect
 	go.opentelemetry.io/auto/sdk v1.1.0 // indirect
@@ -100,10 +111,11 @@ require (
 	go.opentelemetry.io/otel/trace v1.37.0 // indirect
 	gocloud.dev v0.43.0 // indirect
 	golang.org/x/net v0.43.0 // indirect
+	golang.org/x/oauth2 v0.31.0 // indirect
 	golang.org/x/sys v0.35.0 // indirect
 	golang.org/x/xerrors v0.0.0-20240903120638-7835f813f4da // indirect
 	google.golang.org/api v0.242.0 // indirect
 	google.golang.org/genproto/googleapis/rpc v0.0.0-20250715232539-7130f93afb79 // indirect
 	google.golang.org/grpc v1.73.0 // indirect
-	google.golang.org/protobuf v1.36.6 // indirect
+	google.golang.org/protobuf v1.36.9 // indirect
 )

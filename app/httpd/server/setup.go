@@ -23,6 +23,8 @@ func setupCommon() {
 		setupCommonError = fmt.Errorf("Failed to set up network, %w", err)
 		return
 	}
+
+	pr = spelunker.NewDerivativesProvider(sp)
 }
 
 func setupAPI() {
