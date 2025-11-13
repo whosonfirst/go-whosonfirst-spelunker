@@ -1,6 +1,6 @@
 package opensearch
 
-type BasicDescriptionOptions struct {
+type BasicOpenSearchDescriptionOptions struct {
 	Name           string
 	Description    string
 	QueryParameter string
@@ -9,7 +9,7 @@ type BasicDescriptionOptions struct {
 	ImageURI       string
 }
 
-func BasicDescription(opts *BasicDescriptionOptions) (*OpenSearchDescription, error) {
+func BasicOpenSearchDescription(opts *BasicOpenSearchDescriptionOptions) (*OpenSearchDescription, error) {
 
 	im := &OpenSearchImage{
 		Height: DEFAULT_IMAGE_HEIGHT,
@@ -32,7 +32,7 @@ func BasicDescription(opts *BasicDescriptionOptions) (*OpenSearchDescription, er
 	}
 
 	desc := &OpenSearchDescription{
-		NSMoz:         NS_MOZ,
+		NSMoz:         NS_MOZILLA_SEARCH,
 		NSOpenSearch:  NS_OPENSEARCH,
 		InputEncoding: "UTF-8",
 		ShortName:     opts.Name,

@@ -16,7 +16,6 @@ require (
 	github.com/sfomuseum/go-edtf v1.2.1
 	github.com/sfomuseum/go-flags v0.12.1
 	github.com/sfomuseum/go-geojsonld v1.0.0
-	github.com/sfomuseum/go-http-opensearch v0.0.2
 	github.com/sfomuseum/go-template v1.10.1
 	github.com/sfomuseum/iso8601duration v1.1.0
 	github.com/tidwall/gjson v1.18.0
@@ -37,7 +36,6 @@ require (
 
 require (
 	github.com/aaronland/go-aws/v3 v3.1.0 // indirect
-	github.com/aaronland/go-http-rewrite v1.1.0 // indirect
 	github.com/aaronland/go-pagination-sql v0.2.0 // indirect
 	github.com/aaronland/go-sqlite v0.2.2 // indirect
 	github.com/aaronland/gocloud v1.0.1 // indirect

@@ -1,21 +1,34 @@
-package http
+package opensearch
 
 import (
-	_ "fmt"
-	"github.com/aaronland/go-http-rewrite"
-	"github.com/sfomuseum/go-http-opensearch"
 	"golang.org/x/net/html"
 	"golang.org/x/net/html/atom"
 	"io"
-	_ "log"
 	"net/http"
+
+	"github.com/aaronland/go-http/v4/rewrite"
 )
 
-type AppendPluginsOptions struct {
-	Plugins map[string]*opensearch.OpenSearchDescription
+func OpenSearchHandler(desc *OpenSearchDescription) (http.Handler, error) {
+
+	fn := func(rsp http.ResponseWriter, req *http.Request) {
+
+		body, err := desc.Marshal()
+
+		if err != nil {
+			http.Error(rsp, err.Error(), http.StatusInternalServerError)
+			return
+		}
+
+		rsp.Header().Set("Content-Type", OPENSEARCH_CONTENT_TYPE)
+		rsp.Write(body)
+	}
+
+	h := http.HandlerFunc(fn)
+	return h, nil
 }
 
-func AppendPluginsHandler(next http.Handler, opts *AppendPluginsOptions) http.Handler {
+func AppendOpenSearchPluginsHandler(next http.Handler, plugins map[string]*OpenSearchDescription) http.Handler {
 
 	var cb rewrite.RewriteHTMLFunc
 
@@ -23,10 +36,10 @@ func AppendPluginsHandler(next http.Handler, opts *AppendPluginsOptions) http.Ha
 
 		if n.Type == html.ElementNode && n.Data == "head" {
 
-			for uri, d := range opts.Plugins {
+			for uri, d := range plugins {
 
 				link_rel := html.Attribute{"", "rel", "search"}
-				link_type := html.Attribute{"", "type", "application/opensearchdescription+xml"}
+				link_type := html.Attribute{"", "type", OPENSEARCH_CONTENT_TYPE}
 				link_href := html.Attribute{"", "href", uri}
 				link_title := html.Attribute{"", "title", d.ShortName}
 

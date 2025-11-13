@@ -7,8 +7,7 @@ import (
 	"net/http"
 
 	"github.com/aaronland/go-http-maps/v2"
-	"github.com/sfomuseum/go-http-opensearch" // as in: opensearch the browser search protocol not "opensearch" the document store
-	opensearch_http "github.com/sfomuseum/go-http-opensearch/http"
+	opensearch_http "github.com/aaronland/go-http/v4/opensearch"	// as in the browser search widget not the document store
 	"github.com/whosonfirst/go-whosonfirst-spelunker/v2/http/templates/javascript"
 	"github.com/whosonfirst/go-whosonfirst-spelunker/v2/http/templates/text"
 	"github.com/whosonfirst/go-whosonfirst-spelunker/v2/http/www"
@@ -82,7 +81,7 @@ func openSearchHandlerFunc(ctx context.Context) (http.Handler, error) {
 
 	image_url := `data:image/x-icon;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABGdBTUEAALGPC/xhBQAAA5VJREFUWAntVl1IVFEQnlWz8id01cyCCKyIIoiIiLB86OdFi3oIiUCE6MeyoN6MfqCHHsyEqIhASQolgyIhCiGMrAiCCC0wHyKwolJL1NTM1L7Pvcc75+667oPgyw7s7jl35sx8M/Oduesbk/YxmUGJmcHY46GjAKIViLwCubNFWjJFuhaK3PSLZER+NBzRI/NSlCDyJENkdbxIWqxIUaLIfny8ciIpYHcUv6FkCc5m46NkagB7EbwKGcf51DEsX/219zvniFSkimzB75l5to67EoD6mCVyN93ShQeQg4yrETzGE/z1kMgzfIwsRlbVaWYnUtnvrrk6ieBXAI5+lsVZuskBLILT+0Ab7wk+jMF5uNt1MgvLOgRPdVwNjIpc7nP1+ajIxRR3328P3tAACPIOnGbY/Rr3crpH5O2w67AczjeAoEZuIPtOgKCkwT0JqyvY/i+gc75DAziLHuYop+bILTgvU9kVzBU5nmy0IqxOhdITXLoniYY/rj1WwQDWoqalIUjUMChy4Jd7eBXKVInstNQMiHwZCTwh2wtBYC2jAFgLGyU2ALY7FOMbgXr3TxFDfD+O1eNaJqnjY3Be1uu6LkFldOmpYfAP4VpQAMRrwHwtzHxHl8igQx7yg6TLttks9bBrVc43e1rYA16cAn88olKAJg+M1VIHxAw+4ASn7hqu01aPHZ+Xq95zz1ukpRg357PTHnXcBrCSd8qRbiDeh7IrwkspynoQd9orbTB6afoDJedCgrq+bM8ChOIj6p7On/BgA1ihysq+O4DHrY8g8AV1nx+h5EY0sVj5e5gfycq1D5E5Jfke+YRpuNyNo6xwUA+JVpX6MQS/qoKfRy+fq0n4xsme3m6DH+scHrGKWvzIvh1Z5XZOPHWh8FEbSGSGD0mWAuTMuliVvRaz4BzYfh0ZGeEUTIQtb9Ae5+p9ha+NHSKsKl9eWQjeBNCXwJVel1M+608p32YslRH2juUz0oS2bAN6JvwQZc7DIKKMwI5ENWUn4zch+DtVxYBl0Lfdgipk16Ear4O/R9RdXe4syERGRmIBUgfPB8gIgvO4DYClOYTrwomlpRnBt8Npt3re6+kv7b+zv8j8hcMJ7WOStQ2ARg/A7kKM3N8IMISANahKDpx+8wSknZbH2K//IdI8ddn1MZsDWsN7zCr3qay1nmv+U1qK2cEr26huhdcuzH5yAGEOTacquAXT6T0CX1EA0Qr8B2vx8tDeL73aAAAAAElFTkSuQmCC`
 
-	desc_opts := &opensearch.BasicDescriptionOptions{
+	desc_opts := &opensearch_http.BasicOpenSearchDescriptionOptions{
 		Name:           "Who's On First Spelunker Search",
 		Description:    "Search for places in the Who's On First Spelunker",
 		QueryParameter: "q",
@@ -91,17 +90,13 @@ func openSearchHandlerFunc(ctx context.Context) (http.Handler, error) {
 		SearchForm:     search_url,
 	}
 
-	desc, err := opensearch.BasicDescription(desc_opts)
+	desc, err := opensearch_http.BasicOpenSearchDescription(desc_opts)
 
 	if err != nil {
 		return nil, fmt.Errorf("Failed to create basic OpenSearch description, %w", err)
 	}
 
-	opensearch_opts := &opensearch_http.OpenSearchHandlerOptions{
-		Description: desc,
-	}
-
-	return opensearch_http.OpenSearchHandler(opensearch_opts)
+	return opensearch_http.OpenSearchHandler(desc)
 }
 
 func indexHandlerFunc(ctx context.Context) (http.Handler, error) {

@@ -28,8 +28,6 @@ github.com/aaronland/go-aws/v3 v3.1.0 h1:aXyo5lS8Dkx0YmF20gKHGc52FWMsuWn6jLSIdx/
 github.com/aaronland/go-aws/v3 v3.1.0/go.mod h1:ki8AAFdRCjJ8LTRGybRObGYPFs91AwJBMu2ceOe4t1U=
 github.com/aaronland/go-http-maps/v2 v2.4.0 h1:anzYkV96VfngNjFJFOx3gn7f75T1QRRfd9fyRz0q0Jk=
 github.com/aaronland/go-http-maps/v2 v2.4.0/go.mod h1:2iK8mL62rgujrLUa3Thq45G5z6eY6ym8OSNKfEvRiDQ=
-github.com/aaronland/go-http-rewrite v1.1.0 h1:HhsltNyYRnIz2FR+qANZLx2ykiRuNuNK1JgPonKBLHQ=
-github.com/aaronland/go-http-rewrite v1.1.0/go.mod h1:iA9jQBureJrzO6fTzmRLS+fkbAI1Fna71iTb1hP8n3k=
 github.com/aaronland/go-http/v4 v4.0.0 h1:bdFGr48IT05kOxP1IzmP4CFMpsf7CmEzMzNq5zBuYwE=
 github.com/aaronland/go-http/v4 v4.0.0/go.mod h1:ysJtNDgvlJqDNb2ZGIhuYV2NSTzveKbg3U/5ahJ+NSo=
 github.com/aaronland/go-json-query v0.1.2/go.mod h1:kkCl5KrO+fVSL2M8b/i3qO5PsnCpmajGXkbJHpEQPY8=
@@ -211,8 +209,6 @@ github.com/sfomuseum/go-flags v0.12.1 h1:xvg3iEz510JPr9ItPxOOF2C12JnlplodT1V/1Ty
 github.com/sfomuseum/go-flags v0.12.1/go.mod h1:cUTByyudaM9d+iHwxsEpyYHemWVOGL/bqTRPIvydiC8=
 github.com/sfomuseum/go-geojsonld v1.0.0 h1:BkHMEsmbTpDTQu1DClTT4VrNMXnLMPsSdBq8tYbMhB4=
 github.com/sfomuseum/go-geojsonld v1.0.0/go.mod h1:hluKfABMpnukBEf8qLwuWdwotdYFelMYKxO1njRmxPU=
-github.com/sfomuseum/go-http-opensearch v0.0.2 h1:smssY9rIOzI6E1CrZjxwM63873vI5WuyW3LgrDsY4cE=
-github.com/sfomuseum/go-http-opensearch v0.0.2/go.mod h1:WHGYbyNDGaOiCDCkDA7LmuNp15bL/ol4O4WoZp8gwWk=
 github.com/sfomuseum/go-template v1.10.1 h1:VXStcvhuKjnwrHn+c2IKaBHK5OvR5X4NonPpm7r7efY=
 github.com/sfomuseum/go-template v1.10.1/go.mod h1:gRdghrBjP7d+xUjMI4hlBt/lue/YPzuzwu8Zqo0aGHk=
 github.com/sfomuseum/iso8601duration v1.1.0 h1:kMYzbamrZp9dRxi5iFuhjl5CzHXK6s6Bzz/c75wsq8Q=

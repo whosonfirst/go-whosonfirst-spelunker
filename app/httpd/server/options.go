@@ -19,13 +19,13 @@ import (
 )
 
 type RunOptions struct {
-	ServerURI         string                               `json:"server_uri"`
-	SpelunkerURI      string                               `json:"spelunker_uri"`
-	AuthenticatorURI  string                               `json:"authenticator_uri"`
-	URIs              *wof_http.URIs                       `json:"uris"`
-	HTMLTemplates     []io_fs.FS                           `json:"templates,omitemtpy"`
-	HTMLTemplateFuncs html_template.FuncMap                `json:"template_funcs,omitempty"`
-	StaticAssets      io_fs.FS                             `json:"static_assets,omitempty"`
+	ServerURI         string                            `json:"server_uri"`
+	SpelunkerURI      string                            `json:"spelunker_uri"`
+	AuthenticatorURI  string                            `json:"authenticator_uri"`
+	URIs              *wof_http.URIs                    `json:"uris"`
+	HTMLTemplates     []io_fs.FS                        `json:"templates,omitemtpy"`
+	HTMLTemplateFuncs html_template.FuncMap             `json:"template_funcs,omitempty"`
+	StaticAssets      io_fs.FS                          `json:"static_assets,omitempty"`
 	CustomHandlers    map[string]route.RouteHandlerFunc `json:"custom_handlers,omitempty"`
 }
 
