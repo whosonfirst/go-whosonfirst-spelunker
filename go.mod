@@ -4,7 +4,7 @@ go 1.25.0
 
 require (
 	github.com/aaronland/go-http-maps/v2 v2.4.0
-	github.com/aaronland/go-http/v3 v3.3.0
+	github.com/aaronland/go-http/v4 v4.0.0
 	github.com/aaronland/go-pagination v0.3.0
 	github.com/aaronland/go-roster v1.0.0
 	github.com/dustin/go-humanize v1.0.1

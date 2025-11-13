@@ -6,8 +6,8 @@ import (
 	"net/http"
 	"strings"
 
-	"github.com/aaronland/go-http/v3/auth"
-	"github.com/aaronland/go-http/v3/slog"
+	"github.com/aaronland/go-http/v4/auth"
+	"github.com/aaronland/go-http/v4/slog"
 	"github.com/aaronland/go-pagination"
 	"github.com/whosonfirst/go-whosonfirst-sources"
 	"github.com/whosonfirst/go-whosonfirst-spelunker/v2"

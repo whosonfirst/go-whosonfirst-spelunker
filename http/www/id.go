@@ -7,8 +7,8 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/aaronland/go-http/v3/auth"
-	"github.com/aaronland/go-http/v3/slog"
+	"github.com/aaronland/go-http/v4/auth"
+	"github.com/aaronland/go-http/v4/slog"
 	"github.com/tidwall/gjson"
 	"github.com/whosonfirst/go-whosonfirst-placetypes"
 	"github.com/whosonfirst/go-whosonfirst-spelunker/v2"

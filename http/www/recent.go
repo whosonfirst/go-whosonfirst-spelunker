@@ -7,8 +7,8 @@ import (
 	"regexp"
 	"time"
 
-	"github.com/aaronland/go-http/v3/auth"
-	"github.com/aaronland/go-http/v3/slog"
+	"github.com/aaronland/go-http/v4/auth"
+	"github.com/aaronland/go-http/v4/slog"
 	"github.com/aaronland/go-pagination"
 	"github.com/dustin/go-humanize"
 	"github.com/sfomuseum/iso8601duration"

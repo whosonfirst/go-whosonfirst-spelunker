@@ -5,8 +5,8 @@ import (
 	"regexp"
 
 	"encoding/json"
-	"github.com/aaronland/go-http/v3/sanitize"
-	"github.com/aaronland/go-http/v3/slog"
+	"github.com/aaronland/go-http/v4/sanitize"
+	"github.com/aaronland/go-http/v4/slog"
 	"github.com/tidwall/gjson"
 	"github.com/whosonfirst/go-whosonfirst-spelunker/v2"
 	wof_http "github.com/whosonfirst/go-whosonfirst-spelunker/v2/http"

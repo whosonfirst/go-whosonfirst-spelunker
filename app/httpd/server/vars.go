@@ -4,7 +4,7 @@ import (
 	html_template "html/template"
 	"sync"
 
-	"github.com/aaronland/go-http/v3/auth"
+	"github.com/aaronland/go-http/v4/auth"
 	"github.com/rs/cors"
 	"github.com/whosonfirst/go-whosonfirst-spelunker/v2"
 	wof_http "github.com/whosonfirst/go-whosonfirst-spelunker/v2/http"

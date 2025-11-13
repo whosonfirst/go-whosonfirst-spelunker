@@ -6,8 +6,8 @@ import (
 	"net/http"
 	"regexp"
 
-	// "github.com/aaronland/go-http/v3/auth"
-	"github.com/aaronland/go-http/v3/slog"
+	// "github.com/aaronland/go-http/v4/auth"
+	"github.com/aaronland/go-http/v4/slog"
 	"github.com/sfomuseum/iso8601duration"
 	"github.com/whosonfirst/go-whosonfirst-spelunker/v2"
 	wof_http "github.com/whosonfirst/go-whosonfirst-spelunker/v2/http"

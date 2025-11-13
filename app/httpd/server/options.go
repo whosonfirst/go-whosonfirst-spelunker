@@ -8,7 +8,7 @@ import (
 	io_fs "io/fs"
 	"net/url"
 
-	"github.com/aaronland/go-http/v3/handlers"
+	"github.com/aaronland/go-http/v4/route"
 	"github.com/mitchellh/copystructure"
 	"github.com/sfomuseum/go-flags/flagset"
 	sfom_funcs "github.com/sfomuseum/go-template/funcs"
@@ -26,7 +26,7 @@ type RunOptions struct {
 	HTMLTemplates     []io_fs.FS                           `json:"templates,omitemtpy"`
 	HTMLTemplateFuncs html_template.FuncMap                `json:"template_funcs,omitempty"`
 	StaticAssets      io_fs.FS                             `json:"static_assets,omitempty"`
-	CustomHandlers    map[string]handlers.RouteHandlerFunc `json:"custom_handlers,omitempty"`
+	CustomHandlers    map[string]route.RouteHandlerFunc `json:"custom_handlers,omitempty"`
 }
 
 func (o *RunOptions) Clone() (*RunOptions, error) {

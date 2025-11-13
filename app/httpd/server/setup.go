@@ -6,7 +6,7 @@ import (
 	html_template "html/template"
 	"log/slog"
 
-	"github.com/aaronland/go-http/v3/auth"
+	"github.com/aaronland/go-http/v4/auth"
 	"github.com/rs/cors"
 	"github.com/whosonfirst/go-whosonfirst-spelunker/v2"
 )

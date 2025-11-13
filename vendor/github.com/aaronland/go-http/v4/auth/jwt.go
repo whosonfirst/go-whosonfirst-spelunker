@@ -9,6 +9,7 @@ import (
 	"regexp"
 	"strings"
 
+	"github.com/aaronland/go-http/v4/response"
 	"github.com/aaronland/gocloud/runtimevar"
 	"github.com/golang-jwt/jwt/v5"
 )
@@ -168,15 +169,15 @@ func (a *JWTAuthenticator) GetAccountForRequest(req *http.Request) (Account, err
 
 // SigninHandler returns an `http.Handler` instance that returns an HTTP "501 Not implemented" error.
 func (a *JWTAuthenticator) SigninHandler() http.Handler {
-	return notImplementedHandler()
+	return response.NotImplementedHandler()
 }
 
 // SignoutHandler returns an `http.Handler` instance that returns an HTTP "501 Not implemented" error.
 func (a *JWTAuthenticator) SignoutHandler() http.Handler {
-	return notImplementedHandler()
+	return response.NotImplementedHandler()
 }
 
 // SignoutHandler returns an `http.Handler` instance that returns an HTTP "501 Not implemented" error.
 func (a *JWTAuthenticator) SignupHandler() http.Handler {
-	return notImplementedHandler()
+	return response.NotImplementedHandler()
 }
