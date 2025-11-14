@@ -31,7 +31,7 @@ func NewDerivativesProvider(sp Spelunker) derivatives.Provider {
 // GetFeatures returns an `io.ReadSeekCloser` for the record derived from 'id' and 'uri_args'.
 func (pr *SpelunkerDerivativesProvider) GetFeature(ctx context.Context, id int64, uri_args *uri.URIArgs) (io.ReadSeekCloser, error) {
 
-	body, err := pr.spelunker.GetRecordForId(ctx, id, uri_args)
+	body, err := pr.spelunker.GetFeatureForId(ctx, id, uri_args)
 
 	if err != nil {
 		return nil, err

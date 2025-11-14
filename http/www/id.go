@@ -12,9 +12,10 @@ import (
 	"github.com/tidwall/gjson"
 	"github.com/whosonfirst/go-whosonfirst-placetypes"
 	"github.com/whosonfirst/go-whosonfirst-spelunker/v2"
-	wof_http "github.com/whosonfirst/go-whosonfirst-spelunker/v2/http"
-	wof_funcs "github.com/whosonfirst/go-whosonfirst-spelunker/v2/http/templates/funcs"
+	sp_http "github.com/whosonfirst/go-whosonfirst-spelunker/v2/http"
+	sp_funcs "github.com/whosonfirst/go-whosonfirst-spelunker/v2/http/templates/funcs"
 	"github.com/whosonfirst/go-whosonfirst-uri"
+	wof_http "github.com/whosonfirst/go-whosonfirst/http"
 )
 
 type IdHandlerOptions struct {
@@ -34,7 +35,7 @@ type IdHandlerVars struct {
 	RequestId        string
 	URIArgs          *uri.URIArgs
 	PageTitle        string
-	URIs             *wof_http.URIs
+	URIs             *sp_http.URIs
 	Properties       string
 	CountDescendants int64
 	Hierarchies      [][]*IdHandlerAncestor
@@ -248,7 +249,7 @@ func IdHandler(opts *IdHandlerOptions) (http.Handler, error) {
 
 		// START OF put me in a function or something...
 
-		is_pt := wof_funcs.IsAPlacetype(str_pt.String())
+		is_pt := sp_funcs.IsAPlacetype(str_pt.String())
 
 		var og_desc string
 

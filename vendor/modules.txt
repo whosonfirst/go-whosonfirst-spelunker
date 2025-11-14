@@ -417,6 +417,10 @@ github.com/whosonfirst/go-rfc-5646
 # github.com/whosonfirst/go-sanitize v0.1.0
 ## explicit; go 1.12
 github.com/whosonfirst/go-sanitize
+# github.com/whosonfirst/go-whosonfirst v0.0.2
+## explicit; go 1.25.0
+github.com/whosonfirst/go-whosonfirst/http
+github.com/whosonfirst/go-whosonfirst/http/webfinger
 # github.com/whosonfirst/go-whosonfirst-database v0.5.0
 ## explicit; go 1.25.0
 github.com/whosonfirst/go-whosonfirst-database/opensearch/client

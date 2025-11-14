@@ -10,8 +10,8 @@ import (
 	"github.com/aaronland/go-pagination"
 	"github.com/aaronland/go-pagination/countable"
 	"github.com/whosonfirst/go-whosonfirst-spelunker/v2"
-	wof_http "github.com/whosonfirst/go-whosonfirst-spelunker/v2/http"
 	"github.com/whosonfirst/go-whosonfirst-spr/v2"
+	wof_http "github.com/whosonfirst/go-whosonfirst/http"
 )
 
 type DescendantsHandlerOptions struct {

@@ -8,7 +8,7 @@ import (
 	// "github.com/aaronland/go-http/v4/auth"
 	"github.com/aaronland/go-http/v4/slog"
 	"github.com/whosonfirst/go-whosonfirst-spelunker/v2"
-	wof_http "github.com/whosonfirst/go-whosonfirst-spelunker/v2/http"
+	sp_http "github.com/whosonfirst/go-whosonfirst-spelunker/v2/http"
 )
 
 type NullIslandFacetedHandlerOptions struct {
@@ -23,9 +23,9 @@ func NullIslandFacetedHandler(opts *NullIslandFacetedHandlerOptions) (http.Handl
 		ctx := req.Context()
 		logger := slog.LoggerWithRequest(req, nil)
 
-		filter_params := wof_http.DefaultFilterParams()
+		filter_params := sp_http.DefaultFilterParams()
 
-		filters, err := wof_http.FiltersFromRequest(ctx, req, filter_params)
+		filters, err := sp_http.FiltersFromRequest(ctx, req, filter_params)
 
 		if err != nil {
 			logger.Error("Failed to derive filters from request", "error", err)
@@ -33,7 +33,7 @@ func NullIslandFacetedHandler(opts *NullIslandFacetedHandlerOptions) (http.Handl
 			return
 		}
 
-		facets, err := wof_http.FacetsFromRequest(ctx, req, filter_params)
+		facets, err := sp_http.FacetsFromRequest(ctx, req, filter_params)
 
 		if err != nil {
 			logger.Error("Failed to derive facets from requrst", "error", err)

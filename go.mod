@@ -22,6 +22,7 @@ require (
 	github.com/whosonfirst/go-ioutil v1.0.2
 	github.com/whosonfirst/go-reader-cachereader/v2 v2.0.0
 	github.com/whosonfirst/go-reader/v2 v2.1.0
+	github.com/whosonfirst/go-whosonfirst v0.0.2
 	github.com/whosonfirst/go-whosonfirst-database v0.5.0
 	github.com/whosonfirst/go-whosonfirst-derivatives v0.0.4
 	github.com/whosonfirst/go-whosonfirst-flags v0.5.2
