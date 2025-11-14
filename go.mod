@@ -15,7 +15,6 @@ require (
 	github.com/rs/cors v1.11.1
 	github.com/sfomuseum/go-edtf v1.2.1
 	github.com/sfomuseum/go-flags v0.12.1
-	github.com/sfomuseum/go-geojsonld v1.0.0
 	github.com/sfomuseum/go-template v1.10.1
 	github.com/sfomuseum/iso8601duration v1.1.0
 	github.com/tidwall/gjson v1.18.0
@@ -23,7 +22,6 @@ require (
 	github.com/whosonfirst/go-ioutil v1.0.2
 	github.com/whosonfirst/go-reader-cachereader/v2 v2.0.0
 	github.com/whosonfirst/go-reader/v2 v2.1.0
-	github.com/whosonfirst/go-sanitize v0.1.0
 	github.com/whosonfirst/go-whosonfirst-database v0.5.0
 	github.com/whosonfirst/go-whosonfirst-derivatives v0.0.4
 	github.com/whosonfirst/go-whosonfirst-flags v0.5.2
@@ -31,7 +29,6 @@ require (
 	github.com/whosonfirst/go-whosonfirst-sources v0.2.0
 	github.com/whosonfirst/go-whosonfirst-spr/v2 v2.3.8
 	github.com/whosonfirst/go-whosonfirst-sqlite-spr v0.3.3
-	github.com/whosonfirst/go-whosonfirst-svg v0.1.0
 	github.com/whosonfirst/go-whosonfirst-uri v1.3.0
 	golang.org/x/text v0.31.0
 )
@@ -91,6 +88,7 @@ require (
 	github.com/paulmach/go.geojson v1.4.0 // indirect
 	github.com/paulmach/orb v0.12.0 // indirect
 	github.com/sfomuseum/go-database v0.0.17 // indirect
+	github.com/sfomuseum/go-geojsonld v1.0.0 // indirect
 	github.com/skip2/go-qrcode v0.0.0-20200617195104-da1b6568686e // indirect
 	github.com/tidwall/match v1.1.1 // indirect
 	github.com/tidwall/pretty v1.2.1 // indirect
@@ -99,9 +97,11 @@ require (
 	github.com/whosonfirst/go-reader-findingaid/v2 v2.1.1 // indirect
 	github.com/whosonfirst/go-reader-github/v2 v2.0.1 // indirect
 	github.com/whosonfirst/go-rfc-5646 v0.1.0 // indirect
+	github.com/whosonfirst/go-sanitize v0.1.0 // indirect
 	github.com/whosonfirst/go-whosonfirst-feature v0.0.29 // indirect
 	github.com/whosonfirst/go-whosonfirst-findingaid/v2 v2.11.0 // indirect
 	github.com/whosonfirst/go-whosonfirst-names v0.1.0 // indirect
+	github.com/whosonfirst/go-whosonfirst-svg v0.1.0 // indirect
 	go.mongodb.org/mongo-driver v1.11.4 // indirect
 	go.opentelemetry.io/auto/sdk v1.1.0 // indirect
 	go.opentelemetry.io/otel v1.37.0 // indirect
