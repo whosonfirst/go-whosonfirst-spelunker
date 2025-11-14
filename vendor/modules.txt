@@ -425,6 +425,8 @@ github.com/whosonfirst/go-whosonfirst-database/sql/tables
 # github.com/whosonfirst/go-whosonfirst-derivatives v0.0.4
 ## explicit; go 1.25.0
 github.com/whosonfirst/go-whosonfirst-derivatives
+github.com/whosonfirst/go-whosonfirst-derivatives/http
+github.com/whosonfirst/go-whosonfirst-derivatives/http/api
 # github.com/whosonfirst/go-whosonfirst-feature v0.0.29
 ## explicit; go 1.22
 github.com/whosonfirst/go-whosonfirst-feature

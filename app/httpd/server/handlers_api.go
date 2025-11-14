@@ -7,6 +7,7 @@ import (
 	"net/http"
 	"regexp"
 
+	derivatives_api "github.com/whosonfirst/go-whosonfirst-derivatives/http/api"
 	"github.com/whosonfirst/go-whosonfirst-spelunker/v2/http/api"
 )
 
@@ -41,11 +42,11 @@ func geoJSONHandlerFunc(ctx context.Context) (http.Handler, error) {
 		return nil, fmt.Errorf("Failed to set up common configuration, %w", setupAPIError)
 	}
 
-	opts := &api.GeoJSONHandlerOptions{
-		Spelunker: sp,
+	opts := &derivatives_api.GeoJSONHandlerOptions{
+		Provider: pr,
 	}
 
-	h, err := api.GeoJSONHandler(opts)
+	h, err := derivatives_api.GeoJSONHandler(opts)
 
 	if err != nil {
 		return nil, err
@@ -63,11 +64,11 @@ func geoJSONLDHandlerFunc(ctx context.Context) (http.Handler, error) {
 		return nil, fmt.Errorf("Failed to set up common configuration, %w", setupAPIError)
 	}
 
-	opts := &api.GeoJSONLDHandlerOptions{
-		Spelunker: sp,
+	opts := &derivatives_api.GeoJSONLDHandlerOptions{
+		Provider: pr,
 	}
 
-	h, err := api.GeoJSONLDHandler(opts)
+	h, err := derivatives_api.GeoJSONLDHandler(opts)
 
 	if err != nil {
 		return nil, err
@@ -85,11 +86,11 @@ func sprHandlerFunc(ctx context.Context) (http.Handler, error) {
 		return nil, fmt.Errorf("Failed to set up common configuration, %w", setupAPIError)
 	}
 
-	opts := &api.SPRHandlerOptions{
-		Spelunker: sp,
+	opts := &derivatives_api.SPRHandlerOptions{
+		Provider: pr,
 	}
 
-	h, err := api.SPRHandler(opts)
+	h, err := derivatives_api.SPRHandler(opts)
 
 	if err != nil {
 		return nil, err
@@ -117,12 +118,12 @@ func selectHandlerFunc(ctx context.Context) (http.Handler, error) {
 		return nil, fmt.Errorf("Failed to compile select pattern (%s), %w", select_pattern, err)
 	}
 
-	opts := &api.SelectHandlerOptions{
-		Pattern:   pat,
-		Spelunker: sp,
+	opts := &derivatives_api.SelectHandlerOptions{
+		Pattern:  pat,
+		Provider: pr,
 	}
 
-	h, err := api.SelectHandler(opts)
+	h, err := derivatives_api.SelectHandler(opts)
 
 	if err != nil {
 		return nil, err
@@ -140,12 +141,12 @@ func navPlaceHandlerFunc(ctx context.Context) (http.Handler, error) {
 		return nil, fmt.Errorf("Failed to set up common configuration, %w", setupAPIError)
 	}
 
-	opts := &api.NavPlaceHandlerOptions{
-		Spelunker:   sp,
+	opts := &derivatives_api.NavPlaceHandlerOptions{
+		Provider:    pr,
 		MaxFeatures: 10,
 	}
 
-	h, err := api.NavPlaceHandler(opts)
+	h, err := derivatives_api.NavPlaceHandler(opts)
 
 	if err != nil {
 		return nil, err
@@ -163,14 +164,14 @@ func svgHandlerFunc(ctx context.Context) (http.Handler, error) {
 		return nil, fmt.Errorf("Failed to set up common configuration, %w", setupAPIError)
 	}
 
-	sz := api.DefaultSVGSizes()
+	sz := derivatives_api.DefaultSVGSizes()
 
-	opts := &api.SVGHandlerOptions{
-		Spelunker: sp,
-		Sizes:     sz,
+	opts := &derivatives_api.SVGHandlerOptions{
+		Provider: pr,
+		Sizes:    sz,
 	}
 
-	return api.SVGHandler(opts)
+	return derivatives_api.SVGHandler(opts)
 }
 
 func descendantsFacetedHandlerFunc(ctx context.Context) (http.Handler, error) {

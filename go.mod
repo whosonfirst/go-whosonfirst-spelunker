@@ -20,6 +20,7 @@ require (
 	github.com/sfomuseum/iso8601duration v1.1.0
 	github.com/tidwall/gjson v1.18.0
 	github.com/whosonfirst/go-cache v0.5.3
+	github.com/whosonfirst/go-ioutil v1.0.2
 	github.com/whosonfirst/go-reader-cachereader/v2 v2.0.0
 	github.com/whosonfirst/go-reader/v2 v2.1.0
 	github.com/whosonfirst/go-sanitize v0.1.0
@@ -95,7 +96,6 @@ require (
 	github.com/tidwall/pretty v1.2.1 // indirect
 	github.com/tidwall/sjson v1.2.5 // indirect
 	github.com/whosonfirst/go-geojson-svg v0.0.5 // indirect
-	github.com/whosonfirst/go-ioutil v1.0.2 // indirect
 	github.com/whosonfirst/go-reader-findingaid/v2 v2.1.1 // indirect
 	github.com/whosonfirst/go-reader-github/v2 v2.0.1 // indirect
 	github.com/whosonfirst/go-rfc-5646 v0.1.0 // indirect
