@@ -1,46 +1,40 @@
-# go-whosonfirst-spelunker-sql
+# sql
 
-Go package implementing the `whosonfirst/go-whosonfirst-spelunker.Spelunker` interface for use with `database/sql` backed databases.
+The `sql` package implements the `Spelunker` interface for SQL databases with [database/sql](https://pkg.go.dev/database/sql) drivers.
 
-## Documentation
+Currently supported drivers are: `sqlite3`, `mysql` and `postgres` though in practice only the SQLite implementation has been thoroughly tested.
 
-Documentation is incompete at this time. For starters consult the (also incomplete) documentation in the [whosonfirst/go-whosonfirst-spelunker](https://github.com/whosonfirst/go-whosonfirst-spelunker) package.
+| Target | Driver | Build tags | Provider | Notes |
+| --- | --- | --- | --- | --- |
+| MySQL | `mysql` | `mysql` | [go-sql-driver/mysql](https://github.com/go-sql-driver/mysql) | Support for MySQL should probably still be considered "alpha" at best. |
+| Postgres | `postgres` | `postgres` | [lib/pq](https://github.com/lib/pq) | Support for Postgres should probably still be considered "alpha" at best. |
+| SQLite | `sqlite3` | `sqlite3,icu,json1,fts5` | [mattn/go-sqlite3](https://github.com/mattn/go-sqlite3) | |
 
-## Important
+## Example
 
-This is work in progress and you should expect things to change, break or simply not work yet.
+New `database/sql`-backed Spelunker instances are created by passing a URI to the `NewSpelunker` method in the form of:
 
-## Indexing
+```
+sql://{DATABASE_ENGINE}?dsn={DATABASE_ENGINE_DSN}
+```
+
+Where `{DATABASE_ENGINE}` is a registered (imported) `database/sql.Driver` name and `{DATABASE_ENGINE_DSN}` is that driver's specific DSN string for connecting to the database.
 
 For example:
 
 ```
-$> cd /usr/local/whosonfirst/go-whosonfirst-sqlite-features-index 
-$> ./bin/wof-sqlite-index-features-mattn \
-	-timings \
-	-database-uri mattn:///usr/local/data/ca-search.db \
-	-spelunker-tables \
-	-index-alt geojson \
-	/usr/local/data/whosonfirst-data-admin-ca
+import (
+       "context"
 
-$> du -h /usr/local/data/ca-search.db
-1.4G	/usr/local/data/ca-search.db
+       "github.com/whosonfirst/go-whosonfirst-spelunker"
+       _ "github.com/whosonfirst/go-whosonfirst-spelunker/sql"       
+)
+
+sp, _ := spelunker.NewSpelunker(context.Background(), "sql://sqlite3?dsn=example.db")
 ```
 
-## Tools
+_Note how the code does NOT import any specific `database/sql` implementation. That is expected to be handled by build tags (described above)._
 
-### server
+## Database schema(s)
 
-For example:
-
-```
-$> go run -mod readonly -tags "icu json1 fts5" cmd/httpd/main.go \
-		-server-uri http://localhost:8080 \
-		-spelunker-uri sql://sqlite3?dsn=file:/usr/local/data/ca-search.db
-2024/02/13 08:46:41 INFO Listening for requests address=http://localhost:8080
-```
-
-## See also
-
-* https://github.com/whosonfirst/go-whosonfirst-spelunker
-* https://github.com/whosonfirst/go-whosonfirst-spelunker-httpd
+Database table schemas used by the `SQLSpelunker` implementation are defined in the [whosonfirst/go-whosonfirst-database/sql/tables](https://github.com/whosonfirst/go-whosonfirst-database/tree/main/sql/tables) package.
