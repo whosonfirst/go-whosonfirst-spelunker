@@ -10,61 +10,119 @@ Specifically, the former (`whosonfirst-www-spelunker`) is written in Python and 
 
 ## Structure
 
-```
-// Spelunker is an interface for reading and querying Who's On First style data from an "index" (a database or queryable datafile).
-type Spelunker interface {
+The structure of the Who's On First Spelunker depends on two Go language interfaces: `Spelunker` and `StandardPlacesResult`. These interfaces are defined in this package and the [whosonfirst/go-whosonfirst-spr](https://github.com/whosonfirst/go-whosonfirst-spr) packages respectively.
 
+### Spelunker
+
+`Spelunker` is an interface for reading and querying Who's On First style data from an "index" (a database or queryable datafile).
+
+```
+type Spelunker interface {
 	// Retrieve properties (or more specifically the "document") for...
 	GetRecordForId(context.Context, int64, *uri.URIArgs) ([]byte, error)
 	// Retrieve the `spr.StandardPlaceResult` instance for a given ID.
 	GetSPRForId(context.Context, int64, *uri.URIArgs) (spr.StandardPlacesResult, error)
 	// Retrieve the GeoJSON Feature record for a given ID.
 	GetFeatureForId(context.Context, int64, *uri.URIArgs) ([]byte, error)
-
 	// Retrieve all the Who's On First record that are a descendant of a specific Who's On First ID.
 	GetDescendants(context.Context, pagination.Options, int64, []Filter) (spr.StandardPlacesResults, pagination.Results, error)
 	// Retrieve faceted properties for records that are a descendant of a specific Who's On First ID.
 	GetDescendantsFaceted(context.Context, int64, []Filter, []*Facet) ([]*Faceting, error)
 	// Return the total number of Who's On First records that are a descendant of a specific Who's On First ID.
 	CountDescendants(context.Context, int64) (int64, error)
-
 	// Retrieve all the Who's On First records that match a search criteria.
 	Search(context.Context, pagination.Options, *SearchOptions, []Filter) (spr.StandardPlacesResults, pagination.Results, error)
 	// Retrieve faceted properties for records match a search criteria.
 	SearchFaceted(context.Context, *SearchOptions, []Filter, []*Facet) ([]*Faceting, error)
-
 	// Retrieve all the Who's On First records that have been modified with a window of time.
 	GetRecent(context.Context, pagination.Options, time.Duration, []Filter) (spr.StandardPlacesResults, pagination.Results, error)
 	// Retrieve faceted properties for records that have been modified with a window of time.
 	GetRecentFaceted(context.Context, time.Duration, []Filter, []*Facet) ([]*Faceting, error)
-
 	// Retrieve the list of unique placetypes in a Spleunker index.
 	GetPlacetypes(context.Context) (*Faceting, error)
 	// Retrieve the list of records with a given placetype.
 	HasPlacetype(context.Context, pagination.Options, *placetypes.WOFPlacetype, []Filter) (spr.StandardPlacesResults, pagination.Results, error)
 	// Retrieve faceted properties for records with a given placetype.
 	HasPlacetypeFaceted(context.Context, *placetypes.WOFPlacetype, []Filter, []*Facet) ([]*Faceting, error)
-
 	// Retrieve the list of unique concordances in a Spleunker index.
 	GetConcordances(context.Context) (*Faceting, error)
 	// Retrieve the list of records with a given concordance.
 	HasConcordance(context.Context, pagination.Options, string, string, any, []Filter) (spr.StandardPlacesResults, pagination.Results, error)
 	// Retrieve faceted properties for records with a given concordance.
 	HasConcordanceFaceted(context.Context, string, string, any, []Filter, []*Facet) ([]*Faceting, error)
-
 	// Retrieve the list of unique tags in a Spelunker index.
 	GetTags(context.Context) (*Faceting, error)
 	// Retrieve the list of records that have a given tag.
 	HasTag(context.Context, pagination.Options, string, []Filter) (spr.StandardPlacesResults, pagination.Results, error)
 	// Retrieve faceted properties for records that have a given tag.
 	HasTagFaceted(context.Context, string, []Filter, []*Facet) ([]*Faceting, error)
-
 	// Retrieve the list of records that are "visiting Null Island" (have a latitude, longitude value of "0.0, 0.0".
 	VisitingNullIsland(context.Context, pagination.Options, []Filter) (spr.StandardPlacesResults, pagination.Results, error)
 	// Retrieve faceted properties for records that are "visiting Null Island" (have a latitude, longitude value of "0.0, 0.0".
 	VisitingNullIslandFaceted(context.Context, []Filter, []*Facet) ([]*Faceting, error)
 }
 ```
+
+### StandardPlacesResult
+
+StandardPlacesResult is an interface which defines the minimum set of methods that a system working with a collection of Who's On First (WOF) must implement for any given record. Not all records are the same so the SPR interface is meant to serve as a baseline for common data that describes every record.
+
+```
+type StandardPlacesResult interface {
+	// The unique ID of the place result
+	Id() string
+	// The unique parent ID of the place result
+	ParentId() string
+	// The name of the place result
+	Name() string
+	// The Who's On First placetype of the place result
+	Placetype() string
+	// The two-letter country code of the place result
+	Country() string
+	// The (Git) repository name where the source record for the place result is stored.
+	Repo() string
+	// The relative path for the Who's On First record associated with the place result
+	Path() string
+	// The fully-qualified URI (URL) for the Who's On First record associated with the place result
+	URI() string
+	// The EDTF inception date of the place result
+	Inception() *edtf.EDTFDate
+	// The EDTF cessation date of the place result
+	Cessation() *edtf.EDTFDate
+	// The latitude for the principal centroid (typically "label") of the place result
+	Latitude() float64
+	// The longitude for the principal centroid (typically "label") of the place result
+	Longitude() float64
+	// The minimum latitude of the bounding box of the place result
+	MinLatitude() float64
+	// The minimum longitude of the bounding box of the place result
+	MinLongitude() float64
+	// The maximum latitude of the bounding box of the place result
+	MaxLatitude() float64
+	// The maximum longitude of the bounding box of the place result
+	MaxLongitude() float64
+	// The Who's On First "existential" flag denoting whether the place result is "current" or not
+	IsCurrent() flags.ExistentialFlag
+	// The Who's On First "existential" flag denoting whether the place result is "ceased" or not
+	IsCeased() flags.ExistentialFlag
+	// The Who's On First "existential" flag denoting whether the place result is superseded or not
+	IsDeprecated() flags.ExistentialFlag
+	// The Who's On First "existential" flag denoting whether the place result has been superseded
+	IsSuperseded() flags.ExistentialFlag
+	// The Who's On First "existential" flag denoting whether the place result supersedes other records
+	IsSuperseding() flags.ExistentialFlag
+	// The list of Who's On First IDs that supersede the place result
+	SupersededBy() []int64
+	// The list of Who's On First IDs that are superseded by the place result
+	Supersedes() []int64
+	// The list of Who's On First IDs that are ancestors of the place result
+	BelongsTo() []int64
+	// The Unix timestamp indicating when the place result was last modified
+	LastModified() int64
+}
+```
+
+Currently the Spelunker returns `StandardPlacesResult` results but does not _consume_ them. I am considering using the design of the `Spelunker` interface (above) to inform the next version of the `StandardPlacesResult` interface (v3) such that it will expose methods suitable for indexing a Spelunker-compliant database. It's too soon to say for certain but that's what I am thinking.
 
 ## Databases
 
