@@ -235,7 +235,7 @@ Valid options are:
   -map-tile-uri string
     	A valid Leaflet tile layer URI. See documentation for special-case (interpolated tile) URIs. (default "https://tile.openstreetmap.org/{z}/{x}/{y}.png")
   -protomaps-max-data-zoom int
-    	The maximum zoom (tile) level for data in a PMTiles database
+    	The maximum zoom (tile) level for data in a PMTiles database (default 15)
   -protomaps-theme string
     	A valid Protomaps theme label. (default "white")
   -root-url string
