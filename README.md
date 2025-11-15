@@ -65,7 +65,9 @@ type Spelunker interface {
 
 ### StandardPlacesResult
 
-StandardPlacesResult is an interface which defines the minimum set of methods that a system working with a collection of Who's On First (WOF) must implement for any given record. Not all records are the same so the SPR interface is meant to serve as a baseline for common data that describes every record.
+StandardPlacesResult (SPR) is an interface which defines the minimum set of methods that a system working with a collection of Who's On First (WOF) must implement for any given record. Not all WOF records are the same so the SPR interface is meant to serve as a baseline for common data that describes every record.
+
+The `StandardPlacesResults` return value in many (mosdt) of the `Spelunker` interface methods above is just an array of SPR instances. Currently the Spelunker returns JSON-encoded `StandardPlacesResult` results (specifically JSON-encoded [WOFStandardPlacesResult](https://github.com/whosonfirst/go-whosonfirst-spr/blob/main/whosonfirst.go) structs) but does not _consume_ them. I am considering using the design of the `Spelunker` interface (above) to inform the next version of the `StandardPlacesResult` interface (v3) such that it will expose methods suitable for indexing a Spelunker-compliant database. It's too soon to say for certain but that's what I am thinking.
 
 ```
 type StandardPlacesResult interface {
@@ -122,8 +124,6 @@ type StandardPlacesResult interface {
 }
 ```
 
-Currently the Spelunker returns `StandardPlacesResult` results but does not _consume_ them. I am considering using the design of the `Spelunker` interface (above) to inform the next version of the `StandardPlacesResult` interface (v3) such that it will expose methods suitable for indexing a Spelunker-compliant database. It's too soon to say for certain but that's what I am thinking.
-
 ## Databases
 
 The Who's On First Spelunker attempts to be database agnostic. It does not define or require support for any specific database engine. Instead it works with implementations of the `Spelunker` interface which handle database interactions independent of any specific Spelunker-like application.
@@ -132,9 +132,11 @@ As of this writing there is default support for two classes of database engines:
 
 * Anything which supports the Go language `database/sql` interface. In practice this really means SQLite. Support for MySQL and Postgres is available but has not been fully tested and may still contain bugs or gotachas.
 
-* The [OpenSearch](#) document store.
+* The [OpenSearch](https://opensearch.org/) document store.
 
 ### database/sql
+
+New `database/sql`-backed Spelunker instances are created by passing a URI to the `NewSpelunker` method in the form of:
 
 ```
 sql://{DATABASE_ENGINE}?dsn={DATABASE_ENGINE_DSN}
@@ -157,6 +159,8 @@ See [sql/README.md](sql/README.md) for details.
 
 ### OpenSearch
 
+New OpenSearch-backed Spelunker instances are created by passing a URI to the `NewSpelunker` method in the form of:
+
 ```
 opensearch://?client_uri={GO_WHOSONFIRST_DATABASE_OPENSEARCH_CLIENT_URI}
 ```
@@ -172,7 +176,7 @@ import (
        _ "github.com/whosonfirst/go-whosonfirst-spelunker/opensearch"       
 )
 
-client_uri := ""
+client_uri := "https://localhost:9200?index=spelunker&require-tls=true"
 enc_client_uri, _ := url.QueryEscape(client_uri)
 
 sp, _ := spelunker.NewSpelunker(context.Background(), "opensearch://?client_uri=" + enc_client-uri)
@@ -180,9 +184,14 @@ sp, _ := spelunker.NewSpelunker(context.Background(), "opensearch://?client_uri=
 
 See [opensearch/README.md](opensearch/README.md) for details.
 
-### Implementing ...
+### Implementing a custom database
 
-This is what the code for the HTTP server tool would look something like this:
+Implementing support for a custom database involves two steps:
+
+1. Define a Go package implementing the `Spelunker` interface and make sure to call the `RegisterSpelunker` method in your package's `init` function. For a "starter" example consult the [NullSpelunker](spelunker_null.go) implementation.
+2. Clone the relevant Spelunker-related tool in the [cmd](cmd) folder and import your custom package. All the Spelunker command-line tools are broken in to two pieces: The guts of the application code live in the [app](app) package which is then invoked in command-line tools exported in the [cmd](cmd) package. The goal is to make extending any given tool possible with a minimum of "time and typing".
+
+For example, this is what the code to extend the HTTP server tool ([cmd/wof-spelunker-httpd](cmd/wof-spelunker-httpd)) to use a custom database implementation would look like:
 
 ```
 import (
@@ -231,4 +240,4 @@ Valid options are:
     	A URI in the form of '{SPELUNKER_SCHEME}://{IMPLEMENTATION_DETAILS}' referencing the underlying Spelunker database. For example: sql://sqlite3?dsn=spelunker.db (default "null://")
 ```
 
-See [cmd/wof-spelunker-httpd/README.md](cmd/wof-spelunker-httpd/README.md) for details.
+See [cmd/wof-spelunker-httpd/README.md](cmd/wof-spelunker-httpd/README.md) for details (including relevant build tags for specific database implementations).
