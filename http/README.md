@@ -57,6 +57,7 @@ go build -mod vendor -tags="opensearch" -ldflags="-s -w" -o bin/wof-spelunker-ht
 | Target | Tags | Notes |
 | --- | --- | --- |
 | MySQL | `mysql` | Support for MySQL should probably still be considered "alpha" at best. |
+| Postgres | `postgres` | Support for Postgres should probably still be considered "alpha" at best. |
 | SQLite | `sqlite3,icu,json1,fts5` | |
 | OpenSearch | `opensearch` | |
 
