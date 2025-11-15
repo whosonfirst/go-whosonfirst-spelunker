@@ -1,6 +1,6 @@
 # sql
 
-The `sql` package implements the `Spelunker` interface for SQL databases with [database/sql](https://pkg.go.dev/database/sql) drivers.
+The `sql` package implements the `Spelunker` interface for Who's On First data indexed in SQL databases with [database/sql](https://pkg.go.dev/database/sql) drivers.
 
 Currently supported drivers are: `sqlite3`, `mysql` and `postgres` though in practice only the SQLite implementation has been thoroughly tested.
 
