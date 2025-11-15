@@ -22,7 +22,7 @@ type IdHandlerOptions struct {
 	Spelunker     spelunker.Spelunker
 	Authenticator auth.Authenticator
 	Templates     *template.Template
-	URIs          *wof_http.URIs
+	URIs          *sp_http.URIs
 }
 
 type IdHandlerAncestor struct {
@@ -64,7 +64,7 @@ func IdHandler(opts *IdHandlerOptions) (http.Handler, error) {
 		ctx := req.Context()
 		logger := slog.LoggerWithRequest(req, nil)
 
-		req_uri, err, status := wof_http.ParseURIFromRequest(req, nil)
+		req_uri, err, status := wof_http.ParseURIFromRequest(req)
 
 		if err != nil {
 			logger.Error("Failed to parse URI from request", "error", err)
@@ -102,7 +102,7 @@ func IdHandler(opts *IdHandlerOptions) (http.Handler, error) {
 		country_rsp := gjson.GetBytes(f, "wof:country")
 		wof_country := country_rsp.String()
 
-		country_name, country_exists := wof_http.CountryCodeLookup[wof_country]
+		country_name, country_exists := sp_http.CountryCodeLookup[wof_country]
 
 		if !country_exists {
 			country_name = wof_country
@@ -274,7 +274,7 @@ func IdHandler(opts *IdHandlerOptions) (http.Handler, error) {
 
 		// END OF put me in a function or something...
 
-		svg_url := wof_http.URIForIdSimple(opts.URIs.SVG, wof_id)
+		svg_url := sp_http.URIForIdSimple(opts.URIs.SVG, wof_id)
 
 		og_image, err := opts.URIs.Abs(svg_url)
 
