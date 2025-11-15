@@ -3,13 +3,13 @@ CWD=$(shell pwd)
 GOMOD=$(shell test -f "go.work" && echo "readonly" || echo "vendor")
 LDFLAGS=-s -w
 
-GOTAGS=wof
-
-GOTAGS_SQL=sqlite3,icu,json1,fts5
+GOTAGS_SQLITE=sqlite3,icu,json1,fts5
 GOTAGS_OPENSEARCH=opensearch
 
-cli-sql:
-	@make cli GOTAGS=$(GOTAGS_SQL) 
+GOTAGS=$(GOTAGS_SQLITE),$(GOTAGS_OPENSEARCH)
+
+cli-sqlite:
+	@make cli GOTAGS=$(GOTAGS_SQLITE) 
 
 cli-opensearch:
 	@make cli GOTAGS=$(GOTAGS_OPENSEARCH) 
