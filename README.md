@@ -10,7 +10,7 @@ Specifically, the former (`whosonfirst-www-spelunker`) is written in Python and 
 
 ## Structure
 
-The structure of the Who's On First Spelunker depends on two Go language interfaces: `Spelunker` and `StandardPlacesResult`. These interfaces are defined in this package and the [whosonfirst/go-whosonfirst-spr](https://github.com/whosonfirst/go-whosonfirst-spr) packages respectively.
+The structure of the Who's On First Spelunker depends on two Go language interfaces: `Spelunker` and `StandardPlacesResult`. These interfaces are defined in this package and the [whosonfirst/go-whosonfirst-spr](https://github.com/whosonfirst/go-whosonfirst-spr) package respectively.
 
 ### Spelunker
 
@@ -62,6 +62,8 @@ type Spelunker interface {
 	VisitingNullIslandFaceted(context.Context, []Filter, []*Facet) ([]*Faceting, error)
 }
 ```
+
+Version "2" of the `Spelunker` interface does NOT define any methods for querying spatial data. Currently that functionality is handled separately by tools and libraries provided by the [whosonfirst/go-whosonfirst-spatial](https://github.com/whosonfirst/go-whosonfirst-spatial) package. Version "3" of the `Spelunker` interface MAY implement the [go-whosonfirst-spatial.SpatialAPI](https://github.com/whosonfirst/go-whosonfirst-spatial/blob/main/spatial.go) but there is still no timeline for when that work might be completed.
 
 ### StandardPlacesResult
 
@@ -211,6 +213,10 @@ func main() {
 _Error handling removed for the sake of brevity._
 
 ## Tools
+
+### wof-spelunker
+
+Earlier versions of this package provided a `wof-spelunker` command-line tool for interacting with the `Spelunker` API. It has been removed for the time being pending a refactoring of the tool's code.
 
 ### wof-spelunker-httpd
 
