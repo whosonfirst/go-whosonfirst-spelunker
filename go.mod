@@ -24,7 +24,7 @@ require (
 	github.com/whosonfirst/go-reader/v2 v2.1.0
 	github.com/whosonfirst/go-whosonfirst v0.0.2
 	github.com/whosonfirst/go-whosonfirst-database v0.5.0
-	github.com/whosonfirst/go-whosonfirst-derivatives v0.0.4
+	github.com/whosonfirst/go-whosonfirst-derivatives v0.0.5
 	github.com/whosonfirst/go-whosonfirst-flags v0.5.2
 	github.com/whosonfirst/go-whosonfirst-placetypes v0.9.0
 	github.com/whosonfirst/go-whosonfirst-sources v0.2.0

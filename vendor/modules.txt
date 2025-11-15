@@ -426,7 +426,7 @@ github.com/whosonfirst/go-whosonfirst/http/webfinger
 github.com/whosonfirst/go-whosonfirst-database/opensearch/client
 github.com/whosonfirst/go-whosonfirst-database/opensearch/document
 github.com/whosonfirst/go-whosonfirst-database/sql/tables
-# github.com/whosonfirst/go-whosonfirst-derivatives v0.0.4
+# github.com/whosonfirst/go-whosonfirst-derivatives v0.0.5
 ## explicit; go 1.25.0
 github.com/whosonfirst/go-whosonfirst-derivatives
 github.com/whosonfirst/go-whosonfirst-derivatives/http

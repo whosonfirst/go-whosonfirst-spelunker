@@ -279,8 +279,8 @@ github.com/whosonfirst/go-whosonfirst v0.0.2/go.mod h1:a045GcdLojTTiUTZD4KRkVeaa
 github.com/whosonfirst/go-whosonfirst-crawl v0.2.1/go.mod h1:MTD1TCgAkXlAtysPU98ylrz9Y5+ZCfRrsrBnRyiH/t8=
 github.com/whosonfirst/go-whosonfirst-database v0.5.0 h1:7pd0OTApFQDBwda5OeumWLPIJq51UDpO1gaQ5WwT2KU=
 github.com/whosonfirst/go-whosonfirst-database v0.5.0/go.mod h1:D7cEdC+VpsP0OsREY6YR59Ls8sIhhWhu3n8sOy1KZWo=
-github.com/whosonfirst/go-whosonfirst-derivatives v0.0.4 h1:lyUlMsAMzmyzj1z9SJYHsF3Oyu7FYXtO1oj1aupjtOQ=
-github.com/whosonfirst/go-whosonfirst-derivatives v0.0.4/go.mod h1:6WdF21T9vzzfuhjpc+T6m4Eegr8n8wjhwR+7jM1Xn70=
+github.com/whosonfirst/go-whosonfirst-derivatives v0.0.5 h1:9rZWoeiY3+LfyToLAgYQ2SIKQCevbMcKuNWiz/tpobQ=
+github.com/whosonfirst/go-whosonfirst-derivatives v0.0.5/go.mod h1:jOil1ItdDopwLADwB1mSo0MU2UNPiRQhydFOz2/1J6U=
 github.com/whosonfirst/go-whosonfirst-feature v0.0.23/go.mod h1:3cvRigFFG2a99M64lZzfy5amHacWu8Os5fXZdGjPnLM=
 github.com/whosonfirst/go-whosonfirst-feature v0.0.29 h1:Sy5qE+dR3U6CYEJjDuflsjWM9x4ico4+F++xeTQQSHs=
 github.com/whosonfirst/go-whosonfirst-feature v0.0.29/go.mod h1:sJl2dhA5l10Maukks4Kx6X6JwqtKD1NKLNJrmRkFOfE=
