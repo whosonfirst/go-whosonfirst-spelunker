@@ -107,5 +107,18 @@ func (c *IndexOpenSearchCommand) Run(ctx context.Context, args []string) error {
 		Verbose:       verbose,
 	}
 
+	/*
+
+		/usr/local/data/whosonfirst/whosonfirst-data-admin-ca
+2025/11/15 17:49:02 INFO Iterator stats elapsed=1m0.001272166s seen=24419 allocated="195 MB" "total allocated"="11 GB" sys="346 MB" numgc=159
+2025/11/15 17:49:30 ERROR Failed to index record path=112/576/680/5/1125766805.geojson type=mapper_exception reason="timed out while waiting for a dynamic mapping update"
+2025/11/15 17:49:30 ERROR Failed to index record path=112/607/179/7/1126071797.geojson type=mapper_exception reason="timed out while waiting for a dynamic mapping update"
+2025/11/15 17:49:30 ERROR Failed to index record path=112/611/017/5/1126110175.geojson type=mapper_exception reason="timed out while waiting for a dynamic mapping update"
+2025/11/15 17:49:30 ERROR Failed to index record path=112/611/366/1/1126113661.geojson type=mapper_exception reason="timed out while waiting for a dynamic mapping update"
+2025/11/15 17:49:30 ERROR Failed to index record path=115/886/315/9/1158863159.geojson type=mapper_exception reason="timed out while waiting for a dynamic mapping update"
+2025/11/15 17:49:30 ERROR Failed to index record path=115/886/830/9/1158868309.geojson type=mapper_exception reason="timed out while waiting for a dynamic mapping update"
+
+	*/
+	
 	return iterwriter_app.RunWithOptions(ctx, opts)
 }

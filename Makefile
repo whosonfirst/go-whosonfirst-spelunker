@@ -48,6 +48,8 @@ OS_ENC_CLIENT_URI=$(shell $(URLESCAPE) 'https://$(OS_CLIENT_URI)')
 
 OS_SPELUNKER_URI=opensearch://?client-uri=$(OS_ENC_CLIENT_URI)&cache-uri=$(OS_ENC_CACHE_URI)&reader-uri=$(OS_ENC_READER_URI)
 
+OS_CREATE_INDEX=true
+
 # https://opensearch.org/docs/latest/install-and-configure/install-opensearch/docker/
 #
 # And then:
@@ -72,6 +74,7 @@ os-spelunker-local:
 os-index-local:
 	go run -tags $(GOTAGS_OPENSEARCH) -mod $(GOMOD) ./cmd/wof-spelunker-index/main.go opensearch \
 		-client-uri '$(OS_WRITER_URI)' \
+		-create-index=$(OS_CREATE_INDEX) \
 		$(REPOS)
 
 # OpenSearch "spelunker" server
