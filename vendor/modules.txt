@@ -19,6 +19,9 @@ github.com/aaronland/go-http/v4/route
 github.com/aaronland/go-http/v4/sanitize
 github.com/aaronland/go-http/v4/server
 github.com/aaronland/go-http/v4/slog
+# github.com/aaronland/go-json-query v0.1.6
+## explicit; go 1.22
+github.com/aaronland/go-json-query
 # github.com/aaronland/go-pagination v0.3.0
 ## explicit; go 1.16
 github.com/aaronland/go-pagination
@@ -374,6 +377,7 @@ github.com/sfomuseum/go-edtf/unix
 # github.com/sfomuseum/go-flags v0.12.1
 ## explicit; go 1.22
 github.com/sfomuseum/go-flags/flagset
+github.com/sfomuseum/go-flags/multi
 # github.com/sfomuseum/go-geojsonld v1.0.0
 ## explicit; go 1.13
 github.com/sfomuseum/go-geojsonld
@@ -435,8 +439,11 @@ github.com/whosonfirst/go-whosonfirst/http
 github.com/whosonfirst/go-whosonfirst/http/webfinger
 # github.com/whosonfirst/go-whosonfirst-database v0.5.0
 ## explicit; go 1.25.0
+github.com/whosonfirst/go-whosonfirst-database/app/sql/tables/index
 github.com/whosonfirst/go-whosonfirst-database/opensearch/client
 github.com/whosonfirst/go-whosonfirst-database/opensearch/document
+github.com/whosonfirst/go-whosonfirst-database/sql
+github.com/whosonfirst/go-whosonfirst-database/sql/indexer
 github.com/whosonfirst/go-whosonfirst-database/sql/tables
 # github.com/whosonfirst/go-whosonfirst-derivatives v0.0.5
 ## explicit; go 1.25.0
@@ -457,6 +464,10 @@ github.com/whosonfirst/go-whosonfirst-findingaid/v2/resolver
 ## explicit; go 1.18
 github.com/whosonfirst/go-whosonfirst-flags
 github.com/whosonfirst/go-whosonfirst-flags/existential
+# github.com/whosonfirst/go-whosonfirst-iterate/v3 v3.2.0
+## explicit; go 1.24
+github.com/whosonfirst/go-whosonfirst-iterate/v3
+github.com/whosonfirst/go-whosonfirst-iterate/v3/filters
 # github.com/whosonfirst/go-whosonfirst-names v0.1.0
 ## explicit; go 1.12
 github.com/whosonfirst/go-whosonfirst-names

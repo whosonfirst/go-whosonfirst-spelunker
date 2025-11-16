@@ -1,8 +1,8 @@
-//go:build postgres
+//go:build mysql
 
-package server
+package app
 
 import (
-	_ "github.com/lib/pq"
+	_ "github.com/go-sql-driver/mysql"
 	_ "github.com/whosonfirst/go-whosonfirst-spelunker/v2/sql"
 )

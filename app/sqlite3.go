@@ -1,8 +1,8 @@
-//go:build mysql
+//go:build sqlite3
 
-package server
+package app
 
 import (
-	_ "github.com/go-sql-driver/mysql"
+	_ "github.com/mattn/go-sqlite3"
 	_ "github.com/whosonfirst/go-whosonfirst-spelunker/v2/sql"
 )

@@ -39,6 +39,7 @@ require (
 require (
 	filippo.io/edwards25519 v1.1.0 // indirect
 	github.com/aaronland/go-aws/v3 v3.1.0 // indirect
+	github.com/aaronland/go-json-query v0.1.6 // indirect
 	github.com/aaronland/go-pagination-sql v0.2.0 // indirect
 	github.com/aaronland/go-sqlite v0.2.2 // indirect
 	github.com/aaronland/gocloud v1.0.1 // indirect
@@ -104,6 +105,7 @@ require (
 	github.com/whosonfirst/go-sanitize v0.1.0 // indirect
 	github.com/whosonfirst/go-whosonfirst-feature v0.0.29 // indirect
 	github.com/whosonfirst/go-whosonfirst-findingaid/v2 v2.11.0 // indirect
+	github.com/whosonfirst/go-whosonfirst-iterate/v3 v3.2.0 // indirect
 	github.com/whosonfirst/go-whosonfirst-names v0.1.0 // indirect
 	github.com/whosonfirst/go-whosonfirst-svg v0.1.0 // indirect
 	go.mongodb.org/mongo-driver v1.11.4 // indirect

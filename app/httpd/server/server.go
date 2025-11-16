@@ -8,6 +8,8 @@ import (
 	"net/http"
 	"net/url"
 
+	_ "github.com/whosonfirst/go-whosonfirst-spelunker/v2/app"
+
 	"github.com/aaronland/go-http/v4/route"
 	"github.com/aaronland/go-http/v4/server"
 )

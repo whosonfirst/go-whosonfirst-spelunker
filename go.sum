@@ -35,6 +35,8 @@ github.com/aaronland/go-http-maps/v2 v2.4.0/go.mod h1:2iK8mL62rgujrLUa3Thq45G5z6
 github.com/aaronland/go-http/v4 v4.0.0 h1:bdFGr48IT05kOxP1IzmP4CFMpsf7CmEzMzNq5zBuYwE=
 github.com/aaronland/go-http/v4 v4.0.0/go.mod h1:ysJtNDgvlJqDNb2ZGIhuYV2NSTzveKbg3U/5ahJ+NSo=
 github.com/aaronland/go-json-query v0.1.2/go.mod h1:kkCl5KrO+fVSL2M8b/i3qO5PsnCpmajGXkbJHpEQPY8=
+github.com/aaronland/go-json-query v0.1.6 h1:i4HHIFeZr6jguE/TFWYSJmDZDH2PyrI5MH1YSqJ2F80=
+github.com/aaronland/go-json-query v0.1.6/go.mod h1:acIgF0MbnW5fp/oGaVJAFs692X8ZQTsRoDlklXV3w9Q=
 github.com/aaronland/go-pagination v0.2.0/go.mod h1:zrYVkUTBoe6yJ23l6OyTyfSpTyg6s/cNxZxNztXNQpQ=
 github.com/aaronland/go-pagination v0.3.0 h1:5YHm2ylZtWj40m+hyncrt4vaZxjZ5v6szi2F4OqkqO4=
 github.com/aaronland/go-pagination v0.3.0/go.mod h1:zrYVkUTBoe6yJ23l6OyTyfSpTyg6s/cNxZxNztXNQpQ=
@@ -296,6 +298,8 @@ github.com/whosonfirst/go-whosonfirst-flags v0.4.3/go.mod h1:pL17Ryo60FH8RYaQRgf
 github.com/whosonfirst/go-whosonfirst-flags v0.5.2 h1:vSx7fcM04HiSAEF+WOKfuyJawac99skN9HJAeqBXWpI=
 github.com/whosonfirst/go-whosonfirst-flags v0.5.2/go.mod h1:kozBozsyI8cKekUces1m10vJ301sH2EqLZtjX1xCSqQ=
 github.com/whosonfirst/go-whosonfirst-iterate/v2 v2.1.0/go.mod h1:aWeWB3DYX7bVtnNNRjCpMNZSsRgohX+FM7ukQ0cXXTY=
+github.com/whosonfirst/go-whosonfirst-iterate/v3 v3.2.0 h1:tYnvMEJu/0a2q/QGOnuZ2eQ94wOybcddxQWVNSvYa2A=
+github.com/whosonfirst/go-whosonfirst-iterate/v3 v3.2.0/go.mod h1:rQ7v8x2o4klGsWRneUxvZXAVJZUrDPvNl6ubxRBVq7c=
 github.com/whosonfirst/go-whosonfirst-names v0.1.0 h1:uXop/DwQqH60uDBZvHCPg1yRSQLScbm6VZyqcaED2KE=
 github.com/whosonfirst/go-whosonfirst-names v0.1.0/go.mod h1:0z86/nedM9T/5C8cAdbCMfRuBrkc33oEQ6vdJ6WybSg=
 github.com/whosonfirst/go-whosonfirst-placetypes v0.3.0/go.mod h1:ez0VFkGFbgT2/z2oi3PIuW6FewsZ2+5glyfDD79XEHk=

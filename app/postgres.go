@@ -1,8 +1,8 @@
-//go:build sqlite3
+//go:build postgres
 
-package server
+package app
 
 import (
-	_ "github.com/mattn/go-sqlite3"
+	_ "github.com/lib/pq"
 	_ "github.com/whosonfirst/go-whosonfirst-spelunker/v2/sql"
 )
