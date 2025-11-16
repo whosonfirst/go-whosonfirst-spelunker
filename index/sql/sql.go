@@ -29,7 +29,7 @@ func (c *IndexSQLCommand) Run(ctx context.Context, args []string) error {
 	sources := fs.Args()
 
 	opts := &sql_index.RunOptions{
-		SpelunkerTables:  true,
+		SpelunkerTables: true,
 		DatabaseURI:     db_uri,
 		IteratorURI:     iterator_uri,
 		IteratorSources: sources,

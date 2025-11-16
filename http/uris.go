@@ -57,6 +57,8 @@ type URIs struct {
 	SPRAlt                   []string `json:"spr_alt"`
 	SVG                      string   `json:"svg"`
 	SVGAlt                   []string `json:"svg_alt"`
+	WKT                      string   `json:"wkt"`
+	WKTAlt                   []string `json:"wkt_alt"`
 
 	RootURL string `json:"root_url"`
 }
@@ -160,6 +162,10 @@ func DefaultURIs() *URIs {
 		SVG: "/id/{id}/svg",
 		SVGAlt: []string{
 			"/svg/",
+		},
+		WKT: "/id/{id}/wkt",
+		WKTAlt: []string{
+			"/wkt/",
 		},
 	}
 

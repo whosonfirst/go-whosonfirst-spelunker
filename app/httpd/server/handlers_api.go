@@ -174,6 +174,22 @@ func svgHandlerFunc(ctx context.Context) (http.Handler, error) {
 	return derivatives_api.SVGHandler(opts)
 }
 
+func wktHandlerFunc(ctx context.Context) (http.Handler, error) {
+
+	setupAPIOnce.Do(setupAPI)
+
+	if setupAPIError != nil {
+		slog.Error("Failed to set up common configuration", "error", setupAPIError)
+		return nil, fmt.Errorf("Failed to set up common configuration, %w", setupAPIError)
+	}
+
+	opts := &derivatives_api.WKTHandlerOptions{
+		Provider: pr,
+	}
+
+	return derivatives_api.WKTHandler(opts)
+}
+
 func descendantsFacetedHandlerFunc(ctx context.Context) (http.Handler, error) {
 
 	setupAPIOnce.Do(setupAPI)

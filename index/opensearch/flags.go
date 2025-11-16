@@ -26,7 +26,7 @@ func DefaultFlagSet() *flag.FlagSet {
 	fs.StringVar(&iterator_uri, "iterator-uri", "repo://", iterator_desc)
 
 	fs.BoolVar(&forgiving, "forgiving", true, "")
-	fs.BoolVar(&create_index, "create-index", false, "")	
+	fs.BoolVar(&create_index, "create-index", false, "")
 
 	fs.StringVar(&client_uri, "client-uri", "", "...")
 

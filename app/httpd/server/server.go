@@ -100,6 +100,7 @@ func RunWithOptions(ctx context.Context, opts *RunOptions) error {
 		run_options.URIs.Select:                   selectHandlerFunc,
 		run_options.URIs.SPR:                      sprHandlerFunc,
 		run_options.URIs.SVG:                      svgHandlerFunc,
+		run_options.URIs.WKT:                      wktHandlerFunc,
 	}
 
 	map_cfg_handler, map_tile_handler, map_tile_url, err := mapConfigHandlers(ctx)
@@ -136,6 +137,7 @@ func RunWithOptions(ctx context.Context, opts *RunOptions) error {
 	assign_handlers(mux_handlers, run_options.URIs.RecentAlt, recentHandlerFunc)
 	assign_handlers(mux_handlers, run_options.URIs.SPRAlt, sprHandlerFunc)
 	assign_handlers(mux_handlers, run_options.URIs.SVGAlt, svgHandlerFunc)
+	assign_handlers(mux_handlers, run_options.URIs.WKTAlt, wktHandlerFunc)
 
 	route_handler_opts := &route.RouteHandlerOptions{
 		Handlers: mux_handlers,
