@@ -5,7 +5,8 @@ import (
 	"fmt"
 	"net/url"
 	"strings"
-
+	"log/slog"
+	
 	_ "github.com/whosonfirst/go-whosonfirst-database/opensearch/writer"
 
 	"github.com/opensearch-project/opensearch-go/v4/opensearchapi"
@@ -38,6 +39,11 @@ func (c *IndexOpenSearchCommand) Run(ctx context.Context, args []string) error {
 
 	sources := fs.Args()
 
+	if verbose {
+		slog.SetLogLoggerLevel(slog.LevelDebug)
+		slog.Debug("Verbose (debug) logging enabled")
+	}
+	
 	wr, err := writer.NewWriter(ctx, client_uri)
 
 	if err != nil {
@@ -49,6 +55,8 @@ func (c *IndexOpenSearchCommand) Run(ctx context.Context, args []string) error {
 
 	if create_index {
 
+		slog.Debug("Create index", "name", os_index)
+		
 		mappings_r, err := v2.FS.Open("mappings.spelunker.json")
 
 		if err != nil {

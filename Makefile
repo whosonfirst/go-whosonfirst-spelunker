@@ -65,12 +65,6 @@ os-local:
 		-v opensearch-data1:/usr/local/data/opensearch \
 		opensearchproject/opensearch:latest
 
-# OpenSearch "spelunker" index
-
-os-spelunker-local:
-	@make os-spelunker-local-index
-	@make os-spelunker-local-fieldlimit
-
 os-index-local:
 	go run -tags $(GOTAGS_OPENSEARCH) -mod $(GOMOD) ./cmd/wof-spelunker-index/main.go opensearch \
 		-client-uri '$(OS_WRITER_URI)' \
@@ -80,7 +74,6 @@ os-index-local:
 # OpenSearch "spelunker" server
 
 os-server-local:
-	@echo $(OS_ENC_CLIENT_URI)
 	go run -tags $(GOTAGS_OPENSEARCH) -mod $(GOMOD) ./cmd/wof-spelunker-httpd/main.go \
 		-server-uri http://localhost:8080 \
 		-spelunker-uri '$(OS_SPELUNKER_URI)'
