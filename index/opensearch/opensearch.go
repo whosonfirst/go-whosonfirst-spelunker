@@ -49,33 +49,52 @@ func (c *IndexOpenSearchCommand) Run(ctx context.Context, args []string) error {
 
 	if create_index {
 
+		mappings_r, err := v2.FS.Open("mappings.spelunker.json")
+
+		if err != nil {
+			return fmt.Errorf("Failed to open mappings for reading, %w", err)
+		}
+
+		defer mappings_r.Close()
+
+		settings_r, err := v2.FS.Open("settings.spelunker.json")
+
+		if err != nil {
+			return fmt.Errorf("Failed to open settings for reading, %w", err)
+		}
+
+		defer settings_r.Close()
+
 		os_client, err := client.NewClient(ctx, client_uri)
 
 		if err != nil {
 			return fmt.Errorf("Failed to create Opensearch client, %w", err)
 		}
 
-		req := opensearchapi.IndicesCreateReq{
+		mappings_req := opensearchapi.IndicesCreateReq{
 			Index: os_index,
-			Params: opensearchapi.IndicesCreateParams{
-				Pretty: true,
-			},
+			Body: mappings_r,
 		}
-
-		r, err := v2.FS.Open("mappings.spelunker.json")
-
-		if err != nil {
-			return fmt.Errorf("Failed to open settings for reading, %w", err)
-		}
-
-		defer r.Close()
-		req.Body = r
-
-		_, err = os_client.Indices.Create(ctx, req)
+		
+		_, err = os_client.Indices.Create(ctx, mappings_req)
 
 		if err != nil {
 			return fmt.Errorf("Failed to create index, %w", err)
 		}
+
+		settings_req := opensearchapi.SettingsPutReq{
+			Indices: []string{
+				os_index,
+			},
+			Body: settings_r,
+		}
+
+		_, err = os_client.Indices.Settings.Put(ctx, settings_req)
+
+		if err != nil {
+			return fmt.Errorf("Failed to put settings, %w", err)
+		}
+		
 	}
 
 	cb_func := iterwriter.DefaultIterwriterCallback(forgiving)

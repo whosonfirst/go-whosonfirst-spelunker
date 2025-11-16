@@ -21,11 +21,12 @@ require (
 	github.com/sfomuseum/iso8601duration v1.1.0
 	github.com/tidwall/gjson v1.18.0
 	github.com/whosonfirst/go-cache v0.5.3
+	github.com/whosonfirst/go-cache-ristretto v0.0.2
 	github.com/whosonfirst/go-ioutil v1.0.2
 	github.com/whosonfirst/go-reader-cachereader/v2 v2.0.0
 	github.com/whosonfirst/go-reader/v2 v2.1.0
 	github.com/whosonfirst/go-whosonfirst v0.0.2
-	github.com/whosonfirst/go-whosonfirst-database v0.5.0
+	github.com/whosonfirst/go-whosonfirst-database v0.6.0
 	github.com/whosonfirst/go-whosonfirst-derivatives v0.0.5
 	github.com/whosonfirst/go-whosonfirst-flags v0.5.2
 	github.com/whosonfirst/go-whosonfirst-iterate/v3 v3.2.0
@@ -77,6 +78,8 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/sts v1.38.6 // indirect
 	github.com/aws/smithy-go v1.23.0 // indirect
 	github.com/cenkalti/backoff/v4 v4.3.0 // indirect
+	github.com/cespare/xxhash/v2 v2.3.0 // indirect
+	github.com/dgraph-io/ristretto/v2 v2.1.0 // indirect
 	github.com/dominikbraun/graph v0.23.0 // indirect
 	github.com/fsnotify/fsnotify v1.9.0 // indirect
 	github.com/g8rswimmer/error-chain v1.0.0 // indirect
@@ -97,6 +100,7 @@ require (
 	github.com/patrickmn/go-cache v2.1.0+incompatible // indirect
 	github.com/paulmach/go.geojson v1.4.0 // indirect
 	github.com/paulmach/orb v0.12.0 // indirect
+	github.com/pkg/errors v0.9.1 // indirect
 	github.com/sfomuseum/go-database v0.0.17 // indirect
 	github.com/sfomuseum/go-geojsonld v1.0.0 // indirect
 	github.com/skip2/go-qrcode v0.0.0-20200617195104-da1b6568686e // indirect

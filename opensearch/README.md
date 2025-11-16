@@ -25,7 +25,19 @@ docker run \
 ...wait for Docker/OpenSearch to start
 ```
 
-In another terminal run the `os-server-local` Makefile target:
+In another terminal run the `os-index-local` Makefile target:
+
+```
+$> make os-index-local REPOS=/usr/local/data/whosonfirst/whosonfirst-data-admin-ca
+go run -tags opensearch -mod readonly ./cmd/wof-spelunker-index/main.go opensearch \
+		-client-uri 'opensearch2://localhost:9200/spelunker?username=admin&password=dkjfhsjdkfkjdjhksfhskd98475kjHkzjxckj&insecure=true&require-tls=true' \
+		/usr/local/data/whosonfirst/whosonfirst-data-admin-ca
+
+2025/11/15 17:34:59 INFO Iterator stats elapsed=17.295467917s seen=33845 allocated="229 MB" "total allocated"="15 GB" sys="643 MB" numgc=182
+2025/11/15 17:35:08 INFO Index complete indexed=28097
+```
+
+Once complete run the `os-server-local` Makefile target:
 
 ```
 $> make os-server-local
