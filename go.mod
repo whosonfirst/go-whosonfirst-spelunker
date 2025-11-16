@@ -35,6 +35,7 @@ require (
 	github.com/whosonfirst/go-whosonfirst-spr/v2 v2.3.8
 	github.com/whosonfirst/go-whosonfirst-sqlite-spr v0.3.3
 	github.com/whosonfirst/go-whosonfirst-uri v1.3.0
+	github.com/whosonfirst/go-writer/v3 v3.1.1
 	golang.org/x/text v0.31.0
 )
 
@@ -111,7 +112,6 @@ require (
 	github.com/whosonfirst/go-whosonfirst-findingaid/v2 v2.11.0 // indirect
 	github.com/whosonfirst/go-whosonfirst-names v0.1.0 // indirect
 	github.com/whosonfirst/go-whosonfirst-svg v0.1.0 // indirect
-	github.com/whosonfirst/go-writer/v3 v3.1.1 // indirect
 	go.mongodb.org/mongo-driver v1.11.4 // indirect
 	go.opentelemetry.io/auto/sdk v1.1.0 // indirect
 	go.opentelemetry.io/otel v1.37.0 // indirect

@@ -9,9 +9,12 @@ import (
 	"github.com/whosonfirst/go-whosonfirst-iterate/v3"
 )
 
+var client_uri string
 var iterator_uri string
 var forgiving bool
 var verbose bool
+
+var create_index bool
 
 func DefaultFlagSet() *flag.FlagSet {
 
@@ -23,6 +26,8 @@ func DefaultFlagSet() *flag.FlagSet {
 	fs.StringVar(&iterator_uri, "iterator-uri", "repo://", iterator_desc)
 
 	fs.BoolVar(&forgiving, "forgiving", true, "")
+
+	fs.StringVar(&client_uri, "client-uri", "", "...")
 
 	fs.BoolVar(&verbose, "verbose", false, "Enable verbose (debug) logging")
 	return fs

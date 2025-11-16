@@ -41,8 +41,10 @@ OS_ENC_CACHE_URI=$(shell $(URLESCAPE) $(OS_CACHE_URI))
 OS_READER_URI=https://data.whosonfirst.org
 OS_ENC_READER_URI=$(shell $(URLESCAPE) $(OS_READER_URI))
 
-OS_CLIENT_URI="https://localhost:9200/spelunker?username=admin&password=$(OS_PSWD)&insecure=true&require-tls=true"
-OS_ENC_CLIENT_URI=$(shell $(URLESCAPE) $(OS_CLIENT_URI))
+OS_CLIENT_URI=localhost:9200/spelunker?username=admin&password=$(OS_PSWD)&insecure=true&require-tls=true
+OS_WRITER_URI=opensearch2://$(OS_CLIENT_URI)
+
+OS_ENC_CLIENT_URI=$(shell $(URLESCAPE) https://$(OS_CLIENT_URI))
 
 OS_SPELUNKER_URI=opensearch://?client-uri=$(OS_ENC_CLIENT_URI)&cache-uri=$(OS_ENC_CACHE_URI)&reader-uri=$(OS_ENC_READER_URI)
 
@@ -68,24 +70,15 @@ os-spelunker-local:
 	@make os-spelunker-local-fieldlimit
 
 os-spelunker-local-index:
-	cat $(WHOSONFIRST_OPENSEARCH)/schema/2.x/mappings.spelunker.json | \
-		curl -k \
-		-H 'Content-Type: application/json' \
-		-X PUT \
-		https://admin:$(OS_PSWD)@localhost:9200/spelunker \
-		-d @-
-
-os-spelunker-local-fieldlimit:
-	cat $(WHOSONFIRST_OPENSEARCH)/schema/2.x/settings.spelunker.json | \
-	curl -k \
-		-H 'Content-type:application/json' \
-		-XPUT \
-		https://admin:$(OS_PSWD)@localhost:9200/spelunker/_settings \
-		-d @-
+	go run -tags $(GOTAGS_OPENSEARCH) -mod $(GOMOD) ./cmd/wof-spelunker-index/main.go opensearch \
+		-verbose \
+		-client-uri '$(OS_WRITER_URI)' \
+		$(REPOS)
 
 # OpenSearch "spelunker" server
 
 os-server-local:
 	go run -tags $(GOTAGS_OPENSEARCH) -mod $(GOMOD) ./cmd/wof-spelunker-httpd/main.go \
+		-verbose \
 		-server-uri http://localhost:8080 \
 		-spelunker-uri '$(OS_SPELUNKER_URI)'
