@@ -14,6 +14,7 @@ import (
 
 func usage() {
 
+	fmt.Println("Index one or more Who's On First data sources in a Spelunker-compatible datastore.")
 	fmt.Println("Usage: wof-spelunker-index [CMD] [OPTIONS]")
 	fmt.Println("Valid commands are:")
 

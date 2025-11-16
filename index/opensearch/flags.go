@@ -9,7 +9,7 @@ import (
 	"github.com/whosonfirst/go-whosonfirst-iterate/v3"
 )
 
-var client_uri string
+var writer_uri string
 var iterator_uri string
 var forgiving bool
 var verbose bool
@@ -26,9 +26,9 @@ func DefaultFlagSet() *flag.FlagSet {
 	fs.StringVar(&iterator_uri, "iterator-uri", "repo://", iterator_desc)
 
 	fs.BoolVar(&forgiving, "forgiving", true, "")
-	fs.BoolVar(&create_index, "create-index", false, "")
+	fs.BoolVar(&create_index, "create-index", false, "Create a new OpenSearch index before indexing records.")
 
-	fs.StringVar(&client_uri, "client-uri", "", "...")
+	fs.StringVar(&writer_uri, "writer-uri", "", "...")
 
 	fs.BoolVar(&verbose, "verbose", false, "Enable verbose (debug) logging")
 	return fs

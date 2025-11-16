@@ -214,9 +214,20 @@ _Error handling removed for the sake of brevity._
 
 ## Tools
 
-### wof-spelunker
+### wof-spelunker-index
 
-Earlier versions of this package provided a `wof-spelunker` command-line tool for interacting with the `Spelunker` API. It has been removed for the time being pending a refactoring of the tool's code.
+Index one or more Who's On First data sources in a Spelunker-compatible datastore.
+
+```
+$> ./bin/wof-spelunker-index -h
+Index one or more Who's On First data sources in a Spelunker-compatible datastore.
+Usage: wof-spelunker-index [CMD] [OPTIONS]
+Valid commands are:
+* opensearch
+* sql
+```
+
+See [cmd/wof-spelunker-index/README.md](cmd/wof-spelunker-index/README.md) for details (including relevant build tags for specific database implementations).
 
 ### wof-spelunker-httpd
 

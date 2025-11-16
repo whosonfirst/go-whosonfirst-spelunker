@@ -3,10 +3,10 @@ package opensearch
 import (
 	"context"
 	"fmt"
+	"log/slog"
 	"net/url"
 	"strings"
-	"log/slog"
-	
+
 	_ "github.com/whosonfirst/go-whosonfirst-database/opensearch/writer"
 
 	"github.com/opensearch-project/opensearch-go/v4/opensearchapi"
@@ -43,20 +43,20 @@ func (c *IndexOpenSearchCommand) Run(ctx context.Context, args []string) error {
 		slog.SetLogLoggerLevel(slog.LevelDebug)
 		slog.Debug("Verbose (debug) logging enabled")
 	}
-	
-	wr, err := writer.NewWriter(ctx, client_uri)
+
+	wr, err := writer.NewWriter(ctx, writer_uri)
 
 	if err != nil {
 		return fmt.Errorf("Failed to create new writer, %w", err)
 	}
 
-	u, _ := url.Parse(client_uri)
-	os_index := strings.TrimLeft(u.Path, "/")
-
 	if create_index {
 
+		u, _ := url.Parse(writer_uri)
+		os_index := strings.TrimLeft(u.Path, "/")
+
 		slog.Debug("Create index", "name", os_index)
-		
+
 		mappings_r, err := v2.FS.Open("mappings.spelunker.json")
 
 		if err != nil {
@@ -73,6 +73,7 @@ func (c *IndexOpenSearchCommand) Run(ctx context.Context, args []string) error {
 
 		defer settings_r.Close()
 
+		client_uri := writer_uri
 		os_client, err := client.NewClient(ctx, client_uri)
 
 		if err != nil {
@@ -117,14 +118,14 @@ func (c *IndexOpenSearchCommand) Run(ctx context.Context, args []string) error {
 
 	/*
 
-			/usr/local/data/whosonfirst/whosonfirst-data-admin-ca
-	2025/11/15 17:49:02 INFO Iterator stats elapsed=1m0.001272166s seen=24419 allocated="195 MB" "total allocated"="11 GB" sys="346 MB" numgc=159
-	2025/11/15 17:49:30 ERROR Failed to index record path=112/576/680/5/1125766805.geojson type=mapper_exception reason="timed out while waiting for a dynamic mapping update"
-	2025/11/15 17:49:30 ERROR Failed to index record path=112/607/179/7/1126071797.geojson type=mapper_exception reason="timed out while waiting for a dynamic mapping update"
-	2025/11/15 17:49:30 ERROR Failed to index record path=112/611/017/5/1126110175.geojson type=mapper_exception reason="timed out while waiting for a dynamic mapping update"
-	2025/11/15 17:49:30 ERROR Failed to index record path=112/611/366/1/1126113661.geojson type=mapper_exception reason="timed out while waiting for a dynamic mapping update"
-	2025/11/15 17:49:30 ERROR Failed to index record path=115/886/315/9/1158863159.geojson type=mapper_exception reason="timed out while waiting for a dynamic mapping update"
-	2025/11/15 17:49:30 ERROR Failed to index record path=115/886/830/9/1158868309.geojson type=mapper_exception reason="timed out while waiting for a dynamic mapping update"
+				/usr/local/data/whosonfirst/whosonfirst-data-admin-ca
+		2025/11/15 17:49:02 INFO Iterator stats elapsed=1m0.001272166s seen=24419 allocated="195 MB" "total allocated"="11 GB" sys="346 MB" numgc=159
+		2025/11/15 17:49:30 ERROR Failed to index record path=112/576/680/5/1125766805.geojson type=mapper_exception reason="timed out while waiting for a dynamic mapping update"
+		2025/11/15 17:49:30 ERROR Failed to index record path=112/607/179/7/1126071797.geojson type=mapper_exception reason="timed out while waiting for a dynamic mapping update"
+		2025/11/15 17:49:30 ERROR Failed to index record path=112/611/017/5/1126110175.geojson type=mapper_exception reason="timed out while waiting for a dynamic mapping update"
+		2025/11/15 17:49:30 ERROR Failed to index record path=112/611/366/1/1126113661.geojson type=mapper_exception reason="timed out while waiting for a dynamic mapping update"
+		2025/11/15 17:49:30 ERROR Failed to index record path=115/886/315/9/1158863159.geojson type=mapper_exception reason="timed out while waiting for a dynamic mapping update"
+		2025/11/15 17:49:30 ERROR Failed to index record path=115/886/830/9/1158868309.geojson type=mapper_exception reason="timed out while waiting for a dynamic mapping update"
 
 	*/
 
