@@ -28,6 +28,8 @@ require (
 	github.com/whosonfirst/go-whosonfirst-database v0.5.0
 	github.com/whosonfirst/go-whosonfirst-derivatives v0.0.5
 	github.com/whosonfirst/go-whosonfirst-flags v0.5.2
+	github.com/whosonfirst/go-whosonfirst-iterate/v3 v3.2.0
+	github.com/whosonfirst/go-whosonfirst-iterwriter/v4 v4.0.4
 	github.com/whosonfirst/go-whosonfirst-placetypes v0.9.0
 	github.com/whosonfirst/go-whosonfirst-sources v0.2.0
 	github.com/whosonfirst/go-whosonfirst-spr/v2 v2.3.8
@@ -76,6 +78,7 @@ require (
 	github.com/cenkalti/backoff/v4 v4.3.0 // indirect
 	github.com/dominikbraun/graph v0.23.0 // indirect
 	github.com/fsnotify/fsnotify v1.9.0 // indirect
+	github.com/g8rswimmer/error-chain v1.0.0 // indirect
 	github.com/go-ini/ini v1.67.0 // indirect
 	github.com/go-logr/logr v1.4.3 // indirect
 	github.com/go-logr/stdr v1.2.2 // indirect
@@ -89,6 +92,7 @@ require (
 	github.com/hashicorp/go-multierror v1.1.1 // indirect
 	github.com/jmespath/go-jmespath v0.4.0 // indirect
 	github.com/mitchellh/reflectwalk v1.0.2 // indirect
+	github.com/natefinch/atomic v1.0.1 // indirect
 	github.com/patrickmn/go-cache v2.1.0+incompatible // indirect
 	github.com/paulmach/go.geojson v1.4.0 // indirect
 	github.com/paulmach/orb v0.12.0 // indirect
@@ -105,9 +109,9 @@ require (
 	github.com/whosonfirst/go-sanitize v0.1.0 // indirect
 	github.com/whosonfirst/go-whosonfirst-feature v0.0.29 // indirect
 	github.com/whosonfirst/go-whosonfirst-findingaid/v2 v2.11.0 // indirect
-	github.com/whosonfirst/go-whosonfirst-iterate/v3 v3.2.0 // indirect
 	github.com/whosonfirst/go-whosonfirst-names v0.1.0 // indirect
 	github.com/whosonfirst/go-whosonfirst-svg v0.1.0 // indirect
+	github.com/whosonfirst/go-writer/v3 v3.1.1 // indirect
 	go.mongodb.org/mongo-driver v1.11.4 // indirect
 	go.opentelemetry.io/auto/sdk v1.1.0 // indirect
 	go.opentelemetry.io/otel v1.37.0 // indirect

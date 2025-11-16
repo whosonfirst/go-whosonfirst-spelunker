@@ -274,6 +274,9 @@ github.com/dustin/go-humanize
 ## explicit; go 1.17
 github.com/fsnotify/fsnotify
 github.com/fsnotify/fsnotify/internal
+# github.com/g8rswimmer/error-chain v1.0.0
+## explicit
+github.com/g8rswimmer/error-chain
 # github.com/go-ini/ini v1.67.0
 ## explicit
 github.com/go-ini/ini
@@ -335,12 +338,16 @@ github.com/mitchellh/copystructure
 # github.com/mitchellh/reflectwalk v1.0.2
 ## explicit
 github.com/mitchellh/reflectwalk
+# github.com/natefinch/atomic v1.0.1
+## explicit; go 1.12
+github.com/natefinch/atomic
 # github.com/opensearch-project/opensearch-go/v4 v4.5.0
 ## explicit; go 1.22
 github.com/opensearch-project/opensearch-go/v4
 github.com/opensearch-project/opensearch-go/v4/internal/version
 github.com/opensearch-project/opensearch-go/v4/opensearchapi
 github.com/opensearch-project/opensearch-go/v4/opensearchtransport
+github.com/opensearch-project/opensearch-go/v4/opensearchutil
 github.com/opensearch-project/opensearch-go/v4/signer
 github.com/opensearch-project/opensearch-go/v4/signer/awsv2
 # github.com/patrickmn/go-cache v2.1.0+incompatible
@@ -442,6 +449,7 @@ github.com/whosonfirst/go-whosonfirst/http/webfinger
 github.com/whosonfirst/go-whosonfirst-database/app/sql/tables/index
 github.com/whosonfirst/go-whosonfirst-database/opensearch/client
 github.com/whosonfirst/go-whosonfirst-database/opensearch/document
+github.com/whosonfirst/go-whosonfirst-database/opensearch/writer
 github.com/whosonfirst/go-whosonfirst-database/sql
 github.com/whosonfirst/go-whosonfirst-database/sql/indexer
 github.com/whosonfirst/go-whosonfirst-database/sql/tables
@@ -468,6 +476,10 @@ github.com/whosonfirst/go-whosonfirst-flags/existential
 ## explicit; go 1.24
 github.com/whosonfirst/go-whosonfirst-iterate/v3
 github.com/whosonfirst/go-whosonfirst-iterate/v3/filters
+# github.com/whosonfirst/go-whosonfirst-iterwriter/v4 v4.0.4
+## explicit; go 1.25.0
+github.com/whosonfirst/go-whosonfirst-iterwriter/v4
+github.com/whosonfirst/go-whosonfirst-iterwriter/v4/app/iterwriter
 # github.com/whosonfirst/go-whosonfirst-names v0.1.0
 ## explicit; go 1.12
 github.com/whosonfirst/go-whosonfirst-names
@@ -492,6 +504,9 @@ github.com/whosonfirst/go-whosonfirst-svg
 # github.com/whosonfirst/go-whosonfirst-uri v1.3.0
 ## explicit; go 1.13
 github.com/whosonfirst/go-whosonfirst-uri
+# github.com/whosonfirst/go-writer/v3 v3.1.1
+## explicit; go 1.22.1
+github.com/whosonfirst/go-writer/v3
 # go.mongodb.org/mongo-driver v1.11.4
 ## explicit; go 1.13
 go.mongodb.org/mongo-driver/bson

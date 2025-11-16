@@ -16,6 +16,7 @@ cli-opensearch:
 
 cli:
 	go build -mod $(GOMOD) -tags="$(GOTAGS)" -ldflags="$(LDFLAGS)" -o bin/wof-spelunker-httpd cmd/wof-spelunker-httpd/main.go
+	go build -mod $(GOMOD) -tags="$(GOTAGS)" -ldflags="$(LDFLAGS)" -o bin/wof-spelunker-index cmd/wof-spelunker-index/main.go
 
 # Targets for running the Spelunker locally
 

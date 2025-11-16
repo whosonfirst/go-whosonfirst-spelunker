@@ -6,6 +6,8 @@ import (
 	"os"
 
 	_ "github.com/whosonfirst/go-whosonfirst-spelunker/v2/app"
+	_ "github.com/whosonfirst/go-whosonfirst-spelunker/v2/index/opensearch"
+	_ "github.com/whosonfirst/go-whosonfirst-spelunker/v2/index/sql"
 
 	"github.com/whosonfirst/go-whosonfirst-spelunker/v2/index"
 )
