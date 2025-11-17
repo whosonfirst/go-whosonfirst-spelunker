@@ -65,7 +65,7 @@ os-local:
 		-v opensearch-data1:/usr/local/data/opensearch \
 		opensearchproject/opensearch:latest
 
-os-index-local:
+os-local-index:
 	go run -tags $(GOTAGS_OPENSEARCH) -mod $(GOMOD) ./cmd/wof-spelunker-index/main.go opensearch \
 		-client-uri '$(OS_WRITER_URI)' \
 		-create-index=$(OS_CREATE_INDEX) \
@@ -73,7 +73,7 @@ os-index-local:
 
 # OpenSearch "spelunker" server
 
-os-server-local:
+os-local-server:
 	go run -tags $(GOTAGS_OPENSEARCH) -mod $(GOMOD) ./cmd/wof-spelunker-httpd/main.go \
 		-server-uri http://localhost:8080 \
 		-spelunker-uri '$(OS_SPELUNKER_URI)'

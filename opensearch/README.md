@@ -48,28 +48,33 @@ docker run \
 ...wait for Docker/OpenSearch to start
 ```
 
-In another terminal run the `os-index-local` Makefile target:
+In another terminal run the `os-local-index` Makefile target passing in one or more Who's On First data sources in the `REPOS` variable. This will index the records in those sources in to the OpenSearch instance started, above. For example:
 
 ```
-$> make os-index-local REPOS=/usr/local/data/whosonfirst/whosonfirst-data-admin-ca
+$> make os-local-index REPOS=/usr/local/data/whosonfirst/whosonfirst-data-admin-ca
 go run -tags opensearch -mod readonly ./cmd/wof-spelunker-index/main.go opensearch \
-		-database-uri 'opensearch2://localhost:9200/spelunker?username=admin&password=dkjfhsjdkfkjdjhksfhskd98475kjHkzjxckj&insecure=true&require-tls=true' \
+		-create-index \
+		-client-uri 'opensearch2://localhost:9200/spelunker?username=admin&password=dkjfhsjdkfkjdjhksfhskd98475kjHkzjxckj&insecure=true&require-tls=true' \
 		/usr/local/data/whosonfirst/whosonfirst-data-admin-ca
 
 2025/11/15 17:34:59 INFO Iterator stats elapsed=17.295467917s seen=33845 allocated="229 MB" "total allocated"="15 GB" sys="643 MB" numgc=182
 2025/11/15 17:35:08 INFO Index complete indexed=28097
 ```
 
-Once complete run the `os-server-local` Makefile target:
+_Note the default OpenSearch username and password values. This are assigned by default (and can be overriden) as Makefile variables._
+
+Once complete run the `os-server-local` Makefile target to start the Spelunker web application reading data from the Spelunker OpenSearch instance:
 
 ```
-$> make os-server-local
+$> make os-local-server
 go run -tags opensearch -mod vendor ./cmd/wof-spelunker-httpd/main.go \
 		-server-uri http://localhost:8080 \
 		-spelunker-uri 'opensearch://?client-uri=https%3A%2F%2Flocalhost%3A9200%2Fspelunker%3Fusername%3Dadmin%26password%3Ddkjfhsjdkfkjdjhksfhskd98475kjHkzjxckj%26insecure%3Dtrue%26require-tls%3Dtrue&cache-uri=ristretto%3A%2F%2F&reader-uri=https%3A%2F%2Fdata.whosonfirst.org'
 
 2025/11/15 11:42:44 INFO Listening for requests address=http://localhost:8080
 ```
+
+_Note: The value of the `-spelunker-uri` flag is NOT the same as the "client-uri" URI used to connect to OpenSearch. Specifically, the "client-uri" URI is encoded as a query parameter of the `-spelunker-uri` flag. There are additional OpenSearch-implementation-specific flags (`cache-uri` and `reader-uri`). Consult the [cmd/wof-spelunker-httpd documentation](../cmd/wof-spelunker-httpd) for details._
 
 ## Database schema(s)
 

@@ -120,11 +120,23 @@ For example to start the `wof-spelunker-httpd` application using data stored in 
 
 New OpenSearch-backed Spelunker instances are created by passing a URI to the `NewSpelunker` method in the form of:
 
+Where {QUERY_PARAMETERS} may be one or more of the following:
+* `client-uri={STRING}. A URI in the form of "opensearch://?{QUERY_PARAMETERS}client-uri={GO_WHOSONFIRST_DATABASE_OPENSEARCH_CLIENT_URI}" for connecting to OpenSearch.
+* `reader-uri={STRING}. A valid "whosonfirst/go-reader/v2.Reader" URI used to read raw "source" Who's On First documents (because documents are indexed in a truncated form in OpenSearch).
+* `cache-uri={STRING}. A valid "whosonfirst/go-cache.Cache" URI used to cache data retrieved from a "reader-uri" source.
+
+For example:
+
 ```
-opensearch://?client-uri={GO_WHOSONFIRST_DATABASE_OPENSEARCH_CLIENT_URI}
+./bin/wof-spelunker-httpd \
+	-spelunker-uri 'opensearch://?client-uri=https%3A%2F%2Flocalhost%3A9200%2Fspelunker%3Fusername%3Dadmin%26password%3Ddkjfhsjdkfkjdjhksfhskd98475kjHkzjxckj%26insecure%3Dtrue%26require-tls%3Dtrue&cache-uri=ristretto%3A%2F%2F&reader-uri=https%3A%2F%2Fdata.whosonfirst.org'
 ```
 
-Where the value of the `client-uri` query parameter is a URL-escaped URI for instantiating a [opensearchapi.Client](https://pkg.go.dev/github.com/opensearch-project/opensearch-go/v4/opensearchapi#Client) instance using the [whosonfirst/go-whosonfirst-database/opensearch/client](https://github.com/whosonfirst/go-whosonfirst-database/tree/main/opensearch/client) package. The `?client-uri` paramater is expected to take the form of:
+_The need to URL-escape the `client-uri`, `-reader-uri` and `-cache-uri` parameters is not great but that's how things work today._
+
+#### client-uri
+
+The value of the `client-uri` query parameter is a URL-escaped URI for instantiating a [opensearchapi.Client](https://pkg.go.dev/github.com/opensearch-project/opensearch-go/v4/opensearchapi#Client) instance using the [whosonfirst/go-whosonfirst-database/opensearch/client](https://github.com/whosonfirst/go-whosonfirst-database/tree/main/opensearch/client) package. The `?client-uri` paramater is expected to take the form of:
 
 ```
 opensearch://{OPENSEARCH_HOST}:{OPENSEARCH_PORT}/{OPENSEARCH_INDEX}?{QUERY_PARAMETERS}
@@ -138,14 +150,8 @@ Where {QUERY_PARAMETERS} may be one or more of the following:
 * `password={STRING}`. The OpenSearch password for authenticated connections.
 * `aws-credentials-uri={STRING}`. A a valid `aaronland/go-aws-auth` URI used to create a Golang AWS authentication config used to sign requests to an AWS-hosted OpenSearch instance.
 
-For example:
-
-```
-./bin/wof-spelunker-httpd \
-	-spelunker-uri 'opensearch://?client-uri=opensearch%3A%2F%2Flocalhost%3A9200%3Findex%3Dspelunker%26require-tls%3Dtrue'
-```
-
-_The need to URL-escape the `client-uri` parameter is not great but that's how things work today._
-
 See [opensearch/README.md](../../opensearch/README.md) for details.
 
+#### reader-uri
+
+#### cache-uri
