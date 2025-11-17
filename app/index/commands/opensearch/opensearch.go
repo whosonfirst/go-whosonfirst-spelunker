@@ -44,8 +44,7 @@ func (c *IndexOpenSearchCommand) Run(ctx context.Context, args []string) error {
 		slog.Debug("Verbose (debug) logging enabled")
 	}
 
-	writer_uri := database_uri
-	client_uri := database_uri
+	writer_uri := client_uri
 
 	wr, err := writer.NewWriter(ctx, writer_uri)
 

@@ -2,6 +2,29 @@
 
 The `opensearch` package implements the `Spelunker` interface for Who's On First data indexed in an [OpenSearch](https://opensearch.org/) database.
 
+## Connecting to OpenSearch
+
+Ultimately, all of the code in this package uses the `opensearch-project/opensearch-go/v4` package for executing requests against an OpenSearch server. It also uses the `whosonfirst/go-whosonfirst-database/opensearch/client` package for managing the details of creating an `opensearch-go` client instance. These clients are derived from URIs which take the form of:
+
+```
+opensearch://{OPENSEARCH_HOST}:{OPENSEARCH_PORT}/{OPENSEARCH_INDEX}?{QUERY_PARAMETERS}
+```
+
+Where {QUERY_PARAMETERS} may be one or more of the following:
+* `debug={BOOLEAN}`. A boolean value to configure the underlying OpenSearch client to write request and response bodies to STDOUT.
+* `insecure={BOOLEAN}`. A boolean value to disable TLS "InsecureSkipVerify" checks (for custom certificate authorities and the like).
+* `require-tls={BOOLEAN}`. A boolean value to ensure that all connections are made over HTTPS even if the OpenSearch port is not 443.
+* `username={STRING}`. The OpenSearch username for authenticated connections.
+* `password={STRING}`. The OpenSearch password for authenticated connections.
+* `aws-credentials-uri={STRING}`. A a valid `aaronland/go-aws-auth` URI used to create a Golang AWS authentication config used to sign requests to an AWS-hosted OpenSearch instance.
+* `bulk-index={BOOLEAN}`. A boolean value. If true then writes will be performed using a "bulk indexer". Default is true.
+* `workers={INT}`. The number of users to enable for bulk indexing. Default is 10.
+
+These are the common query parameters when creating clients for both the `wof-spelunker-httpd` and `wof-spelunker-index` tools. The `wof-spelunker-index` tool also accepts the following parameters:
+
+* `bulk-index={BOOLEAN}`. A boolean value. If true then writes will be performed using a "bulk indexer". Default is true.
+* `workers={INT}`. The number of users to enable for bulk indexing. Default is 10.
+
 ## Examples
 
 ### Running locally
