@@ -1,5 +1,7 @@
 # wof-spelunker-index
 
+Index one or more Who's On First data sources in a Spelunker-compatible datastore.
+
 ```
 $> ./bin/wof-spelunker-index -h
 Index one or more Who's On First data sources in a Spelunker-compatible datastore.
@@ -48,6 +50,8 @@ go build -mod vendor -tags="opensearch" -ldflags="-s -w" -o bin/wof-spelunker-in
 
 ### database/sql
 
+Index one or more Who's On First data sources in a `database/sql`-compatible Spelunker datastore.
+
 ```
 $> ./bin/wof-spelunker-index sql -h
   -database-uri string
@@ -85,6 +89,8 @@ $> ./bin/wof-spelunker-index sql \
 ```
 
 ### OpenSearch
+
+Index one or more Who's On First data sources in a OpenSearch-based Spelunker datastore.
 
 ```
 $> ./bin/wof-spelunker-index opensearch -h

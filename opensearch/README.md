@@ -70,3 +70,7 @@ go run -tags opensearch -mod vendor ./cmd/wof-spelunker-httpd/main.go \
 
 2025/11/15 11:42:44 INFO Listening for requests address=http://localhost:8080
 ```
+
+## Database schema(s)
+
+Database schemas (mappings) used by the `OpenSearchSpelunker` implementation are defined in the [whosonfirst/go-whosonfirst-database/opensearch/schema/v2](https://github.com/whosonfirst/go-whosonfirst-database/tree/main/opensearch/schema/v2) package.
