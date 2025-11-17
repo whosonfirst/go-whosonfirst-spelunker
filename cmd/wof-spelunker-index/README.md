@@ -101,8 +101,18 @@ $> ./bin/wof-spelunker-index opensearch -h
 The `-database-uri` flag is expected to take the form of:
 
 ```
-opensearch://?client_uri={GO_WHOSONFIRST_DATABASE_OPENSEARCH_CLIENT_URI}
+opensearch://{OPENSEARCH_HOST}:{OPENSEARCH_PORT}/{OPENSEARCH_INDEX}?{QUERY_PARAMETERS}
 ```
+
+Where {QUERY_PARAMETERS} may be one or more of the following:
+* `debug` - A boolean value to configure the underlying OpenSearch client to write request and response bodies to STDOUT.
+* `insecure` - A boolean value to disable TLS "InsecureSkipVerify" checks (for custom certificate authorities and the like).
+* `require-tls` – A boolean value to ensure that all connections are made over HTTPS even if the OpenSearch port is not 443.
+* `username` – The OpenSearch username for authenticated connections.
+* `password` – The OpenSearch password for authenticated connections.
+* `aws-credentials-uri` – A a valid `aaronland/go-aws-auth` URI used to create a Golang AWS authentication config used to sign requests to an AWS-hosted OpenSearch instance.
+* ?bulk-index={BOOLEAN}. If true then writes will be performed using a "bulk indexer". Default is true.
+* ?workers={INT}. The number of users to enable for bulk indexing. Default is 10.
 
 Where the value of the `client-uri` query parameter is a URL-escaped URI for instantiating a [opensearchapi.Client](https://pkg.go.dev/github.com/opensearch-project/opensearch-go/v4/opensearchapi#Client) instance using the [whosonfirst/go-whosonfirst-database/opensearch/client](https://github.com/whosonfirst/go-whosonfirst-database/tree/main/opensearch/client) package.
 
@@ -111,7 +121,7 @@ For example to index all the data in the [whosonfirst-data/whosonfirst-data-admi
 ```
 $> ./bin/wof-spelunker-index opensearch \
 	-create-index \
-	-database-uri '...' \
+	-database-uri 'opensearch://localhost:9200/whosonfirst?require-tls=true&username=admin&password=...' \
 	/usr/local/data/whosonfirst/whosonfirst-data-admin-ca
 ```
 
