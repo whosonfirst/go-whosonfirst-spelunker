@@ -77,7 +77,9 @@ See [sql/README.md](../../sql/README.md) for details.
 #### SQLite
 
 For example to index all the data in the [whosonfirst-data/whosonfirst-data-admin-ca](#) repository in to a SQLite database called `test.db`:
- ./bin/wof-spelunker-index sql \
+
+```
+$> ./bin/wof-spelunker-index sql \
 	-database-uri 'sql://sqlite3?dsn=test.db' \
 	/usr/local/data/whosonfirst/whosonfirst-data-admin-ca/
 ```
@@ -89,13 +91,13 @@ $> ./bin/wof-spelunker-index opensearch -h
   -create-index
     	Create a new OpenSearch index before indexing records.
   -forgiving
-    	 (default true)
+    	 Be "forgiving" of failed writes, logging the issue(s) but not triggering errors. (default true)
   -iterator-uri string
     	A valid whosonfirst/go-whosonfirst-iterate/v3.Iterator URI. Supported iterator URI schemes are: cwd://,directory://,featurecollection://,file://,filelist://,geojsonl://,null://,repo:// (default "repo://")
   -verbose
     	Enable verbose (debug) logging
-  -writer-uri string
-    	...
+  -database-uri string
+    	A valid whosonfirst/go-whosonfirst-database/opensearch/client URI in the form of "opensearch://{OPENSEARCH_HOST}:{OPENSEARCH_PORT}/{OPENSEARCH_INDEX}?{QUERY_PARAMETERS}".
 ```
 
 The `-database-uri` flag is expected to take the form of:
