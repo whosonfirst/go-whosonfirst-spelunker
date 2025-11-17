@@ -4,19 +4,19 @@ import (
 	"context"
 
 	sql_index "github.com/whosonfirst/go-whosonfirst-database/app/sql/tables/index"
-	"github.com/whosonfirst/go-whosonfirst-spelunker/v2/index"
+	"github.com/whosonfirst/go-whosonfirst-spelunker/v2/app/index/commands"
 )
 
 type IndexSQLCommand struct {
-	index.Command
+	commands.Command
 }
 
 func init() {
 	ctx := context.Background()
-	index.RegisterCommand(ctx, "sql", NewIndexSQLCommand)
+	commands.RegisterCommand(ctx, "sql", NewIndexSQLCommand)
 }
 
-func NewIndexSQLCommand(ctx context.Context, cmd string) (index.Command, error) {
+func NewIndexSQLCommand(ctx context.Context, cmd string) (commands.Command, error) {
 	c := &IndexSQLCommand{}
 	return c, nil
 }

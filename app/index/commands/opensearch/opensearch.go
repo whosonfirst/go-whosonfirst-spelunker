@@ -14,20 +14,20 @@ import (
 	"github.com/whosonfirst/go-whosonfirst-database/opensearch/schema/v2"
 	"github.com/whosonfirst/go-whosonfirst-iterwriter/v4"
 	iterwriter_app "github.com/whosonfirst/go-whosonfirst-iterwriter/v4/app/iterwriter"
-	"github.com/whosonfirst/go-whosonfirst-spelunker/v2/index"
+	"github.com/whosonfirst/go-whosonfirst-spelunker/v2/app/index/commands"
 	"github.com/whosonfirst/go-writer/v3"
 )
 
 type IndexOpenSearchCommand struct {
-	index.Command
+	commands.Command
 }
 
 func init() {
 	ctx := context.Background()
-	index.RegisterCommand(ctx, "opensearch", NewIndexOpenSearchCommand)
+	commands.RegisterCommand(ctx, "opensearch", NewIndexOpenSearchCommand)
 }
 
-func NewIndexOpenSearchCommand(ctx context.Context, cmd string) (index.Command, error) {
+func NewIndexOpenSearchCommand(ctx context.Context, cmd string) (commands.Command, error) {
 	c := &IndexOpenSearchCommand{}
 	return c, nil
 }
@@ -43,6 +43,9 @@ func (c *IndexOpenSearchCommand) Run(ctx context.Context, args []string) error {
 		slog.SetLogLoggerLevel(slog.LevelDebug)
 		slog.Debug("Verbose (debug) logging enabled")
 	}
+
+	writer_uri := database_uri
+	client_uri := database_uri
 
 	wr, err := writer.NewWriter(ctx, writer_uri)
 
@@ -73,7 +76,6 @@ func (c *IndexOpenSearchCommand) Run(ctx context.Context, args []string) error {
 
 		defer settings_r.Close()
 
-		client_uri := writer_uri
 		os_client, err := client.NewClient(ctx, client_uri)
 
 		if err != nil {

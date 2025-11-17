@@ -64,7 +64,7 @@ $> ./bin/wof-spelunker-index sql -h
     	Enable verbose (debug) logging
 ```
 
-New `database/sql`-backed Spelunker instances are created by passing a URI to the `NewSpelunker` method in the form of:
+The `-database-uri` flag is expected to take the form of:
 
 ```
 sql://{DATABASE_ENGINE}?dsn={DATABASE_ENGINE_DSN}
@@ -98,7 +98,7 @@ $> ./bin/wof-spelunker-index opensearch -h
     	...
 ```
 
-New OpenSearch-backed Spelunker instances are created by passing a URI to the `NewSpelunker` method in the form of:
+The `-database-uri` flag is expected to take the form of:
 
 ```
 opensearch://?client_uri={GO_WHOSONFIRST_DATABASE_OPENSEARCH_CLIENT_URI}
@@ -111,7 +111,7 @@ For example to index all the data in the [whosonfirst-data/whosonfirst-data-admi
 ```
 $> ./bin/wof-spelunker-index opensearch \
 	-create-index \
-	-writer-uri '...' \
+	-database-uri '...' \
 	/usr/local/data/whosonfirst/whosonfirst-data-admin-ca
 ```
 

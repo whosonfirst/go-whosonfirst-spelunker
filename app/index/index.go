@@ -6,10 +6,10 @@ import (
 	"os"
 
 	_ "github.com/whosonfirst/go-whosonfirst-spelunker/v2/app"
-	_ "github.com/whosonfirst/go-whosonfirst-spelunker/v2/index/opensearch"
-	_ "github.com/whosonfirst/go-whosonfirst-spelunker/v2/index/sql"
+	_ "github.com/whosonfirst/go-whosonfirst-spelunker/v2/app/index/commands/opensearch"
+	_ "github.com/whosonfirst/go-whosonfirst-spelunker/v2/app/index/commands/sql"
 
-	"github.com/whosonfirst/go-whosonfirst-spelunker/v2/index"
+	"github.com/whosonfirst/go-whosonfirst-spelunker/v2/app/index/commands"
 )
 
 func usage() {
@@ -18,7 +18,7 @@ func usage() {
 	fmt.Println("Usage: wof-spelunker-index [CMD] [OPTIONS]")
 	fmt.Println("Valid commands are:")
 
-	for _, cmd := range index.Commands() {
+	for _, cmd := range commands.Commands() {
 		fmt.Printf("* %s\n", cmd)
 	}
 
@@ -37,7 +37,7 @@ func Run(ctx context.Context) error {
 		usage()
 	}
 
-	c, err := index.NewCommand(ctx, cmd)
+	c, err := commands.NewCommand(ctx, cmd)
 
 	if err != nil {
 		usage()

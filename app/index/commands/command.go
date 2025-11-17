@@ -1,4 +1,4 @@
-package index
+package commands
 
 import (
 	"context"
