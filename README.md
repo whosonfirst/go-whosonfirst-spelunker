@@ -164,7 +164,7 @@ See [sql/README.md](sql/README.md) for details.
 New OpenSearch-backed Spelunker instances are created by passing a URI to the `NewSpelunker` method in the form of:
 
 ```
-opensearch://?client_uri={GO_WHOSONFIRST_DATABASE_OPENSEARCH_CLIENT_URI}
+opensearch://?client-uri={URL_ESCAPED_GO_WHOSONFIRST_DATABASE_OPENSEARCH_CLIENT_URI}
 ```
 
 For example:
@@ -178,13 +178,13 @@ import (
        _ "github.com/whosonfirst/go-whosonfirst-spelunker/opensearch"       
 )
 
-client_uri := "https://localhost:9200?index=spelunker&require-tls=true"
+client_uri := "opensearch://localhost:9200/spelunker?require-tls=true"
 enc_client_uri, _ := url.QueryEscape(client_uri)
 
 sp, _ := spelunker.NewSpelunker(context.Background(), "opensearch://?client_uri=" + enc_client-uri)
 ```
 
-See [opensearch/README.md](opensearch/README.md) for details.
+See [opensearch/README.md](opensearch/README.md) for details, in particular for details about the `client-uri` paramater.
 
 ### Implementing a custom database
 
