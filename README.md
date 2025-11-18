@@ -4,6 +4,8 @@ Go package implementing tools and a common interface for querying (or "spelunkin
 
 ## tl;dr
 
+![](docs/images/wof-spelunker-montreal)
+
 Step 1: Index the Who's On First data for Canada reading that data directly from the [whosonfirst-data/whosonfirst-data-admin-ca](https://github.com/whosonfirst-data/whosonfirst-data-admin-ca) repository. Store that index in a SQLite database named `test-git.db`.
 
 ```

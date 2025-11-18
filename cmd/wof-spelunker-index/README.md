@@ -46,6 +46,95 @@ go build -mod vendor -tags="opensearch" -ldflags="-s -w" -o bin/wof-spelunker-in
 | SQLite | `sqlite3,icu,json1,fts5` | |
 | OpenSearch | `opensearch` | |
 
+## Examples
+
+### database/sql
+
+Index one or more Who's On First data sources in a `database/sql`-compatible Spelunker datastore.
+
+```
+$> ./bin/wof-spelunker-index sql -h
+  -database-uri string
+    	A URI in the form of 'sql://{DATABASE_SQL_ENGINE}?dsn={DATABASE_SQL_DSN}'. For example: sql://sqlite3?dsn=test.db
+  -iterator-uri string
+    	A valid whosonfirst/go-whosonfirst-iterate/v3.Iterator URI. Supported iterator URI schemes are: cwd://,directory://,featurecollection://,file://,filelist://,geojsonl://,git://,null://,repo:// (default "repo://")
+  -optimize
+    	Attempt to optimize the database before closing connection (default true)
+  -processes int
+    	The number of concurrent processes to index data with (default 28)
+  -strict-alt-files
+    	Be strict when indexing alt geometries (default true)
+  -verbose
+    	Enable verbose (debug) logging
+```
+
+The `-database-uri` flag is expected to take the form of:
+
+```
+sql://{DATABASE_ENGINE}?dsn={DATABASE_ENGINE_DSN}
+```
+
+Where `{DATABASE_ENGINE}` is a registered (as in "imported") Go language [database/sql](https://pkg.go.dev/database/sql) driver name and `{DATABASE_ENGINE_DSN}` is a driver-specific DSN string for connecting to that database.
+
+See [sql/README.md](../../sql/README.md) for details.
+
+#### SQLite
+
+For example to index all the data in the [whosonfirst-data/whosonfirst-data-admin-ca](https://github.org/whosonfirst-data/whosonfirst-data-admin-ca) repository in to a SQLite database called `test.db`:
+
+```
+$> ./bin/wof-spelunker-index sql \
+	-database-uri 'sql://sqlite3?dsn=test.db' \
+	/usr/local/data/whosonfirst/whosonfirst-data-admin-ca/
+```
+
+### OpenSearch
+
+Index one or more Who's On First data sources in a OpenSearch-based Spelunker datastore.
+
+```
+$> ./bin/wof-spelunker-index opensearch -h
+  -client-uri string
+    	A valid whosonfirst/go-whosonfirst-database/opensearch/client URI in the form of "opensearch://{OPENSEARCH_HOST}:{OPENSEARCH_PORT}/{OPENSEARCH_INDEX}?{QUERY_PARAMETERS}".
+  -create-index
+    	Create a new OpenSearch index before indexing records.
+  -forgiving
+    	Be "forgiving" of failed writes, logging the issue(s) but not triggering errors (default true)
+  -iterator-uri string
+    	A valid whosonfirst/go-whosonfirst-iterate/v3.Iterator URI. Supported iterator URI schemes are: cwd://,directory://,featurecollection://,file://,filelist://,geojsonl://,git://,null://,repo:// (default "repo://")
+  -verbose
+    	Enable verbose (debug) logging
+```
+
+The `-client-uri` flag is expected to take the form of:
+
+```
+opensearch://{OPENSEARCH_HOST}:{OPENSEARCH_PORT}/{OPENSEARCH_INDEX}?{QUERY_PARAMETERS}
+```
+
+Where {QUERY_PARAMETERS} may be one or more of the following:
+* `debug={BOOLEAN}`. A boolean value to configure the underlying OpenSearch client to write request and response bodies to STDOUT.
+* `insecure={BOOLEAN}`. A boolean value to disable TLS "InsecureSkipVerify" checks (for custom certificate authorities and the like).
+* `require-tls={BOOLEAN}`. A boolean value to ensure that all connections are made over HTTPS even if the OpenSearch port is not 443.
+* `username={STRING}`. The OpenSearch username for authenticated connections.
+* `password={STRING}`. The OpenSearch password for authenticated connections.
+* `aws-credentials-uri={STRING}`. A a valid `aaronland/go-aws-auth` URI used to create a Golang AWS authentication config used to sign requests to an AWS-hosted OpenSearch instance.
+* `bulk-index={BOOLEAN}`. A boolean value. If true then writes will be performed using a "bulk indexer". Default is true.
+* `workers={INT}`. The number of users to enable for bulk indexing. Default is 10.
+
+Where the value of the `client-uri` query parameter is a URL-escaped URI for instantiating a [opensearchapi.Client](https://pkg.go.dev/github.com/opensearch-project/opensearch-go/v4/opensearchapi#Client) instance using the [whosonfirst/go-whosonfirst-database/opensearch/client](https://github.com/whosonfirst/go-whosonfirst-database/tree/main/opensearch/client) package.
+
+For example to index all the data in the [whosonfirst-data/whosonfirst-data-admin-ca](#) repository in to an OpenSearch index named `spelunker`:
+
+```
+$> ./bin/wof-spelunker-index opensearch \
+	-create-index \
+	-client-uri 'opensearch://localhost:9200/whosonfirst?require-tls=true&username=admin&password=...' \
+	/usr/local/data/whosonfirst/whosonfirst-data-admin-ca
+```
+
+See [opensearch/README.md](../../opensearch/README.md) for details.
+
 ## Iterators
 
 Under the hood this tool is using the [whosonfirst/go-whosonfirst-iterate/v3](https://github.com/whosonfirst/go-whosonfirst-iterate) package to process all the Who's On First documents in a data source. That data source might be a local Who's On First data repository, a line-separated GeoJSON file or remote Who's On First data repository in the [whosonfirst-data](https://github.com/whosonfirst-data) organization. The `wof-spelunker-index` tool will work with any custom code that supports the `Iterator` interface:
@@ -92,92 +181,4 @@ func main() {
 
 _Error handling removed for the sake of brevity._
 
-## Examples
-
-### database/sql
-
-Index one or more Who's On First data sources in a `database/sql`-compatible Spelunker datastore.
-
-```
-$> ./bin/wof-spelunker-index sql -h
-  -database-uri string
-    	A URI in the form of 'sql://{DATABASE_SQL_ENGINE}?dsn={DATABASE_SQL_DSN}'. For example: sql://sqlite3?dsn=test.db
-  -iterator-uri string
-    	A valid whosonfirst/go-whosonfirst-iterate/v3.Iterator URI. Supported iterator URI schemes are: cwd://,directory://,featurecollection://,file://,filelist://,geojsonl://,null://,repo:// (default "repo://")
-  -optimize
-    	Attempt to optimize the database before closing connection (default true)
-  -processes int
-    	The number of concurrent processes to index data with (default 28)
-  -strict-alt-files
-    	Be strict when indexing alt geometries (default true)
-  -verbose
-    	Enable verbose (debug) logging
-```
-
-The `-database-uri` flag is expected to take the form of:
-
-```
-sql://{DATABASE_ENGINE}?dsn={DATABASE_ENGINE_DSN}
-```
-
-Where `{DATABASE_ENGINE}` is a registered (as in "imported") Go language [database/sql](https://pkg.go.dev/database/sql) driver name and `{DATABASE_ENGINE_DSN}` is a driver-specific DSN string for connecting to that database.
-
-See [sql/README.md](../../sql/README.md) for details.
-
-#### SQLite
-
-For example to index all the data in the [whosonfirst-data/whosonfirst-data-admin-ca](#) repository in to a SQLite database called `test.db`:
-
-```
-$> ./bin/wof-spelunker-index sql \
-	-database-uri 'sql://sqlite3?dsn=test.db' \
-	/usr/local/data/whosonfirst/whosonfirst-data-admin-ca/
-```
-
-### OpenSearch
-
-Index one or more Who's On First data sources in a OpenSearch-based Spelunker datastore.
-
-```
-$> ./bin/wof-spelunker-index opensearch -h
-  -create-index
-    	Create a new OpenSearch index before indexing records.
-  -forgiving
-    	 Be "forgiving" of failed writes, logging the issue(s) but not triggering errors. (default true)
-  -iterator-uri string
-    	A valid whosonfirst/go-whosonfirst-iterate/v3.Iterator URI. Supported iterator URI schemes are: cwd://,directory://,featurecollection://,file://,filelist://,geojsonl://,null://,repo:// (default "repo://")
-  -verbose
-    	Enable verbose (debug) logging
-  -database-uri string
-    	A valid whosonfirst/go-whosonfirst-database/opensearch/client URI in the form of "opensearch://{OPENSEARCH_HOST}:{OPENSEARCH_PORT}/{OPENSEARCH_INDEX}?{QUERY_PARAMETERS}".
-```
-
-The `-database-uri` flag is expected to take the form of:
-
-```
-opensearch://{OPENSEARCH_HOST}:{OPENSEARCH_PORT}/{OPENSEARCH_INDEX}?{QUERY_PARAMETERS}
-```
-
-Where {QUERY_PARAMETERS} may be one or more of the following:
-* `debug={BOOLEAN}`. A boolean value to configure the underlying OpenSearch client to write request and response bodies to STDOUT.
-* `insecure={BOOLEAN}`. A boolean value to disable TLS "InsecureSkipVerify" checks (for custom certificate authorities and the like).
-* `require-tls={BOOLEAN}`. A boolean value to ensure that all connections are made over HTTPS even if the OpenSearch port is not 443.
-* `username={STRING}`. The OpenSearch username for authenticated connections.
-* `password={STRING}`. The OpenSearch password for authenticated connections.
-* `aws-credentials-uri={STRING}`. A a valid `aaronland/go-aws-auth` URI used to create a Golang AWS authentication config used to sign requests to an AWS-hosted OpenSearch instance.
-* `bulk-index={BOOLEAN}`. A boolean value. If true then writes will be performed using a "bulk indexer". Default is true.
-* `workers={INT}`. The number of users to enable for bulk indexing. Default is 10.
-
-Where the value of the `client-uri` query parameter is a URL-escaped URI for instantiating a [opensearchapi.Client](https://pkg.go.dev/github.com/opensearch-project/opensearch-go/v4/opensearchapi#Client) instance using the [whosonfirst/go-whosonfirst-database/opensearch/client](https://github.com/whosonfirst/go-whosonfirst-database/tree/main/opensearch/client) package.
-
-For example to index all the data in the [whosonfirst-data/whosonfirst-data-admin-ca](#) repository in to an OpenSearch index named `spelunker`:
-
-```
-$> ./bin/wof-spelunker-index opensearch \
-	-create-index \
-	-database-uri 'opensearch://localhost:9200/whosonfirst?require-tls=true&username=admin&password=...' \
-	/usr/local/data/whosonfirst/whosonfirst-data-admin-ca
-```
-
-See [opensearch/README.md](../../opensearch/README.md) for details.
 

@@ -222,3 +222,5 @@ If you want to disable caching entirely, use the "null" cache implementation. Fo
 ```
 ?cache-uri=null://
 ```
+
+## Endpoints
