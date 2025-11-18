@@ -26,6 +26,11 @@ Valid options are:
     	A URI in the form of '{SPELUNKER_SCHEME}://{IMPLEMENTATION_DETAILS}' referencing the underlying Spelunker database. For example: sql://sqlite3?dsn=spelunker.db (default "null://")
 ```
 
+## Things the Spelunker web application does NOT do
+
+* It does not provide the ability to edit records. Most of the pieces to do that are available at this point but they have not been wired in to the Spelunker at this point.
+* It does not define any methods for querying spatial data. This _might_ be possible in a version "3" of the Spelunker but it's too soon to say righr now.
+
 ## Building
 
 The `wof-spelunker-httpd` depends on Go language build tags. The default `cli` Makefile target to compile command line tools build the `wof-spelunker-httpd` tool with support for all the database implementations included in this package. For example:
@@ -60,6 +65,10 @@ go build -mod vendor -tags="opensearch" -ldflags="-s -w" -o bin/wof-spelunker-ht
 | Postgres | `postgres` | Support for Postgres should probably still be considered "alpha" at best. |
 | SQLite | `sqlite3,icu,json1,fts5` | |
 | OpenSearch | `opensearch` | |
+
+## Indexing
+
+For details on indexing records in to the Spelunker web application please consult the documentation for the [wof-spelunker-index](../wof-spelunker-index) tool.
 
 ## Maps
 
@@ -154,4 +163,62 @@ See [opensearch/README.md](../../opensearch/README.md) for details.
 
 #### reader-uri
 
+The OpenSearch Spelunker implementation does not index Who's On First records in their entirety. Specifically geometries are excluded from the OpenSearch index with the goal of minimizing the overall size of the index. While that decision may change in future releases it is the way things work today.
+
+In order to account for the need to retrieve and display complete Who's On First GeoJSON Feature records the OpenSearch Spelunker implementation relies on the [whosonfirst/go-reader/v2.Reader](https://github.com/whosonfirst/go-reader) interface to do so. The interface is very simple:
+
+```
+// Reader is an interface for reading data from multiple sources or targets.
+type Reader interface {
+	// Reader returns a `io.ReadSeekCloser` instance for a URI resolved by the instance implementing the `Reader` interface.
+	Read(context.Context, string) (io.ReadSeekCloser, error)
+	// Exists returns a boolean value indicating whether a URI already exists.
+	Exists(context.Context, string) (bool, error)
+	// The absolute path for the file is determined by the instance implementing the `Reader` interface.
+	ReaderURI(context.Context, string) string
+}
+```
+
+And there are number of implementations allowing you to read records from files stored locally on disk, to files stored in GitHub, to files hosted from the `data.whosonfirst.org` website. For example:
+
+To read files from a Who's On First data repository on disk:
+
+```
+?reader-uri=repo:///path/to-whosonfirst-data-reposiroty
+```
+
+To read files from a Who's On First data repository hosted on the `data.whosonfirst.org` website:
+
+```
+?reader-uri=https://data.whosonfirst.org/geojson
+```
+
+To read files from a Who's On First data repository hosted on GitHub:
+
+```
+?reader-uri=URLESCAPE(github://whosonfirst-data/whosonfirst-data-admin-us?branch=master&prefix=data)
+```
+
+_See [whosonfirst/go-reader-github](https://github.com/whosonfirst/go-reader-github) for details._
+
+To read files from a Who's On First data repository hosted on GitHub deriving the name of the repository dynamically using a "finding aid":
+
+```
+?reader-uri=URLESCAPE(findingaid://https/data.whosonfirst.org/findingaid?template=https://raw.githubusercontent.com/whosonfirst-data/{repo}/master/data/)
+```
+
+_See [whosonfirst/go-reader-findingaid](https://github.com/whosonfirst/go-reader-findingaid) for details._
+
 #### cache-uri
+
+In order to minimize the number of requests to an external "reader" source the OpenSearch Spelunker implementation caches data using an implementation of the [whosonfirst-/go-cache](https://github.com/whosonfirst/go-cache) interface. While there are a number of implementations if you just want a reliable in-memory the easiest thing is to use the [whosonfirst/go-cache-ristretto](https://github.com/whosonfirst/go-cache-ristretto) implementation which is bundled with this package. For example:
+
+```
+?cache-uri=ristretto://
+```
+
+If you want to disable caching entirely, use the "null" cache implementation. For example:
+
+```
+?cache-uri=null://
+```

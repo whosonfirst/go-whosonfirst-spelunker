@@ -11,6 +11,9 @@ import (
 	"strings"
 	"time"
 
+	_ "github.com/whosonfirst/go-reader-findingaid/v2"
+	_ "github.com/whosonfirst/go-reader-github/v2"
+
 	"github.com/aaronland/go-pagination"
 	"github.com/aaronland/go-pagination/countable"
 	"github.com/aaronland/go-pagination/cursor"

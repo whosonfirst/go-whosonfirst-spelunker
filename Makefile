@@ -38,7 +38,7 @@ OS_PSWD=dkjfhsjdkfkjdjhksfhskd98475kjHkzjxckj
 OS_CACHE_URI=ristretto://
 OS_ENC_CACHE_URI=$(shell $(URLESCAPE) $(OS_CACHE_URI))
 
-OS_READER_URI=https://data.whosonfirst.org
+OS_READER_URI=https://data.whosonfirst.org/geojson
 OS_ENC_READER_URI=$(shell $(URLESCAPE) $(OS_READER_URI))
 
 OS_CLIENT_URI=localhost:9200/spelunker?username=admin&password=$(OS_PSWD)&insecure=true&require-tls=true
