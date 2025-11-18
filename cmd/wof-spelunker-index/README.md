@@ -46,6 +46,52 @@ go build -mod vendor -tags="opensearch" -ldflags="-s -w" -o bin/wof-spelunker-in
 | SQLite | `sqlite3,icu,json1,fts5` | |
 | OpenSearch | `opensearch` | |
 
+## Iterators
+
+Under the hood this tool is using the [whosonfirst/go-whosonfirst-iterate/v3](https://github.com/whosonfirst/go-whosonfirst-iterate) package to process all the Who's On First documents in a data source. That data source might be a local Who's On First data repository, a line-separated GeoJSON file or remote Who's On First data repository in the [whosonfirst-data](https://github.com/whosonfirst-data) organization. The `wof-spelunker-index` tool will work with any custom code that supports the `Iterator` interface:
+
+```
+// Iterator defines an interface for iterating through collections  of Who's On First documents.
+type Iterator interface {
+	// Iterate will return an `iter.Seq2[*Record, error]` for each record encountered in one or more URIs.
+	Iterate(context.Context, ...string) iter.Seq2[*Record, error]
+	// Seen() returns the total number of records processed so far.
+	Seen() int64
+	// IsIterating() returns a boolean value indicating whether 'it' is still processing documents.
+	IsIterating() bool
+	// Close performs any implementation specific tasks before terminating the iterator.
+	Close() error
+}
+```
+
+The `wof-spelunker-index` tool automatically supports [all the implementations provided by the `go-whosonfirst-iterate` package](https://github.com/whosonfirst/go-whosonfirst-iterate?tab=readme-ov-file#iterators) as well as the Git and GitHub API implementations provided by the [go-whosonfirst-iterate-git](https://github.com/whosonfirst/go-whosonfirst-iterate-git) package.
+
+### Custom iterators
+
+Implementing support for a custom iterator involves two steps:
+
+1. Define a Go package implementing the `Iterator` interface and make sure to call the `IteratorSpelunker` method in your package's `init` function. For a "starter" example consult the [NullIterator](https://github.com/whosonfirst/go-whosonfirst-iterate/blob/main/null.go) implementation.
+2. Clone the `wof-spelunker-index` tool in the [cmd](cmd) folder and import your custom package. All the Spelunker command-line tools are broken in to two pieces: The guts of the application code live in the [app](app) package which is then invoked in command-line tools exported in the [cmd](cmd) package. The goal is to make extending any given tool possible with a minimum of "time and typing".
+
+For example, this is what the code to extend the ([cmd/wof-spelunker-index](cmd/wof-spelunker-index)) to use a custom iterator implementation would look like:
+
+```
+import (
+        "context"
+        "log"
+	
+        "github.com/whosonfirst/go-whosonfirst-spelunker/app/index"
+        _ "github.com/YOUR_ORG/go-whosonfirst-spelunker-CUSTOM_ITERATOR"	
+)
+
+func main() {
+        ctx := context.Background()
+        index.Run(ctx)
+}
+```
+
+_Error handling removed for the sake of brevity._
+
 ## Examples
 
 ### database/sql

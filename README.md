@@ -2,6 +2,32 @@
 
 Go package implementing tools and a common interface for querying (or "spelunking") an index Who's On First data.
 
+## tl;dr
+
+Step 1: Index the Who's On First data for Canada reading that data directly from the [whosonfirst-data/whosonfirst-data-admin-ca](https://github.com/whosonfirst-data/whosonfirst-data-admin-ca) repository. Store that index in a SQLite database named `test-git.db`.
+
+```
+$> ./bin/wof-spelunker-index sql \
+	-iterator-uri git:///tmp \
+	-database-uri 'sql://sqlite3?dsn=test-git.db' \
+	https://github.com/whosonfirst-data/whosonfirst-data-admin-ca
+	
+2025/11/18 08:40:06 INFO Iterator stats elapsed=1m0.000177375s seen=0 allocated="31 MB" "total allocated"="133 MB" sys="45 MB" numgc=27
+...
+2025/11/18 08:43:28 INFO Iterator stats elapsed=4m22.136140208s seen=33845 allocated="8.5 MB" "total allocated"="31 GB" sys="763 MB" numgc=268
+```
+
+Step 2: Launch the Spelunker web application for the data stored in the `test-git.db` SQLite database.
+
+```
+$> ./bin/wof-spelunker-httpd \
+-spelunker-uri 'sql://sqlite3?dsn=test-git.db'
+
+2025/11/18 08:44:42 INFO Listening for requests address=http://localhost:8080
+```
+
+That's it. Happy spelunking.
+
 ## Motivation
 
 This is a refactoring of both the [whosonfirst/whosonfirst-www-spelunker](github.com/whosonfirst/whosonfirst-www-spelunker) and [whosonfirst/go-whosonfirst-browser](github.com/whosonfirst/go-whosonfirst-browser) packages.
