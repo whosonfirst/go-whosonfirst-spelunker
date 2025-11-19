@@ -13,6 +13,7 @@ type Concordance struct {
 }
 
 // NewConcordanceFromString derives a new `Concordance` instance from 'str_concordance' which is expected to take the form of:
+//
 //	{NAMESPACE}:{PREDICATE}={VALUE}
 func NewConcordanceFromString(str_concordance string) (*Concordance, error) {
 	return nil, ErrNotImplemented

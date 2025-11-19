@@ -11,6 +11,7 @@ import (
 //go:embed *.golang
 var FS embed.FS
 
+// LoadTemplates instantiates ".golang" templates.
 func LoadTemplates(ctx context.Context) (*template.Template, error) {
 
 	return sfomuseum_text.LoadTemplatesMatching(ctx, "*.golang", FS)

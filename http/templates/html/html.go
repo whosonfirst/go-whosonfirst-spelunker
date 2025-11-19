@@ -11,6 +11,7 @@ import (
 //go:embed *.html
 var FS embed.FS
 
+// LoadTemplates instantiates ".html" templates.
 func LoadTemplates(ctx context.Context) (*template.Template, error) {
 
 	return sfomuseum_html.LoadTemplates(ctx, FS)

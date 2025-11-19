@@ -14,6 +14,7 @@ import (
 	wof_http "github.com/whosonfirst/go-whosonfirst/http"
 )
 
+// PaginationOptionsFromRequests derives a new `pagination.Options` instance from query parameters present in 'req'.
 func PaginationOptionsFromRequest(req *go_http.Request) (pagination.Options, error) {
 
 	q_cursor, err := sanitize.GetString(req, "cursor")
@@ -54,6 +55,7 @@ func PaginationOptionsFromRequest(req *go_http.Request) (pagination.Options, err
 	return pg_opts, nil
 }
 
+// ParsePageNumberFromRequest derives a pagination page number from the 'page' query parameter in 'req'.
 func ParsePageNumberFromRequest(req *go_http.Request) (int64, error) {
 
 	page, err := sanitize.GetInt64(req, "page")

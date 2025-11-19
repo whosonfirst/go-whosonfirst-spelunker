@@ -10,6 +10,7 @@ import (
 	"github.com/whosonfirst/go-whosonfirst-spelunker/v2"
 )
 
+// URIs is a struct for defining paths (URIs) for specific Spelunker web application endpoints.
 type URIs struct {
 	// WWW/human-readable
 	Id                string   `json:"id"`
@@ -63,35 +64,7 @@ type URIs struct {
 	RootURL string `json:"root_url"`
 }
 
-func (u *URIs) ApplyPrefix(prefix string) error {
-
-	val := reflect.ValueOf(*u)
-
-	for i := 0; i < val.NumField(); i++ {
-
-		field := val.Field(i)
-		v := field.String()
-
-		if v == "" {
-			continue
-		}
-
-		if strings.HasPrefix(v, prefix) {
-			continue
-		}
-
-		new_v, err := url.JoinPath(prefix, v)
-
-		if err != nil {
-			return fmt.Errorf("Failed to assign prefix to %s, %w", v, err)
-		}
-
-		reflect.ValueOf(u).Elem().Field(i).SetString(new_v)
-	}
-
-	return nil
-}
-
+// DefaultURIs returns a `URIs` struct with default values for Spelunker web application endpoint paths (URIs).
 func DefaultURIs() *URIs {
 
 	// Note that the default path for ID-related URIs is "/id/{id}/foo"
@@ -172,6 +145,7 @@ func DefaultURIs() *URIs {
 	return uris_table
 }
 
+// Abs returns the fully-qualified URI for 'path'.
 func (uris_table *URIs) Abs(path string) (string, error) {
 
 	root_u, err := url.Parse(uris_table.RootURL)
@@ -189,36 +163,36 @@ func (uris_table *URIs) Abs(path string) (string, error) {
 }
 
 func URIForIdSimple(uri string, id int64) string {
-	id_uri := ReplaceAll(uri, "{id}", id)
+	id_uri := replaceAll(uri, "{id}", id)
 	return uriWithFilters(id_uri, nil, nil)
 }
 
 func URIForId(uri string, id int64, filters []spelunker.Filter, facets []spelunker.Facet) string {
 
-	id_uri := ReplaceAll(uri, "{id}", id)
+	id_uri := replaceAll(uri, "{id}", id)
 	return uriWithFilters(id_uri, filters, facets)
 }
 
 func URIForPlacetype(uri string, pt string, filters []spelunker.Filter, facets []spelunker.Facet) string {
 
-	pt_uri := ReplaceAll(uri, "{placetype}", pt)
+	pt_uri := replaceAll(uri, "{placetype}", pt)
 	return uriWithFilters(pt_uri, filters, facets)
 }
 
 func URIForRecentSimple(uri string, d string) string {
-	r_uri := ReplaceAll(uri, "{duration}", d)
+	r_uri := replaceAll(uri, "{duration}", d)
 	return uriWithFilters(r_uri, nil, nil)
 }
 
 func URIForRecent(uri string, d string, filters []spelunker.Filter, facets []spelunker.Facet) string {
 
-	r_uri := ReplaceAll(uri, "{duration}", d)
+	r_uri := replaceAll(uri, "{duration}", d)
 	return uriWithFilters(r_uri, filters, facets)
 }
 
 func URIForConcordanceNS(uri string, ns string, filters []spelunker.Filter, facets []spelunker.Facet) string {
 
-	c_uri := ReplaceAll(uri, "{namespace}", ns)
+	c_uri := replaceAll(uri, "{namespace}", ns)
 	return uriWithFilters(c_uri, filters, facets)
 }
 
@@ -226,8 +200,8 @@ func URIForConcordanceNSPred(uri string, ns string, pred string, filters []spelu
 
 	c_uri := uri
 
-	c_uri = ReplaceAll(c_uri, "{namespace}", ns)
-	c_uri = ReplaceAll(c_uri, "{predicate}", pred)
+	c_uri = replaceAll(c_uri, "{namespace}", ns)
+	c_uri = replaceAll(c_uri, "{predicate}", pred)
 	return uriWithFilters(c_uri, filters, facets)
 }
 
@@ -235,9 +209,9 @@ func URIForConcordanceTriple(uri string, ns string, pred string, value any, filt
 
 	c_uri := uri
 
-	c_uri = ReplaceAll(c_uri, "{namespace}", ns)
-	c_uri = ReplaceAll(c_uri, "{predicate}", pred)
-	c_uri = ReplaceAll(c_uri, "{value}", value)
+	c_uri = replaceAll(c_uri, "{namespace}", ns)
+	c_uri = replaceAll(c_uri, "{predicate}", pred)
+	c_uri = replaceAll(c_uri, "{value}", value)
 	return uriWithFilters(c_uri, filters, facets)
 }
 
@@ -276,7 +250,37 @@ func uriWithFilters(uri string, filters []spelunker.Filter, facets []spelunker.F
 	return u.String()
 }
 
-func ReplaceAll(input string, pattern string, value any) string {
+func replaceAll(input string, pattern string, value any) string {
 	str_value := fmt.Sprintf("%v", value)
 	return strings.Replace(input, pattern, str_value, -1)
 }
+
+func (u *URIs) applyPrefix(prefix string) error {
+
+	val := reflect.ValueOf(*u)
+
+	for i := 0; i < val.NumField(); i++ {
+
+		field := val.Field(i)
+		v := field.String()
+
+		if v == "" {
+			continue
+		}
+
+		if strings.HasPrefix(v, prefix) {
+			continue
+		}
+
+		new_v, err := url.JoinPath(prefix, v)
+
+		if err != nil {
+			return fmt.Errorf("Failed to assign prefix to %s, %w", v, err)
+		}
+
+		reflect.ValueOf(u).Elem().Field(i).SetString(new_v)
+	}
+
+	return nil
+}
+

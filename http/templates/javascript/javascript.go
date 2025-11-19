@@ -11,6 +11,7 @@ import (
 //go:embed *.js
 var FS embed.FS
 
+// LoadTemplates instantiates ".js" templates.
 func LoadTemplates(ctx context.Context) (*template.Template, error) {
 
 	return sfomuseum_text.LoadTemplatesMatching(ctx, "*.js", FS)

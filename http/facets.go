@@ -9,6 +9,7 @@ import (
 	"github.com/whosonfirst/go-whosonfirst-spelunker/v2"
 )
 
+// FiltersFromRequest derives faceting criteria from 'req' for query parameters matching 'params'.
 func FacetsFromRequest(ctx context.Context, req *http.Request, params []string) ([]*spelunker.Facet, error) {
 
 	// TBD...

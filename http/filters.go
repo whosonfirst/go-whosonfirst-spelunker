@@ -9,8 +9,13 @@ import (
 	"github.com/whosonfirst/go-whosonfirst-spelunker/v2"
 )
 
+// DefaultFilterParams returns the default list of query parameters to examine for filtering criteria.
 func DefaultFilterParams() []string {
 
+	// Note that this should be derived on the fly based on "registered" filters.
+	// This also means updating all the Filter stuff to use aaronland/go-roster
+	// which hasn't happened yet.
+	
 	return []string{
 		"placetype",
 		"country",
@@ -20,6 +25,7 @@ func DefaultFilterParams() []string {
 	}
 }
 
+// FiltersFromRequest derives filtering criteria from 'req' for query parameters matching 'params'.
 func FiltersFromRequest(ctx context.Context, req *http.Request, params []string) ([]spelunker.Filter, error) {
 
 	filters := make([]spelunker.Filter, 0)
