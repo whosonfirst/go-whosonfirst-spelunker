@@ -19,6 +19,8 @@ $> ./bin/wof-spelunker-index sql \
 2025/11/18 08:43:28 INFO Iterator stats elapsed=4m22.136140208s seen=33845 allocated="8.5 MB" "total allocated"="31 GB" sys="763 MB" numgc=268
 ```
 
+_Note: You can specify more than one repo to index._
+
 Step 2: Launch the Spelunker web application for the data stored in the `test-git.db` SQLite database.
 
 ```
@@ -28,7 +30,7 @@ $> ./bin/wof-spelunker-httpd \
 2025/11/18 08:44:42 INFO Listening for requests address=http://localhost:8080
 ```
 
-That's it. Happy spelunking.
+That's it. Point your web browser at `http://localhost:8080` and happy spelunking.
 
 ## Tools
 
