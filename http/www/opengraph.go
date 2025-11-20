@@ -1,5 +1,7 @@
 package www
 
+// NOTE: This will eventually be replaced by aaronland/go-http/v4/opengraph
+
 // https://ogp.me/
 
 // OpenGraph describes a struct containing OpenGraph metadata to pass down to

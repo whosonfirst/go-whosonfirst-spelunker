@@ -15,7 +15,8 @@ type TemplateHandlerOptions struct {
 	Templates     *template.Template
 	TemplateName  string
 	PageTitle     string
-	URIs          *wof_http.URIs
+	// URIs are the `wof_http.URIs` details for this Spelunker instance.
+	URIs *wof_http.URIs
 }
 
 type templateHandlerVars struct {

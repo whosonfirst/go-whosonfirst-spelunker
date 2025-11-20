@@ -11,7 +11,7 @@ import (
 
 // FindingAidHandlerOptions defines options for invoking the `FindingAidHandler` method.
 type FindingAidHandlerOptions struct {
-	// An instance implemeting the `spelunker.Spelunker` interface.	
+	// An instance implemeting the `spelunker.Spelunker` interface.
 	Spelunker spelunker.Spelunker
 }
 

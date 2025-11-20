@@ -18,18 +18,20 @@ import (
 )
 
 type RecentHandlerOptions struct {
+	// An instance implemeting the `spelunker.Spelunker` interface.
 	Spelunker     spelunker.Spelunker
 	Authenticator auth.Authenticator
 	Templates     *template.Template
-	URIs          *wof_http.URIs
+	// URIs are the `wof_http.URIs` details for this Spelunker instance.
+	URIs *wof_http.URIs
 }
 
 type recentHandlerVars struct {
-	PageTitle     string
-	URIs          *wof_http.URIs
-	Places        []spr.StandardPlacesResult
-	Pagination    pagination.Results
-	PaginationURL string
+	PageTitle        string
+	URIs             *wof_http.URIs
+	Places           []spr.StandardPlacesResult
+	Pagination       pagination.Results
+	PaginationURL    string
 	Duration         *duration.Duration
 	Since            string
 	FacetsURL        string
@@ -125,10 +127,10 @@ func RecentHandler(opts *RecentHandlerOptions) (http.Handler, error) {
 		since := humanize.RelTime(now, then, "", "")
 
 		vars := recentHandlerVars{
-			Places:        r.Results(),
-			Pagination:    pg_r,
-			URIs:          opts.URIs,
-			PaginationURL: pagination_url,
+			Places:           r.Results(),
+			Pagination:       pg_r,
+			URIs:             opts.URIs,
+			PaginationURL:    pagination_url,
 			Duration:         d,
 			Since:            since,
 			FacetsURL:        facets_url,

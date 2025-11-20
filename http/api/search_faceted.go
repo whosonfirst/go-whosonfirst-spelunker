@@ -6,7 +6,7 @@ import (
 
 	// TBD...
 	// "github.com/aaronland/go-http/v4/auth"
-	
+
 	"github.com/aaronland/go-http/v4/sanitize"
 	"github.com/aaronland/go-http/v4/slog"
 	"github.com/whosonfirst/go-whosonfirst-spelunker/v2"
@@ -15,7 +15,7 @@ import (
 
 // SearchFacetedHandlerOptions defines options for invoking the `SearchFacetedHandler` method.
 type SearchFacetedHandlerOptions struct {
-	// An instance implemeting the `spelunker.Spelunker` interface.	
+	// An instance implemeting the `spelunker.Spelunker` interface.
 	Spelunker spelunker.Spelunker
 	// Authenticator auth.Authenticator
 }

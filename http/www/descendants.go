@@ -16,10 +16,12 @@ import (
 )
 
 type DescendantsHandlerOptions struct {
+	// An instance implemeting the `spelunker.Spelunker` interface.
 	Spelunker     spelunker.Spelunker
 	Authenticator auth.Authenticator
 	Templates     *template.Template
-	URIs          *sp_http.URIs
+	// URIs are the `wof_http.URIs` details for this Spelunker instance.
+	URIs *sp_http.URIs
 }
 
 type descendantsHandlerVars struct {

@@ -18,10 +18,12 @@ import (
 )
 
 type SearchHandlerOptions struct {
+	// An instance implemeting the `spelunker.Spelunker` interface.
 	Spelunker     spelunker.Spelunker
 	Authenticator auth.Authenticator
 	Templates     *template.Template
-	URIs          *wof_http.URIs
+	// URIs are the `wof_http.URIs` details for this Spelunker instance.
+	URIs *wof_http.URIs
 }
 
 type searchHandlerVars struct {

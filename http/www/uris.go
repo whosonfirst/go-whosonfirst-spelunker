@@ -15,7 +15,7 @@ type URIsJSHandlerOptions struct {
 	// Templates are a `text/template` instance containing the "whosonfirst_spelunker_uris" template.
 	Templates *template.Template
 	// URIs are the `wof_http.URIs` details for this Spelunker instance.
-	URIs      *wof_http.URIs
+	URIs *wof_http.URIs
 }
 
 type urisJSVars struct {

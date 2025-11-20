@@ -6,7 +6,7 @@ import (
 
 	// TBD
 	// "github.com/aaronland/go-http/v4/auth"
-	
+
 	"github.com/aaronland/go-http/v4/slog"
 	"github.com/whosonfirst/go-whosonfirst-spelunker/v2"
 	sp_http "github.com/whosonfirst/go-whosonfirst-spelunker/v2/http"
@@ -14,7 +14,7 @@ import (
 
 // NullIslandFacetedHandlerOptions defines options for invoking the `NullIslandFacetedHandler` method.
 type NullIslandFacetedHandlerOptions struct {
-	// An instance implemeting the `spelunker.Spelunker` interface.	
+	// An instance implemeting the `spelunker.Spelunker` interface.
 	Spelunker spelunker.Spelunker
 	// Authenticator auth.Authenticator
 }
