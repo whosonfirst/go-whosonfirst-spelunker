@@ -35,6 +35,10 @@ sp, _ := spelunker.NewSpelunker(context.Background(), "sql://sqlite3?dsn=example
 
 _Note how the code does NOT import any specific `database/sql` implementation. That is expected to be handled by build tags (described above)._
 
+## Things the `database/sql` Spelunker implementation does NOT do yet
+
+* The `database/sql` Spelunker does not implement any of the tag-related methods (`GetTags`, `HasTag`, `HasTagFaceted`) yet.
+
 ## Database schema(s)
 
 Database table schemas used by the `SQLSpelunker` implementation are defined in the [whosonfirst/go-whosonfirst-database/sql/tables](https://github.com/whosonfirst/go-whosonfirst-database/tree/main/sql/tables) package.

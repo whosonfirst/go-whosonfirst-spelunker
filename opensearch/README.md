@@ -76,6 +76,10 @@ go run -tags opensearch -mod vendor ./cmd/wof-spelunker-httpd/main.go \
 
 _Note: The value of the `-spelunker-uri` flag is NOT the same as the "client-uri" URI used to connect to OpenSearch. Specifically, the "client-uri" URI is encoded as a query parameter of the `-spelunker-uri` flag. There are additional OpenSearch-implementation-specific flags (`cache-uri` and `reader-uri`). Consult the [cmd/wof-spelunker-httpd documentation](../cmd/wof-spelunker-httpd) for details._
 
+## Things the `opensearch` Spelunker implementation does NOT do yet
+
+* The `opensearch` Spelunker does not implement any of the tag-related methods (`GetTags`, `HasTag`, `HasTagFaceted`) yet.
+
 ## Database schema(s)
 
 Database schemas (mappings) used by the `OpenSearchSpelunker` implementation are defined in the [whosonfirst/go-whosonfirst-database/opensearch/schema/v2](https://github.com/whosonfirst/go-whosonfirst-database/tree/main/opensearch/schema/v2) package.
