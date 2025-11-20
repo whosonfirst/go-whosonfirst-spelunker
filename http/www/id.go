@@ -30,7 +30,7 @@ type IdHandlerAncestor struct {
 	Id        int64
 }
 
-type IdHandlerVars struct {
+type idHandlerVars struct {
 	Id               int64
 	RequestId        string
 	URIArgs          *uri.URIArgs
@@ -120,7 +120,7 @@ func IdHandler(opts *IdHandlerOptions) (http.Handler, error) {
 
 		github_url := fmt.Sprintf("https://github.com/whosonfirst-data/%s/blob/master/data/%s", repo_name, rel_path)
 
-		vars := IdHandlerVars{
+		vars := idHandlerVars{
 			Id:         wof_id,
 			RequestId:  req_id,
 			URIArgs:    req_uri.URIArgs,

@@ -24,7 +24,7 @@ type SearchHandlerOptions struct {
 	URIs          *wof_http.URIs
 }
 
-type SearchHandlerVars struct {
+type searchHandlerVars struct {
 	PageTitle        string
 	URIs             *wof_http.URIs
 	Places           []spr.StandardPlacesResult
@@ -62,7 +62,7 @@ func SearchHandler(opts *SearchHandlerOptions) (http.Handler, error) {
 		ctx := req.Context()
 		logger := slog.LoggerWithRequest(req, nil)
 
-		vars := SearchHandlerVars{
+		vars := searchHandlerVars{
 			URIs:      opts.URIs,
 			PageTitle: "Search",
 		}

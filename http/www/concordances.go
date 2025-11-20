@@ -18,7 +18,7 @@ type ConcordancesHandlerOptions struct {
 	URIs          *wof_http.URIs
 }
 
-type ConcordancesHandlerVars struct {
+type concordancesHandlerVars struct {
 	PageTitle string
 	URIs      *wof_http.URIs
 	Facets    []*spelunker.FacetCount
@@ -46,7 +46,7 @@ func ConcordancesHandler(opts *ConcordancesHandlerOptions) (http.Handler, error)
 			return
 		}
 
-		vars := ConcordancesHandlerVars{
+		vars := concordancesHandlerVars{
 			PageTitle: "Concordances",
 			URIs:      opts.URIs,
 			Facets:    faceting.Results,

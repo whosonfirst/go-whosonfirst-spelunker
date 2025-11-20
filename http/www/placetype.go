@@ -22,7 +22,7 @@ type HasPlacetypeHandlerOptions struct {
 	URIs          *wof_http.URIs
 }
 
-type HasPlacetypeHandlerVars struct {
+type hasPlacetypeHandlerVars struct {
 	PageTitle        string
 	URIs             *wof_http.URIs
 	Placetype        *placetypes.WOFPlacetype
@@ -91,7 +91,7 @@ func HasPlacetypeHandler(opts *HasPlacetypeHandlerOptions) (http.Handler, error)
 		facets_url := wof_http.URIForPlacetype(opts.URIs.PlacetypeFaceted, pt.Name, filters, nil)
 		facets_context_url := req.URL.Path
 
-		vars := HasPlacetypeHandlerVars{
+		vars := hasPlacetypeHandlerVars{
 			PageTitle:        pt.Name,
 			URIs:             opts.URIs,
 			Placetype:        pt,

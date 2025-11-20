@@ -18,7 +18,7 @@ type PlacetypesHandlerOptions struct {
 	URIs          *wof_http.URIs
 }
 
-type PlacetypesHandlerVars struct {
+type placetypesHandlerVars struct {
 	PageTitle string
 	URIs      *wof_http.URIs
 	Facets    []*spelunker.FacetCount
@@ -46,7 +46,7 @@ func PlacetypesHandler(opts *PlacetypesHandlerOptions) (http.Handler, error) {
 			return
 		}
 
-		vars := PlacetypesHandlerVars{
+		vars := placetypesHandlerVars{
 			PageTitle: "Placetypes",
 			URIs:      opts.URIs,
 			Facets:    faceting.Results,

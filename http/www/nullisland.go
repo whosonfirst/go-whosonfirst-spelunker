@@ -20,7 +20,7 @@ type NullIslandHandlerOptions struct {
 	URIs          *wof_http.URIs
 }
 
-type NullIslandHandlerVars struct {
+type nullIslandHandlerVars struct {
 	PageTitle        string
 	URIs             *wof_http.URIs
 	Places           []spr.StandardPlacesResult
@@ -77,7 +77,7 @@ func NullIslandHandler(opts *NullIslandHandlerOptions) (http.Handler, error) {
 		facets_url := wof_http.URIForNullIsland(opts.URIs.NullIslandFaceted, filters, nil)
 		facets_context_url := pagination_url
 
-		vars := NullIslandHandlerVars{
+		vars := nullIslandHandlerVars{
 			Places:           r.Results(),
 			Pagination:       pg_r,
 			URIs:             opts.URIs,

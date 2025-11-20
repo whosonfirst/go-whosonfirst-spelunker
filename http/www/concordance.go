@@ -22,7 +22,7 @@ type HasConcordanceHandlerOptions struct {
 	URIs          *wof_http.URIs
 }
 
-type HasConcordanceHandlerVars struct {
+type hasConcordanceHandlerVars struct {
 	PageTitle        string
 	URIs             *wof_http.URIs
 	Concordance      *spelunker.Concordance
@@ -147,7 +147,7 @@ func HasConcordanceHandler(opts *HasConcordanceHandlerOptions) (http.Handler, er
 
 		facets_context_url = req.URL.Path
 
-		vars := HasConcordanceHandlerVars{
+		vars := hasConcordanceHandlerVars{
 			PageTitle:        page_title,
 			URIs:             opts.URIs,
 			Concordance:      c,

@@ -22,7 +22,7 @@ type DescendantsHandlerOptions struct {
 	URIs          *sp_http.URIs
 }
 
-type DescendantsHandlerVars struct {
+type descendantsHandlerVars struct {
 	PageTitle        string
 	Id               int64
 	URIs             *sp_http.URIs
@@ -95,7 +95,7 @@ func DescendantsHandler(opts *DescendantsHandlerOptions) (http.Handler, error) {
 		facets_url := sp_http.URIForId(opts.URIs.DescendantsFaceted, uri.Id, filters, nil)
 		facets_context_url := pagination_url
 
-		vars := DescendantsHandlerVars{
+		vars := descendantsHandlerVars{
 			Id:               uri.Id,
 			Places:           r.Results(),
 			Pagination:       pg_r,

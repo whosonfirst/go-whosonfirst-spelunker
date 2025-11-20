@@ -18,7 +18,7 @@ type TemplateHandlerOptions struct {
 	URIs          *wof_http.URIs
 }
 
-type TemplateHandlerVars struct {
+type templateHandlerVars struct {
 	Id         int64
 	PageTitle  string
 	URIs       *wof_http.URIs
@@ -38,7 +38,7 @@ func TemplateHandler(opts *TemplateHandlerOptions) (http.Handler, error) {
 
 		logger := slog.LoggerWithRequest(req, nil)
 
-		vars := TemplateHandlerVars{
+		vars := templateHandlerVars{
 			PageTitle: opts.PageTitle,
 			URIs:      opts.URIs,
 		}

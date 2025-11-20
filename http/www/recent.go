@@ -24,13 +24,12 @@ type RecentHandlerOptions struct {
 	URIs          *wof_http.URIs
 }
 
-type RecentHandlerVars struct {
+type recentHandlerVars struct {
 	PageTitle     string
 	URIs          *wof_http.URIs
 	Places        []spr.StandardPlacesResult
 	Pagination    pagination.Results
 	PaginationURL string
-	// Duration         time.Duration
 	Duration         *duration.Duration
 	Since            string
 	FacetsURL        string
@@ -125,12 +124,11 @@ func RecentHandler(opts *RecentHandlerOptions) (http.Handler, error) {
 
 		since := humanize.RelTime(now, then, "", "")
 
-		vars := RecentHandlerVars{
+		vars := recentHandlerVars{
 			Places:        r.Results(),
 			Pagination:    pg_r,
 			URIs:          opts.URIs,
 			PaginationURL: pagination_url,
-			// Duration:         d.ToDuration(),
 			Duration:         d,
 			Since:            since,
 			FacetsURL:        facets_url,
