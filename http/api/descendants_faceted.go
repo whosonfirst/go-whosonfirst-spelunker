@@ -6,18 +6,22 @@ import (
 
 	// TBD...
 	// "github.com/aaronland/go-http/v4/auth"
+	
 	"github.com/aaronland/go-http/v4/slog"
 	"github.com/whosonfirst/go-whosonfirst-spelunker/v2"
 	sp_http "github.com/whosonfirst/go-whosonfirst-spelunker/v2/http"
 	wof_http "github.com/whosonfirst/go-whosonfirst/http"
 )
 
+// DescendantsFacetedHandlerOptions defines options for invoking the `DescendantsFacetedHandler` method.
 type DescendantsFacetedHandlerOptions struct {
+	// An instance implemeting the `spelunker.Spelunker` interface.	
 	Spelunker spelunker.Spelunker
 	// TBD...
 	// Authenticator auth.Authenticator
 }
 
+// HasConcordanceFacetedHandler returns an `http.Handler` for returning faceted results for a descendants of a given Who's On First record.
 func DescendantsFacetedHandler(opts *DescendantsFacetedHandlerOptions) (http.Handler, error) {
 
 	fn := func(rsp http.ResponseWriter, req *http.Request) {

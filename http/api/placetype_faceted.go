@@ -6,18 +6,22 @@ import (
 
 	// TBD...
 	// "github.com/aaronland/go-http/v4/auth"
+	
 	"github.com/aaronland/go-http/v4/slog"
 	"github.com/whosonfirst/go-whosonfirst-placetypes"
 	"github.com/whosonfirst/go-whosonfirst-spelunker/v2"
 	sp_http "github.com/whosonfirst/go-whosonfirst-spelunker/v2/http"
 )
 
+// PlacetypeFacetedHandlerOptions defines options for invoking the `PlacetypeFacetedHandler` method.
 type PlacetypeFacetedHandlerOptions struct {
+	// An instance implemeting the `spelunker.Spelunker` interface.	
 	Spelunker spelunker.Spelunker
 	// TBD...
 	// Authenticator auth.Authenticator
 }
 
+// PlacetypeFacetedHandler returns an `http.Handler` for returning faceted results for records with a given placetype.
 func PlacetypeFacetedHandler(opts *PlacetypeFacetedHandlerOptions) (http.Handler, error) {
 
 	fn := func(rsp http.ResponseWriter, req *http.Request) {

@@ -9,10 +9,13 @@ import (
 	wof_http "github.com/whosonfirst/go-whosonfirst/http"
 )
 
+// FindingAidHandlerOptions defines options for invoking the `FindingAidHandler` method.
 type FindingAidHandlerOptions struct {
+	// An instance implemeting the `spelunker.Spelunker` interface.	
 	Spelunker spelunker.Spelunker
 }
 
+// FindingAidHandler returns an `http.Handler` for deriving the Who's On First repository for a given record.
 func FindingAidHandler(opts *FindingAidHandlerOptions) (http.Handler, error) {
 
 	fn := func(rsp http.ResponseWriter, req *http.Request) {

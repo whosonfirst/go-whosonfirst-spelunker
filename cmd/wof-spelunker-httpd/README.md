@@ -30,6 +30,7 @@ Valid options are:
 
 * It does not provide the ability to edit records. Most of the pieces to do that are available at this point but they have not been wired in to the Spelunker at this point.
 * It does not define any methods for querying spatial data. This _might_ be possible in a version "3" of the Spelunker but it's too soon to say righr now.
+* It does not provide any kind of authentication or authorization mechanism. Yet.
 
 ## Building
 

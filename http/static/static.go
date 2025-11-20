@@ -1,3 +1,4 @@
+// Package static provides methods for working with static assets.
 package static
 
 import (

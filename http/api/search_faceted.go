@@ -4,18 +4,23 @@ import (
 	"encoding/json"
 	"net/http"
 
-	"github.com/aaronland/go-http/v4/sanitize"
+	// TBD...
 	// "github.com/aaronland/go-http/v4/auth"
+	
+	"github.com/aaronland/go-http/v4/sanitize"
 	"github.com/aaronland/go-http/v4/slog"
 	"github.com/whosonfirst/go-whosonfirst-spelunker/v2"
 	sp_http "github.com/whosonfirst/go-whosonfirst-spelunker/v2/http"
 )
 
+// SearchFacetedHandlerOptions defines options for invoking the `SearchFacetedHandler` method.
 type SearchFacetedHandlerOptions struct {
+	// An instance implemeting the `spelunker.Spelunker` interface.	
 	Spelunker spelunker.Spelunker
 	// Authenticator auth.Authenticator
 }
 
+// SearchFacetedHandler returns an `http.Handler` for returning faceted results for a search query.
 func SearchFacetedHandler(opts *SearchFacetedHandlerOptions) (http.Handler, error) {
 
 	fn := func(rsp http.ResponseWriter, req *http.Request) {

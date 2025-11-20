@@ -6,18 +6,23 @@ import (
 	"net/http"
 	"regexp"
 
+	// TBD...
 	// "github.com/aaronland/go-http/v4/auth"
+	
 	"github.com/aaronland/go-http/v4/slog"
 	"github.com/sfomuseum/iso8601duration"
 	"github.com/whosonfirst/go-whosonfirst-spelunker/v2"
 	sp_http "github.com/whosonfirst/go-whosonfirst-spelunker/v2/http"
 )
 
+// RecentFacetedHandlerOptions defines options for invoking the `RecentFacetedHandler` method.
 type RecentFacetedHandlerOptions struct {
+	// An instance implemeting the `spelunker.Spelunker` interface.	
 	Spelunker spelunker.Spelunker
 	// Authenticator auth.Authenticator
 }
 
+// RecentFacetedHandler returns an `http.Handler` for returning faceted results for Who's On First records that have been updated within a given time period.
 func RecentFacetedHandler(opts *RecentFacetedHandlerOptions) (http.Handler, error) {
 
 	re_full, err := regexp.Compile(`P((?P<year>\d+)Y)?((?P<month>\d+)M)?((?P<day>\d+)D)?(T((?P<hour>\d+)H)?((?P<minute>\d+)M)?((?P<second>\d+)S)?)?`)

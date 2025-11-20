@@ -6,16 +6,20 @@ import (
 
 	// TBD
 	// "github.com/aaronland/go-http/v4/auth"
+	
 	"github.com/aaronland/go-http/v4/slog"
 	"github.com/whosonfirst/go-whosonfirst-spelunker/v2"
 	sp_http "github.com/whosonfirst/go-whosonfirst-spelunker/v2/http"
 )
 
+// NullIslandFacetedHandlerOptions defines options for invoking the `NullIslandFacetedHandler` method.
 type NullIslandFacetedHandlerOptions struct {
+	// An instance implemeting the `spelunker.Spelunker` interface.	
 	Spelunker spelunker.Spelunker
 	// Authenticator auth.Authenticator
 }
 
+// NullIslandFacetedHandler returns an `http.Handler` for returning faceted results for Who's On First records "visiting" Null Island.
 func NullIslandFacetedHandler(opts *NullIslandFacetedHandlerOptions) (http.Handler, error) {
 
 	fn := func(rsp http.ResponseWriter, req *http.Request) {

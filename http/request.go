@@ -71,6 +71,7 @@ func ParsePageNumberFromRequest(req *go_http.Request) (int64, error) {
 	return page, nil
 }
 
+// FeatureFromRequestURI returns the GeoJSON Feature for the Who's On First ID derived from 'req_uri'.
 func FeatureFromRequestURI(ctx context.Context, sp spelunker.Spelunker, req_uri *wof_http.URI) ([]byte, error) {
 
 	wof_id := req_uri.Id
@@ -84,6 +85,8 @@ func FeatureFromRequestURI(ctx context.Context, sp spelunker.Spelunker, req_uri 
 	return f, nil
 }
 
+// RecordFromRequestURI returns the internal Spelunker record (representation) for the Who's On First ID derived from 'req_uri'.
+// Remember: This might be a GeoJSON Feature but it might not be.
 func RecordFromRequestURI(ctx context.Context, sp spelunker.Spelunker, req_uri *wof_http.URI) ([]byte, error) {
 
 	wof_id := req_uri.Id
@@ -97,6 +100,7 @@ func RecordFromRequestURI(ctx context.Context, sp spelunker.Spelunker, req_uri *
 	return f, nil
 }
 
+// SPRFromRequestURI returns the Standard Places Response (SPR) for the Who's On First ID derived from 'req_uri'.
 func SPRFromRequestURI(ctx context.Context, sp spelunker.Spelunker, req_uri *wof_http.URI) (spr.StandardPlacesResult, error) {
 
 	wof_id := req_uri.Id

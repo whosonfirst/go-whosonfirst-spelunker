@@ -7,16 +7,20 @@ import (
 
 	// TBD...
 	// "github.com/aaronland/go-http/v4/auth"
+	
 	"github.com/aaronland/go-http/v4/slog"
 	"github.com/whosonfirst/go-whosonfirst-spelunker/v2"
 	sp_http "github.com/whosonfirst/go-whosonfirst-spelunker/v2/http"
 )
 
+// HasConcordanceFacetedHandlerOptions defines options for invoking the `HasConcordanceFacetedHandler` method.
 type HasConcordanceFacetedHandlerOptions struct {
+	// An instance implemeting the `spelunker.Spelunker` interface.
 	Spelunker spelunker.Spelunker
 	// Authenticator auth.Authenticator
 }
 
+// HasConcordanceFacetedHandler returns an `http.Handler` for returning faceted results for a partial or complete concordance.	
 func HasConcordanceFacetedHandler(opts *HasConcordanceFacetedHandlerOptions) (http.Handler, error) {
 
 	fn := func(rsp http.ResponseWriter, req *http.Request) {

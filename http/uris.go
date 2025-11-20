@@ -25,9 +25,11 @@ type URIs struct {
 	// ConcordancesTriple defines the URI for all the concordances with a fully-qualified concordance (ns:pred=value).
 	ConcordanceTriple string `json:"concordance_triple"`
 	// Descendants defines the URI for all the descendants of a given record.
-	Descendants    string   `json:"descendants"`
+	Descendants string `json:"descendants"`
+	// DescendantsAlt defines zero or more alternate URIs to display the descendants of a given record.
 	DescendantsAlt []string `json:"descendants_alt"`
-	Index          string   `json:"index"`
+	// Index defines the URI for the initial landing (or index) page for the Spelunker.
+	Index string `json:"index"`
 	// Placetypes defines the URI for all the placetypes.
 	Placetypes string `json:"placetypes"`
 	// Placetypes defines the URI for all the record with a given placetype.
@@ -35,43 +37,67 @@ type URIs struct {
 	// Placetypes defines the URI for all the records "visiting" Null Island (have a lat,lon of "0.0, 0.0").
 	NullIsland string `json:"nullisland"`
 	// Recent defined the URI for all the records that have been updated within a given time period.
-	Recent    string   `json:"recent"`
+	Recent string `json:"recent"`
+	// RecentAlt defines zero or more alternate URIs to display records that have been updated within a given time period.
 	RecentAlt []string `json:"recent_alt"`
 	// Search defines the URI for searching the Spelunker.
 	Search string `json:"search"`
-	About  string `json:"about"`
-	// Search defines the URI for the OpenSearch browser plugin (search) definition..
+	// About defined the URI for an "about the Spelunker" page.
+	About string `json:"about"`
+	// OpenSearch defines the URI for the OpenSearch browser plugin (search) definition..
 	OpenSearch string `json:"opensearch"`
 
+	// ConcordanceNSFaceted defines the URI for the API endpoint to return faceted results for a given namespace.
+	ConcordanceNSFaceted string `json:"concordance_ns"`
+	// ConcordanceNSPredFaceted defines the URI for the API endpoint to return faceted results for a namespace and predicate pair.
+	ConcordanceNSPredFaceted string `json:"concordance_ns_pred"`
+	// ConcordanceTripleFaceted defines the URI for the API endpoint to return faceted results for a concordance (ns:pred=value).
+	ConcordanceTripleFaceted string `json:"concordance_triple_faceted"`
+	// DescendantsFaceted defines the URI for the API endpoint to return faceted results for the descendants of a given record.
+	DescendantsFaceted string `json:"descendants_faceted"`
+	// FindingAid defines the URI for the API endpoint to return the repository (as defined by the "wof:repo" property) for a given ID.
+	FindingAid string `json:"finding_aid"`
+	// GeoJSON defines the URI for the API endpoint to render a Who's On First record as a GeoJSON Feature.
+	GeoJSON string `json:"geojson"`
+	// GeoJSON defines zero or more URIs for alternate API endpoints to render a Who's On First record as a GeoJSON Feature.
+	GeoJSONAlt []string `json:"geojson_alt"`
+	// GeoJSON defines the URI for the API endpoint to render a Who's On First record as a GeoJSON-LD Feature.
+	GeoJSONLD string `json:"geojsonld"`
+	// GeoJSON defines zero or more URIs for alternate API endpoints to render a Who's On First record as a GeoJSON-LD Feature.
+	GeoJSONLDAlt []string `json:"geojsonld_alt"`
+	// NavPlace defines the URI to render a Who's On First record as a IIIF NavPlace document.
+	NavPlace string `json:"navplace"`
+	// GeoJSON defines zero or more URIs for alternate API endpoints to render a Who's On First record as a IIIF NavPlace Feature.
+	NavPlaceAlt []string `json:"navplace_alt"`
+	// NullIslandFaceted defines the URI for the API endpoint to return faceted results for Who's Of First records "visiting" Null Island (have lat,lon coordinates of "0.0,0.0").
+	NullIslandFaceted string `json:"nullisland_faceted"`
+	// PlacetypeFaceted defines the URI for the API endpoint to return faceted results for records with a specific placetype.
+	PlacetypeFaceted string `json:"placetype_faceted"`
+	// RecentFaceted defines the URI for the API endpoint to return faceted results for records which have been updated within a given time period.
+	RecentFaceted string `json:"recent_faceted"`
+	// SearchFaceted defines the URI for the API endpoint to return faceted results for a search query.
+	SearchFaceted string `json:"search_faceted"`
+	// Select defines the URIs to emit specific properties in a a Who's On First record.
+	Select string `json:"select"`
+	// SelectAlt defines zero or more URIs for alternate API endpoints to emit specific properties in a a Who's On First record.
+	SelectAlt []string `json:"select_alt"`
+	// SPR defines the URI to render a Who's On First record as a Standard Places Response (SPR) document.
+	SPR string `json:"spr"`
+	// SPRAlt defines zero or more URIs for alternate API endpoints to a Who's On First record as a Standard Places Response (SPR) document.
+	SPRAlt []string `json:"spr_alt"`
+	// SPR defines the URI to render a Who's On First record as an SVG document.
+	SVG string `json:"svg"`
+	// SVGAlt defines zero or more URIs for alternate API endpoints to a Who's On First record as an SVG document.
+	SVGAlt []string `json:"svg_alt"`
+	// WKT defines the URI to render a Who's On First record's geometry property as "well-known text" (WKT).
+	WKT string `json:"wkt"`
+	// WKTAlt defines zero or more URIs for alternate API endpoints to a Who's On First record's geometry property as "well-known text" (WKT).
+	WKTAlt []string `json:"wkt_alt"`
+
+	// RootURL defines the root URL (inclusive of scheme, host and port details) for the Spelunker.
+	RootURL string `json:"root_url"`
 	// Static defines the URI for static assets (JavaScript, CSS, etc.).
 	Static string `json:"static"`
-
-	// API/machine-readable
-	ConcordanceNSFaceted     string   `json:"concordance_ns"`
-	ConcordanceNSPredFaceted string   `json:"concordance_ns_pred"`
-	ConcordanceTripleFaceted string   `json:"concordance_triple_faceted"`
-	DescendantsFaceted       string   `json:"descendants_faceted"`
-	FindingAid               string   `json:"finding_aid"`
-	GeoJSON                  string   `json:"geojson"`
-	GeoJSONAlt               []string `json:"geojson_alt"`
-	GeoJSONLD                string   `json:"geojsonld"`
-	GeoJSONLDAlt             []string `json:"geojsonld_alt"`
-	NavPlace                 string   `json:"navplace"`
-	NavPlaceAlt              []string `json:"navplace_alt"`
-	NullIslandFaceted        string   `json:"nullisland_faceted"`
-	PlacetypeFaceted         string   `json:"placetype_faceted"`
-	RecentFaceted            string   `json:"recent_faceted"`
-	SearchFaceted            string   `json:"search_faceted"`
-	Select                   string   `json:"select"`
-	SelectAlt                []string `json:"select_alt"`
-	SPR                      string   `json:"spr"`
-	SPRAlt                   []string `json:"spr_alt"`
-	SVG                      string   `json:"svg"`
-	SVGAlt                   []string `json:"svg_alt"`
-	WKT                      string   `json:"wkt"`
-	WKTAlt                   []string `json:"wkt_alt"`
-
-	RootURL string `json:"root_url"`
 }
 
 // DefaultURIs returns a `URIs` struct with default values for Spelunker web application endpoint paths (URIs).
