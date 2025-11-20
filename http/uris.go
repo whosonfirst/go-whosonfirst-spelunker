@@ -12,28 +12,38 @@ import (
 
 // URIs is a struct for defining paths (URIs) for specific Spelunker web application endpoints.
 type URIs struct {
-	// WWW/human-readable
-	Id                string   `json:"id"`
-	IdAlt             []string `json:"id_alt"`
-	Concordances      string   `json:"concordances"`
-	ConcordanceNS     string   `json:"concordance_ns"`
-	ConcordanceNSPred string   `json:"concordance_ns_pred"`
-	ConcordanceTriple string   `json:"concordance_triple"`
-	Descendants       string   `json:"descendants"`
-	DescendantsAlt    []string `json:"descendants_alt"`
-	Index             string   `json:"index"`
-	Placetypes        string   `json:"placetypes"`
-	Placetype         string   `json:"placetype"`
-	NullIsland        string   `json:"nullisland"`
-	Recent            string   `json:"recent"`
-	RecentAlt         []string `json:"recent_alt"`
-	Search            string   `json:"search"`
-	About             string   `json:"about"`
-	Code              string   `json:"code"`
-	HowTo             string   `json:"how_to"`
-	OpenSearch        string   `json:"opensearch"`
+	// Id defines the URI for individual records.
+	Id string `json:"id"`
+	// Id defines the URI for individual alternate geometry records.
+	IdAlt []string `json:"id_alt"`
+	// Concordances defines the URI for all the concordances (across all records).
+	Concordances string `json:"concordances"`
+	// ConcordancesNS defines the URI for all the concordances with a given namespace.
+	ConcordanceNS string `json:"concordance_ns"`
+	// ConcordancesNSPred defines the URI for all the concordances with a given namespace and predicate pair.
+	ConcordanceNSPred string `json:"concordance_ns_pred"`
+	// ConcordancesTriple defines the URI for all the concordances with a fully-qualified concordance (ns:pred=value).
+	ConcordanceTriple string `json:"concordance_triple"`
+	// Descendants defines the URI for all the descendants of a given record.
+	Descendants    string   `json:"descendants"`
+	DescendantsAlt []string `json:"descendants_alt"`
+	Index          string   `json:"index"`
+	// Placetypes defines the URI for all the placetypes.
+	Placetypes string `json:"placetypes"`
+	// Placetypes defines the URI for all the record with a given placetype.
+	Placetype string `json:"placetype"`
+	// Placetypes defines the URI for all the records "visiting" Null Island (have a lat,lon of "0.0, 0.0").
+	NullIsland string `json:"nullisland"`
+	// Recent defined the URI for all the records that have been updated within a given time period.
+	Recent    string   `json:"recent"`
+	RecentAlt []string `json:"recent_alt"`
+	// Search defines the URI for searching the Spelunker.
+	Search string `json:"search"`
+	About  string `json:"about"`
+	// Search defines the URI for the OpenSearch browser plugin (search) definition..
+	OpenSearch string `json:"opensearch"`
 
-	// Static assets
+	// Static defines the URI for static assets (JavaScript, CSS, etc.).
 	Static string `json:"static"`
 
 	// API/machine-readable
@@ -80,8 +90,6 @@ func DefaultURIs() *URIs {
 		Index:             "/",
 		Search:            "/search",
 		About:             "/about",
-		Code:              "/code",
-		HowTo:             "/howto",
 		NullIsland:        "/nullisland",
 		Placetypes:        "/placetypes",
 		Placetype:         "/placetypes/{placetype}",
@@ -283,4 +291,3 @@ func (u *URIs) applyPrefix(prefix string) error {
 
 	return nil
 }
-

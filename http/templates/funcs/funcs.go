@@ -1,3 +1,4 @@
+// Package funcs defines Spelunker-specific HTML template functions.
 package funcs
 
 import (
@@ -12,6 +13,7 @@ import (
 	"golang.org/x/text/message"
 )
 
+// Name returns the full name for a source identified by its prefix. If not full name can be found returns the prefix itself.
 func NameForSource(source string) string {
 
 	nspred := strings.Split(source, ":")
@@ -26,11 +28,13 @@ func NameForSource(source string) string {
 	return src.Fullname
 }
 
+// FormatNumbers returns the string-formatted value of 'i' using the `language.English` printer.
 func FormatNumber(i int64) string {
 	p := message.NewPrinter(language.English)
 	return p.Sprintf("%d", i)
 }
 
+// AppendPagination appends pagination query parameters (k=v) to 'uri'.
 func AppendPagination(uri string, k string, v any) string {
 
 	u, err := url.Parse(uri)
@@ -47,6 +51,7 @@ func AppendPagination(uri string, k string, v any) string {
 	return u.String()
 }
 
+// IsAPlacetype returns 'pt' prefixed with 'a' or 'an'.
 func IsAPlacetype(pt string) string {
 
 	if pt == "custom" {

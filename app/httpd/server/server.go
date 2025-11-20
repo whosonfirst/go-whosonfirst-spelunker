@@ -74,8 +74,6 @@ func RunWithOptions(ctx context.Context, opts *RunOptions) error {
 		run_options.URIs.Id:                idHandlerFunc,
 		run_options.URIs.Search:            searchHandlerFunc,
 		run_options.URIs.About:             aboutHandlerFunc,
-		run_options.URIs.Code:              codeHandlerFunc,
-		run_options.URIs.HowTo:             howtoHandlerFunc,
 		run_options.URIs.Index:             indexHandlerFunc,
 		run_options.URIs.OpenSearch:        openSearchHandlerFunc,
 

@@ -1,3 +1,4 @@
+// Package javascript provides functions for working with ".js" templates.
 package javascript
 
 import (

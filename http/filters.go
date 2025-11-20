@@ -15,7 +15,7 @@ func DefaultFilterParams() []string {
 	// Note that this should be derived on the fly based on "registered" filters.
 	// This also means updating all the Filter stuff to use aaronland/go-roster
 	// which hasn't happened yet.
-	
+
 	return []string{
 		"placetype",
 		"country",

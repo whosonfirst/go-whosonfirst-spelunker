@@ -1,3 +1,4 @@
+// Package golang provides functions for working with ".golang" templates.
 package golang
 
 import (

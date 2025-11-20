@@ -1,3 +1,4 @@
+// Package html provides functions for working with ".html" templates.
 package html
 
 import (

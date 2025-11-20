@@ -1,10 +1,11 @@
+// Package text provides functions for working with ".txt" templates.
 package text
 
 import (
 	"context"
 	"embed"
 	"text/template"
-	
+
 	sfomuseum_text "github.com/sfomuseum/go-template/text"
 )
 
