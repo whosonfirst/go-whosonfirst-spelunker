@@ -4,7 +4,6 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
-	"io"
 	"log/slog"
 	"math"
 	"net/url"
@@ -20,17 +19,16 @@ import (
 	opensearchapi "github.com/opensearch-project/opensearch-go/v4/opensearchapi"
 	"github.com/tidwall/gjson"
 	"github.com/whosonfirst/go-cache"
-	"github.com/whosonfirst/go-reader-cachereader/v2"
 	"github.com/whosonfirst/go-reader/v2"
 	"github.com/whosonfirst/go-whosonfirst-database/opensearch/client"
 	"github.com/whosonfirst/go-whosonfirst-spelunker/v2"
 	wof_spr "github.com/whosonfirst/go-whosonfirst-spr/v2"
-	"github.com/whosonfirst/go-whosonfirst-uri"
 )
 
 const scroll_duration time.Duration = 5 * time.Minute
 const scroll_trigger int64 = 10000
 
+// OpenSearchSpelunker implements the `spelunker.Spelunker` interface for Who's On First records stored in an OpenSearch index.
 type OpenSearchSpelunker struct {
 	spelunker.Spelunker
 	client *opensearchapi.Client
@@ -44,6 +42,15 @@ func init() {
 	spelunker.RegisterSpelunker(ctx, "opensearch", NewOpenSearchSpelunker)
 }
 
+// NewOpenSearchSpelunker returns an implementation of  `spelunker.Spelunker` interface for Who's On First records stored in an OpenSearch index
+// derived from 'uri' which is expected to take the form of:
+//
+//	opensearch://?{QUERY_PARAMETERS}
+//
+// Where {QUERY_PARAMETERS} may be one or more of the following:
+// * `client-uri={STRING}. A URI in the form of "opensearch://?client-uri={GO_WHOSONFIRST_DATABASE_OPENSEARCH_CLIENT_URI}" for connecting to OpenSearch where .
+// * `reader-uri={STRING}. A valid "whosonfirst/go-reader/v2.Reader" URI used to read raw "source" Who's On First documents (because documents are indexed in a truncated form in OpenSearch).
+// * `cache-uri={STRING}. A valid "whosonfirst/go-cache.Cache" URI used to cache data retrieved from a "reader-uri" source.
 func NewOpenSearchSpelunker(ctx context.Context, uri string) (spelunker.Spelunker, error) {
 
 	u, err := url.Parse(uri)
@@ -114,102 +121,6 @@ func NewOpenSearchSpelunker(ctx context.Context, uri string) (spelunker.Spelunke
 	}
 
 	return s, nil
-}
-
-func (s *OpenSearchSpelunker) GetRecordForId(ctx context.Context, id int64, uri_args *uri.URIArgs) ([]byte, error) {
-
-	q := fmt.Sprintf(`{"query": { "ids": { "values": [ %d ] } } }`, id)
-
-	req := &opensearchapi.SearchReq{
-		Indices: []string{
-			s.index,
-		},
-		Body: strings.NewReader(q),
-	}
-
-	body, err := s.searchWithIndex(ctx, req)
-
-	if err != nil {
-		slog.Error("Get by ID query failed", "q", q)
-		return nil, fmt.Errorf("Failed to retrieve %d, %w", id, err)
-	}
-
-	r := gjson.GetBytes(body, "hits.hits.0._source")
-
-	if !r.Exists() {
-		return nil, fmt.Errorf("First hit missing for ID '%d'", id)
-	}
-
-	return []byte(r.String()), nil
-}
-
-func (s *OpenSearchSpelunker) GetSPRForId(ctx context.Context, id int64, uri_args *uri.URIArgs) (wof_spr.StandardPlacesResult, error) {
-
-	r, err := s.GetRecordForId(ctx, id, uri_args)
-
-	if err != nil {
-		return nil, err
-	}
-
-	return NewSpelunkerRecordSPR(r)
-}
-
-func (s *OpenSearchSpelunker) GetFeatureForId(ctx context.Context, id int64, uri_args *uri.URIArgs) ([]byte, error) {
-
-	rel_path, err := uri.Id2RelPath(id, uri_args)
-
-	if err != nil {
-		return nil, err
-	}
-
-	f_reader := s.reader
-
-	if f_reader == nil {
-
-		record, err := s.GetRecordForId(ctx, id, uri_args)
-
-		if err != nil {
-			return nil, err
-		}
-
-		repo_name := gjson.GetBytes(record, "wof:repo")
-		reader_uri := fmt.Sprintf("https://raw.githubusercontent.com/whosonfirst-data/%s/master/data", repo_name)
-
-		r, err := reader.NewReader(ctx, reader_uri)
-
-		if err != nil {
-			return nil, err
-		}
-
-		f_reader = r
-	}
-
-	r := f_reader
-
-	if s.cache != nil {
-
-		cr_opts := &cachereader.CacheReaderOptions{
-			Reader: f_reader,
-			Cache:  s.cache,
-		}
-
-		cr, err := cachereader.NewCacheReaderWithOptions(ctx, cr_opts)
-
-		if err != nil {
-			return nil, fmt.Errorf("Failed to create cache reader, %w", err)
-		}
-
-		r = cr
-	}
-
-	rsp, err := r.Read(ctx, rel_path)
-
-	if err != nil {
-		return nil, err
-	}
-
-	defer rsp.Close()
-	return io.ReadAll(rsp)
 }
 
 func (s *OpenSearchSpelunker) facet(ctx context.Context, req *opensearchapi.SearchReq, facets []*spelunker.Facet) ([]*spelunker.Faceting, error) {

@@ -11,6 +11,7 @@ import (
 	wof_spr "github.com/whosonfirst/go-whosonfirst-spr/v2"
 )
 
+// GetConcordances retrieves the list of unique concordances in a OpenSearchSpelunker index.
 func (s *OpenSearchSpelunker) GetConcordances(ctx context.Context) (*spelunker.Faceting, error) {
 
 	c_facet := spelunker.NewFacet("concordances_sources.keyword")
@@ -41,6 +42,7 @@ func (s *OpenSearchSpelunker) GetConcordances(ctx context.Context) (*spelunker.F
 	return f[0], nil
 }
 
+// HasConcordance retrieve the list of records with a given concordance in an OpenSearchSpelunker index.
 func (s *OpenSearchSpelunker) HasConcordance(ctx context.Context, pg_opts pagination.Options, namespace string, predicate string, value any, filters []spelunker.Filter) (wof_spr.StandardPlacesResults, pagination.Results, error) {
 
 	q := s.hasConcordanceQuery(namespace, predicate, value, filters)
@@ -49,6 +51,7 @@ func (s *OpenSearchSpelunker) HasConcordance(ctx context.Context, pg_opts pagina
 	return nil, nil, spelunker.ErrNotImplemented
 }
 
+// HasConcordanceFaceted retrieves faceted properties for records with a given concordance in an OpenSearchSpelunker index.
 func (s *OpenSearchSpelunker) HasConcordanceFaceted(ctx context.Context, namespace string, predicate string, value any, filters []spelunker.Filter, facets []*spelunker.Facet) ([]*spelunker.Faceting, error) {
 
 	q := s.hasConcordanceFacetedQuery(namespace, predicate, value, filters, facets)

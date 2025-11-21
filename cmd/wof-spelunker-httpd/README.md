@@ -130,8 +130,12 @@ For example to start the `wof-spelunker-httpd` application using data stored in 
 
 New OpenSearch-backed Spelunker instances are created by passing a URI to the `NewSpelunker` method in the form of:
 
+```
+opensearch://?{QUERY_PARAMETERS}
+```
+
 Where {QUERY_PARAMETERS} may be one or more of the following:
-* `client-uri={STRING}. A URI in the form of "opensearch://?{QUERY_PARAMETERS}client-uri={GO_WHOSONFIRST_DATABASE_OPENSEARCH_CLIENT_URI}" for connecting to OpenSearch.
+* `client-uri={STRING}. A URI in the form of "opensearch://?client-uri={GO_WHOSONFIRST_DATABASE_OPENSEARCH_CLIENT_URI}" for connecting to OpenSearch.
 * `reader-uri={STRING}. A valid "whosonfirst/go-reader/v2.Reader" URI used to read raw "source" Who's On First documents (because documents are indexed in a truncated form in OpenSearch).
 * `cache-uri={STRING}. A valid "whosonfirst/go-cache.Cache" URI used to cache data retrieved from a "reader-uri" source.
 

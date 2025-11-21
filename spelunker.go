@@ -24,7 +24,7 @@ type SpelunkerInitializationFunc func(ctx context.Context, uri string) (Spelunke
 // Spelunker is an interface for reading and querying Who's On First style data from an "index" (a database or queryable datafile).
 type Spelunker interface {
 
-	// Retrieve properties (or more specifically the "document") for...
+	// Retrieve properties (or more specifically the "document") for a given ID.
 	GetRecordForId(context.Context, int64, *uri.URIArgs) ([]byte, error)
 	// Retrieve the `spr.StandardPlaceResult` instance for a given ID.
 	GetSPRForId(context.Context, int64, *uri.URIArgs) (spr.StandardPlacesResult, error)
@@ -55,7 +55,7 @@ type Spelunker interface {
 	// Retrieve faceted properties for records with a given placetype.
 	HasPlacetypeFaceted(context.Context, *placetypes.WOFPlacetype, []Filter, []*Facet) ([]*Faceting, error)
 
-	// Retrieve the list of unique concordances in a Spleunker index.
+	// Retrieve the list of unique concordances in a Spelunker index.
 	GetConcordances(context.Context) (*Faceting, error)
 	// Retrieve the list of records with a given concordance.
 	HasConcordance(context.Context, pagination.Options, string, string, any, []Filter) (spr.StandardPlacesResults, pagination.Results, error)

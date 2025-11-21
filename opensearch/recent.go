@@ -11,12 +11,14 @@ import (
 	wof_spr "github.com/whosonfirst/go-whosonfirst-spr/v2"
 )
 
+// GetRecent retrieves all the Who's On First records that have been modified with a window of time in an OpenSearchSpelunker index.
 func (s *OpenSearchSpelunker) GetRecent(ctx context.Context, pg_opts pagination.Options, d time.Duration, filters []spelunker.Filter) (wof_spr.StandardPlacesResults, pagination.Results, error) {
 
 	q := s.getRecentQuery(d, filters)
 	return s.searchPaginated(ctx, pg_opts, q)
 }
 
+// GetRecentFaceted retrieves faceted properties for records that have been modified with a window of time in an OpenSearchSpelunker index.
 func (s *OpenSearchSpelunker) GetRecentFaceted(ctx context.Context, d time.Duration, filters []spelunker.Filter, facets []*spelunker.Facet) ([]*spelunker.Faceting, error) {
 
 	q := s.getRecentFacetedQuery(d, filters, facets)
