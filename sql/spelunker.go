@@ -9,6 +9,7 @@ import (
 	"github.com/whosonfirst/go-whosonfirst-spelunker/v2"
 )
 
+// SQLSpelunker implements the `spelunker.Spelunker` interface for Who's On First records stored in a `database/sql`-backed relational database.
 type SQLSpelunker struct {
 	spelunker.Spelunker
 	engine string
@@ -20,6 +21,12 @@ func init() {
 	spelunker.RegisterSpelunker(ctx, "sql", NewSQLSpelunker)
 }
 
+// NewSQLSpelunker returns an implementation of the `spelunker.Spelunker` interface for Who's On First records stored in a `database/sql`-backed relational database.
+// derived from 'uri' which is expected to take the form of:
+//
+//	sql://{DATABASE_ENGINE}?dsn={DATABASE_ENGINE_DSN}
+//
+// Where `{DATABASE_ENGINE}` is a registered (imported) `database/sql.Driver` name and `{DATABASE_ENGINE_DSN}` is that driver's specific DSN string for connecting to the database.
 func NewSQLSpelunker(ctx context.Context, uri string) (spelunker.Spelunker, error) {
 
 	u, err := url.Parse(uri)

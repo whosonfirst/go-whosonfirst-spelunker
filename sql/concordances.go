@@ -14,6 +14,7 @@ import (
 	"github.com/whosonfirst/go-whosonfirst-sqlite-spr"
 )
 
+// GetConcordances retrieves the list of unique concordances in a SQLSpelunker database.
 func (s *SQLSpelunker) GetConcordances(ctx context.Context) (*spelunker.Faceting, error) {
 
 	facet_counts := make([]*spelunker.FacetCount, 0)
@@ -64,6 +65,7 @@ func (s *SQLSpelunker) GetConcordances(ctx context.Context) (*spelunker.Faceting
 	return faceting, nil
 }
 
+// HasConcordance retrieve the list of records with a given concordance in an SQLSpelunker database.
 func (s *SQLSpelunker) HasConcordance(ctx context.Context, pg_opts pagination.Options, namespace string, predicate string, value any, filters []spelunker.Filter) (wof_spr.StandardPlacesResults, pagination.Results, error) {
 
 	var q string
@@ -183,6 +185,7 @@ func (s *SQLSpelunker) HasConcordance(ctx context.Context, pg_opts pagination.Op
 	return s.querySPR(ctx, pg_opts, str_spr_where, ids...)
 }
 
+// HasConcordanceFaceted retrieves faceted properties for records with a given concordance in an SQLSpelunker database.
 func (s *SQLSpelunker) HasConcordanceFaceted(ctx context.Context, namespace string, predicate string, value any, filters []spelunker.Filter, facets []*spelunker.Facet) ([]*spelunker.Faceting, error) {
 
 	where := make([]string, 0)

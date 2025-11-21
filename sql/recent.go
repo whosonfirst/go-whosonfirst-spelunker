@@ -12,6 +12,7 @@ import (
 	wof_spr "github.com/whosonfirst/go-whosonfirst-spr/v2"
 )
 
+// GetRecent retrieves all the Who's On First records that have been modified with a window of time in an SQLSpelunker database.
 func (s *SQLSpelunker) GetRecent(ctx context.Context, pg_opts pagination.Options, d time.Duration, filters []spelunker.Filter) (wof_spr.StandardPlacesResults, pagination.Results, error) {
 
 	where, args, err := s.getRecentQueryWhere(d, filters)
@@ -24,6 +25,7 @@ func (s *SQLSpelunker) GetRecent(ctx context.Context, pg_opts pagination.Options
 	return s.querySPR(ctx, pg_opts, str_where, args...)
 }
 
+// GetRecentFaceted retrieves faceted properties for records that have been modified with a window of time in an SQLSpelunker database.
 func (s *SQLSpelunker) GetRecentFaceted(ctx context.Context, d time.Duration, filters []spelunker.Filter, facets []*spelunker.Facet) ([]*spelunker.Faceting, error) {
 
 	q_where, q_args, err := s.getRecentQueryWhere(d, filters)

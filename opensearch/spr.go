@@ -13,6 +13,7 @@ import (
 	"github.com/whosonfirst/go-whosonfirst-uri"
 )
 
+// SpelunkerRecordSPR implements the `whosonfirst/go-whosonfirst-spr/v2.StandardPlacesResult` interface for Who's On First records stored in an OpenSearch index.
 type SpelunkerRecordSPR struct {
 	wof_spr.StandardPlacesResult
 
@@ -23,15 +24,18 @@ type SpelunkerRecordSPR struct {
 	props []byte
 }
 
+// SpelunkerStandardPlacesResults implements the `whosonfirst/go-whosonfirst-spr/v2.StandardPlacesResults` interface for Who's On First records stored in an OpenSearch index.
 type SpelunkerStandardPlacesResults struct {
 	wof_spr.StandardPlacesResults
 	results []wof_spr.StandardPlacesResult
 }
 
+// Results returns the list of `whosonfirst/go-whosonfirst-spr/v2.StandardPlacesResult` instances stored in 'r'.
 func (r *SpelunkerStandardPlacesResults) Results() []wof_spr.StandardPlacesResult {
 	return r.results
 }
 
+// NewSpelunkerStandardPlacesResults returns a new `whosonfirst/go-whosonfirst-spr/v2.StandardPlacesResults` instance for 'results'.
 func NewSpelunkerStandardPlacesResults(results []wof_spr.StandardPlacesResult) wof_spr.StandardPlacesResults {
 
 	r := &SpelunkerStandardPlacesResults{
@@ -41,6 +45,7 @@ func NewSpelunkerStandardPlacesResults(results []wof_spr.StandardPlacesResult) w
 	return r
 }
 
+// NewSpelunkerRecordSPR returns a new `whosonfirst/go-whosonfirst-spr/v2.StandardPlacesResult` instance derived from 'props'.
 func NewSpelunkerRecordSPR(props []byte) (wof_spr.StandardPlacesResult, error) {
 
 	s := &SpelunkerRecordSPR{

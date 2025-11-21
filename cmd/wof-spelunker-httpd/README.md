@@ -229,3 +229,67 @@ If you want to disable caching entirely, use the "null" cache implementation. Fo
 ```
 
 ## Endpoints
+
+### Endpoints for humans
+
+#### /
+
+#### /about
+
+#### /concordances
+
+#### /concordances/{namespace}
+
+#### /concordances/{namespace}:{predicate}
+
+#### /concordances/{namespace}:{predicate}={value}
+
+#### /id/{id}
+
+#### /id/{id}/descendants
+
+#### nullisland
+
+#### /placetypes
+
+#### /placetypes/{placetype}
+
+#### /recent/{duration}
+
+#### /search
+
+### Endpoints for machines
+
+#### /concordances/{namespace}/facets
+
+#### /concordances/{namespace}:{predicate}/facets
+
+#### /concordances/{namespace}:{predicate}={value}/facets
+
+#### /findingaid
+
+#### /id/{id}/descendants/facets
+
+#### /id/{id}/geojson
+
+#### /id/{id}/geojsonld
+
+#### /id/{id}/navplace
+
+#### /id/{id}/select
+
+#### /id/{id}/spr
+
+#### /id/{id}/svg
+
+#### /id/{id}/wkt
+
+#### /nullisland/facets
+
+#### /opensearch
+
+#### /placetypes/{placetype}/facets
+
+#### /recent/{duration}/facets
+
+#### /search/facets

@@ -15,7 +15,7 @@ import (
 	"github.com/whosonfirst/go-whosonfirst-uri"
 )
 
-// GetRecord retrieves properties (or more specifically the "document") for a given ID in an OpenSearchSpelunker index.
+// GetRecordForId retrieves properties (or more specifically the "document") for a given ID in an OpenSearchSpelunker index.
 func (s *OpenSearchSpelunker) GetRecordForId(ctx context.Context, id int64, uri_args *uri.URIArgs) ([]byte, error) {
 
 	q := fmt.Sprintf(`{"query": { "ids": { "values": [ %d ] } } }`, id)

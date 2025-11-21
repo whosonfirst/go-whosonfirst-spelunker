@@ -12,6 +12,7 @@ import (
 	wof_spr "github.com/whosonfirst/go-whosonfirst-spr/v2"
 )
 
+// GetPlacetypes retrieves the list of unique placetypes in a Spleunker index in an SQLSpelunker database.
 func (s *SQLSpelunker) GetPlacetypes(ctx context.Context) (*spelunker.Faceting, error) {
 
 	facet_counts := make([]*spelunker.FacetCount, 0)
@@ -60,6 +61,7 @@ func (s *SQLSpelunker) GetPlacetypes(ctx context.Context) (*spelunker.Faceting, 
 	return faceting, nil
 }
 
+// HasPlacetype retrieves the list of records with a given placetype in an SQLSpelunker database.
 func (s *SQLSpelunker) HasPlacetype(ctx context.Context, pg_opts pagination.Options, pt *placetypes.WOFPlacetype, filters []spelunker.Filter) (wof_spr.StandardPlacesResults, pagination.Results, error) {
 
 	where, args, err := s.hasPlacetypeQueryWhere(pt, filters)
@@ -72,6 +74,7 @@ func (s *SQLSpelunker) HasPlacetype(ctx context.Context, pg_opts pagination.Opti
 	return s.querySPR(ctx, pg_opts, str_where, args...)
 }
 
+// HasPlacetypeFaceted retrieves faceted properties for records with a given placetype in an SQLSpelunker database.
 func (s *SQLSpelunker) HasPlacetypeFaceted(ctx context.Context, pt *placetypes.WOFPlacetype, filters []spelunker.Filter, facets []*spelunker.Facet) ([]*spelunker.Faceting, error) {
 
 	q_where, q_args, err := s.hasPlacetypeQueryWhere(pt, filters)

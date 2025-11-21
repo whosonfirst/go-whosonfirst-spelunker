@@ -11,6 +11,7 @@ import (
 	wof_spr "github.com/whosonfirst/go-whosonfirst-spr/v2"
 )
 
+// Search retrieves all the Who's On First records that match a search criteria in an SQLSpelunker database.
 func (s *SQLSpelunker) Search(ctx context.Context, pg_opts pagination.Options, search_opts *spelunker.SearchOptions, filters []spelunker.Filter) (wof_spr.StandardPlacesResults, pagination.Results, error) {
 
 	where, args, err := s.searchQueryWhere(search_opts, filters)
@@ -29,6 +30,7 @@ func (s *SQLSpelunker) Search(ctx context.Context, pg_opts pagination.Options, s
 	return s.querySearchWithFilters(ctx, pg_opts, str_where, args...)
 }
 
+// SearchFaceted retrieves faceted properties for records match a search criteria in an SQLSpelunker database.
 func (s *SQLSpelunker) SearchFaceted(ctx context.Context, search_opts *spelunker.SearchOptions, filters []spelunker.Filter, facets []*spelunker.Facet) ([]*spelunker.Faceting, error) {
 
 	q_where, q_args, err := s.searchQueryWhere(search_opts, filters)
