@@ -13,15 +13,6 @@ import (
 	"github.com/whosonfirst/go-whosonfirst-spr/v2"
 )
 
-type NullIslandHandlerOptions struct {
-	// An instance implemeting the `spelunker.Spelunker` interface.
-	Spelunker     spelunker.Spelunker
-	Authenticator auth.Authenticator
-	Templates     *template.Template
-	// URIs are the `wof_http.URIs` details for this Spelunker instance.
-	URIs *wof_http.URIs
-}
-
 type nullIslandHandlerVars struct {
 	PageTitle        string
 	URIs             *wof_http.URIs
@@ -33,6 +24,19 @@ type nullIslandHandlerVars struct {
 	OpenGraph        *OpenGraph
 }
 
+// NullIslandHandlerOptions  defines configuration options for the `NullIslandHandler` method.
+type NullIslandHandlerOptions struct {
+	// An instance implemeting the `spelunker.Spelunker` interface.
+	Spelunker spelunker.Spelunker
+	// An instance implementing the `aaronland/go-http/v4/auth.Authenticator` interface.
+	Authenticator auth.Authenticator
+	// An `html/template.Template` instance containing the named template "nullisland".
+	Templates *template.Template
+	// URIs are the `wof_http.URIs` details for this Spelunker instance.
+	URIs *wof_http.URIs
+}
+
+// NullIslandHandler returns an `http.Handler` instance to display webpage listing Who's On First records "visiting" Null Island (with lat,lon coordinates of "0.0,0.0").
 func NullIslandHandler(opts *NullIslandHandlerOptions) (http.Handler, error) {
 
 	t := opts.Templates.Lookup("nullisland")

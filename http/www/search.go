@@ -17,15 +17,6 @@ import (
 	"github.com/whosonfirst/go-whosonfirst-uri"
 )
 
-type SearchHandlerOptions struct {
-	// An instance implemeting the `spelunker.Spelunker` interface.
-	Spelunker     spelunker.Spelunker
-	Authenticator auth.Authenticator
-	Templates     *template.Template
-	// URIs are the `wof_http.URIs` details for this Spelunker instance.
-	URIs *wof_http.URIs
-}
-
 type searchHandlerVars struct {
 	PageTitle        string
 	URIs             *wof_http.URIs
@@ -39,6 +30,19 @@ type searchHandlerVars struct {
 	OpenGraph        *OpenGraph
 }
 
+// SearchHandlerOptions  defines configuration options for the `SearchHandler` method.
+type SearchHandlerOptions struct {
+	// An instance implemeting the `spelunker.Spelunker` interface.
+	Spelunker spelunker.Spelunker
+	// An instance implementing the `aaronland/go-http/v4/auth.Authenticator` interface.
+	Authenticator auth.Authenticator
+	// An `html/template.Template` instance containing the named template "search".
+	Templates *template.Template
+	// URIs are the `wof_http.URIs` details for this Spelunker instance.
+	URIs *wof_http.URIs
+}
+
+// SearchHandler returns an `http.Handler` instance to display webpage for performing search against a Spelunker index.
 func SearchHandler(opts *SearchHandlerOptions) (http.Handler, error) {
 
 	form_t := opts.Templates.Lookup("search")

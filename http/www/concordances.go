@@ -11,15 +11,6 @@ import (
 	wof_http "github.com/whosonfirst/go-whosonfirst-spelunker/v2/http"
 )
 
-type ConcordancesHandlerOptions struct {
-	// An instance implemeting the `spelunker.Spelunker` interface.
-	Spelunker     spelunker.Spelunker
-	Authenticator auth.Authenticator
-	Templates     *template.Template
-	// URIs are the `wof_http.URIs` details for this Spelunker instance.
-	URIs *wof_http.URIs
-}
-
 type concordancesHandlerVars struct {
 	PageTitle string
 	URIs      *wof_http.URIs
@@ -27,6 +18,19 @@ type concordancesHandlerVars struct {
 	OpenGraph *OpenGraph
 }
 
+// ConcordanceHandlerOptions defines configuration options for the `ConcordancesHandler` method.
+type ConcordancesHandlerOptions struct {
+	// An instance implemeting the `spelunker.Spelunker` interface.
+	Spelunker spelunker.Spelunker
+	// An instance implementing the `aaronland/go-http/v4/auth.Authenticator` interface.
+	Authenticator auth.Authenticator
+	// An `html/template.Template` instance containing the named template "concordances".
+	Templates *template.Template
+	// URIs are the `wof_http.URIs` details for this Spelunker instance.
+	URIs *wof_http.URIs
+}
+
+// ConcordancesHandler returns an `http.Handler` instance to display a webpage listing all the concordances in a Spelunker index.
 func ConcordancesHandler(opts *ConcordancesHandlerOptions) (http.Handler, error) {
 
 	t := opts.Templates.Lookup("concordances")

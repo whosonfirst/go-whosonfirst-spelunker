@@ -11,15 +11,6 @@ import (
 	wof_http "github.com/whosonfirst/go-whosonfirst-spelunker/v2/http"
 )
 
-type PlacetypesHandlerOptions struct {
-	// An instance implemeting the `spelunker.Spelunker` interface.
-	Spelunker     spelunker.Spelunker
-	Authenticator auth.Authenticator
-	Templates     *template.Template
-	// URIs are the `wof_http.URIs` details for this Spelunker instance.
-	URIs *wof_http.URIs
-}
-
 type placetypesHandlerVars struct {
 	PageTitle string
 	URIs      *wof_http.URIs
@@ -27,6 +18,19 @@ type placetypesHandlerVars struct {
 	OpenGraph *OpenGraph
 }
 
+// PlacetypesHandlerOptions  defines configuration options for the `PlacetypesHandler` method.
+type PlacetypesHandlerOptions struct {
+	// An instance implemeting the `spelunker.Spelunker` interface.
+	Spelunker spelunker.Spelunker
+	// An instance implementing the `aaronland/go-http/v4/auth.Authenticator` interface.
+	Authenticator auth.Authenticator
+	// An `html/template.Template` instance containing the named template "placetypes".
+	Templates *template.Template
+	// URIs are the `wof_http.URIs` details for this Spelunker instance.
+	URIs *wof_http.URIs
+}
+
+// PlacetypesHandler returns an `http.Handler` instance to display webpage listing all the placetypes in Spelunker index.
 func PlacetypesHandler(opts *PlacetypesHandlerOptions) (http.Handler, error) {
 
 	t := opts.Templates.Lookup("placetypes")

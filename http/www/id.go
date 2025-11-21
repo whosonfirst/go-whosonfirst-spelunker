@@ -18,16 +18,7 @@ import (
 	wof_http "github.com/whosonfirst/go-whosonfirst/http"
 )
 
-type IdHandlerOptions struct {
-	// An instance implemeting the `spelunker.Spelunker` interface.
-	Spelunker     spelunker.Spelunker
-	Authenticator auth.Authenticator
-	Templates     *template.Template
-	// URIs are the `wof_http.URIs` details for this Spelunker instance.
-	URIs *sp_http.URIs
-}
-
-type IdHandlerAncestor struct {
+type idHandlerAncestor struct {
 	Placetype string
 	Id        int64
 }
@@ -40,13 +31,26 @@ type idHandlerVars struct {
 	URIs             *sp_http.URIs
 	Properties       string
 	CountDescendants int64
-	Hierarchies      [][]*IdHandlerAncestor
+	Hierarchies      [][]*idHandlerAncestor
 	RelPath          string
 	GitHubURL        string
 	WriteFieldURL    string
 	OpenGraph        *OpenGraph
 }
 
+// IdHandlerOptions  defines configuration options for the `IdHandler` method.
+type IdHandlerOptions struct {
+	// An instance implemeting the `spelunker.Spelunker` interface.
+	Spelunker spelunker.Spelunker
+	// An instance implementing the `aaronland/go-http/v4/auth.Authenticator` interface.
+	Authenticator auth.Authenticator
+	// An `html/template.Template` instance containing the named template "id".
+	Templates *template.Template
+	// URIs are the `wof_http.URIs` details for this Spelunker instance.
+	URIs *sp_http.URIs
+}
+
+// IdHandler returns an `http.Handler` instance to display webpage for a Who's On First ID.
 func IdHandler(opts *IdHandlerOptions) (http.Handler, error) {
 
 	t := opts.Templates.Lookup("id")
@@ -215,11 +219,11 @@ func IdHandler(opts *IdHandlerOptions) (http.Handler, error) {
 			}
 		}
 
-		handler_hierarchies := make([][]*IdHandlerAncestor, len(hierarchies))
+		handler_hierarchies := make([][]*idHandlerAncestor, len(hierarchies))
 
 		for idx, hier := range hierarchies {
 
-			handler_ancestors := make([]*IdHandlerAncestor, 0)
+			handler_ancestors := make([]*idHandlerAncestor, 0)
 
 			for _, n := range sorted {
 
@@ -230,7 +234,7 @@ func IdHandler(opts *IdHandlerOptions) (http.Handler, error) {
 					continue
 				}
 
-				a := &IdHandlerAncestor{
+				a := &idHandlerAncestor{
 					Placetype: n,
 					Id:        v,
 				}

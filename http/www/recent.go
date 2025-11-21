@@ -17,15 +17,6 @@ import (
 	"github.com/whosonfirst/go-whosonfirst-spr/v2"
 )
 
-type RecentHandlerOptions struct {
-	// An instance implemeting the `spelunker.Spelunker` interface.
-	Spelunker     spelunker.Spelunker
-	Authenticator auth.Authenticator
-	Templates     *template.Template
-	// URIs are the `wof_http.URIs` details for this Spelunker instance.
-	URIs *wof_http.URIs
-}
-
 type recentHandlerVars struct {
 	PageTitle        string
 	URIs             *wof_http.URIs
@@ -39,6 +30,19 @@ type recentHandlerVars struct {
 	OpenGraph        *OpenGraph
 }
 
+// RecentHandlerOptions  defines configuration options for the `RecentHandler` method.
+type RecentHandlerOptions struct {
+	// An instance implemeting the `spelunker.Spelunker` interface.
+	Spelunker spelunker.Spelunker
+	// An instance implementing the `aaronland/go-http/v4/auth.Authenticator` interface.
+	Authenticator auth.Authenticator
+	// An `html/template.Template` instance containing the named template "recent".
+	Templates *template.Template
+	// URIs are the `wof_http.URIs` details for this Spelunker instance.
+	URIs *wof_http.URIs
+}
+
+// RecentHandler returns an `http.Handler` instance to display webpage listing records that have been updated within a given time period.
 func RecentHandler(opts *RecentHandlerOptions) (http.Handler, error) {
 
 	t := opts.Templates.Lookup("recent")

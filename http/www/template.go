@@ -10,15 +10,6 @@ import (
 	wof_http "github.com/whosonfirst/go-whosonfirst-spelunker/v2/http"
 )
 
-type TemplateHandlerOptions struct {
-	Authenticator auth.Authenticator
-	Templates     *template.Template
-	TemplateName  string
-	PageTitle     string
-	// URIs are the `wof_http.URIs` details for this Spelunker instance.
-	URIs *wof_http.URIs
-}
-
 type templateHandlerVars struct {
 	Id         int64
 	PageTitle  string
@@ -27,6 +18,21 @@ type templateHandlerVars struct {
 	OpenGraph  *OpenGraph
 }
 
+// TemplateHandlerOptions  defines configuration options for the `TemplateHandler` method.
+type TemplateHandlerOptions struct {
+	// An instance implementing the `aaronland/go-http/v4/auth.Authenticator` interface.
+	Authenticator auth.Authenticator
+	// An `html/template.Template` instance containing the named template defined in the `TemplateName` property.
+	Templates *template.Template
+	// The name of the template to display.
+	TemplateName string
+	// The title of the page to display.
+	PageTitle string
+	// URIs are the `wof_http.URIs` details for this Spelunker instance.
+	URIs *wof_http.URIs
+}
+
+// TemplateHandler returns an `http.Handler` instance to display webpage defined by a named template.
 func TemplateHandler(opts *TemplateHandlerOptions) (http.Handler, error) {
 
 	t := opts.Templates.Lookup(opts.TemplateName)

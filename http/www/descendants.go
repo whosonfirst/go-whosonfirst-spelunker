@@ -15,15 +15,6 @@ import (
 	wof_http "github.com/whosonfirst/go-whosonfirst/http"
 )
 
-type DescendantsHandlerOptions struct {
-	// An instance implemeting the `spelunker.Spelunker` interface.
-	Spelunker     spelunker.Spelunker
-	Authenticator auth.Authenticator
-	Templates     *template.Template
-	// URIs are the `wof_http.URIs` details for this Spelunker instance.
-	URIs *sp_http.URIs
-}
-
 type descendantsHandlerVars struct {
 	PageTitle        string
 	Id               int64
@@ -35,6 +26,19 @@ type descendantsHandlerVars struct {
 	FacetsContextURL string
 }
 
+// DescendantsHandlerOptions  defines configuration options for the `DescendantsHandler` method.
+type DescendantsHandlerOptions struct {
+	// An instance implemeting the `spelunker.Spelunker` interface.
+	Spelunker spelunker.Spelunker
+	// An instance implementing the `aaronland/go-http/v4/auth.Authenticator` interface.
+	Authenticator auth.Authenticator
+	// An `html/template.Template` instance containing the named template "descendants".
+	Templates *template.Template
+	// URIs are the `wof_http.URIs` details for this Spelunker instance.
+	URIs *sp_http.URIs
+}
+
+// DescendantsHandler returns an `http.Handler` instance to display webpage listing all the descendants of a given Who's On First ID.
 func DescendantsHandler(opts *DescendantsHandlerOptions) (http.Handler, error) {
 
 	t := opts.Templates.Lookup("descendants")

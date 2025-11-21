@@ -15,15 +15,6 @@ import (
 	"github.com/whosonfirst/go-whosonfirst-spr/v2"
 )
 
-type HasPlacetypeHandlerOptions struct {
-	// An instance implemeting the `spelunker.Spelunker` interface.
-	Spelunker     spelunker.Spelunker
-	Authenticator auth.Authenticator
-	Templates     *template.Template
-	// URIs are the `wof_http.URIs` details for this Spelunker instance.
-	URIs *wof_http.URIs
-}
-
 type hasPlacetypeHandlerVars struct {
 	PageTitle        string
 	URIs             *wof_http.URIs
@@ -36,6 +27,19 @@ type hasPlacetypeHandlerVars struct {
 	OpenGraph        *OpenGraph
 }
 
+// PlacetypeHandlerOptions  defines configuration options for the `PlacetypeHandler` method.
+type HasPlacetypeHandlerOptions struct {
+	// An instance implemeting the `spelunker.Spelunker` interface.
+	Spelunker spelunker.Spelunker
+	// An instance implementing the `aaronland/go-http/v4/auth.Authenticator` interface.
+	Authenticator auth.Authenticator
+	// An `html/template.Template` instance containing the named template "placetype".
+	Templates *template.Template
+	// URIs are the `wof_http.URIs` details for this Spelunker instance.
+	URIs *wof_http.URIs
+}
+
+// PlacetypeHandler returns an `http.Handler` instance to display webpage listing Who's On First records with a given placetype.
 func HasPlacetypeHandler(opts *HasPlacetypeHandlerOptions) (http.Handler, error) {
 
 	t := opts.Templates.Lookup("placetype")

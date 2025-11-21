@@ -8,10 +8,13 @@ import (
 	"github.com/aaronland/go-http/v4/slog"
 )
 
+// RobotsHandlerOptions  defines configuration options for the `RobotsHandler` method.
 type RobotsTxtHandlerOptions struct {
+	// An `text/template.Template` instance containing the named template "robots_txt".
 	Templates *template.Template
 }
 
+// RobotsHandler returns an `http.Handler` instance to display a "robots.txt" page.
 func RobotsTxtHandler(opts *RobotsTxtHandlerOptions) (http.Handler, error) {
 
 	t_name := "robots_txt"

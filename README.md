@@ -32,6 +32,10 @@ $> ./bin/wof-spelunker-httpd \
 
 That's it. Point your web browser at `http://localhost:8080` and happy spelunking.
 
+## Documentation
+
+[![Go Reference](https://pkg.go.dev/badge/github.com/whosonfirst/go-whosonfirst-spelunker.svg)](https://pkg.go.dev/github.com/whosonfirst/go-whosonfirst-spelunker)
+
 ## Tools
 
 ### wof-spelunker-index
