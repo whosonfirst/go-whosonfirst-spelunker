@@ -14,7 +14,7 @@ import (
 	"github.com/whosonfirst/go-whosonfirst-uri"
 )
 
-// GetRecordForId retrieves properties (or more specifically the "document") for a given ID in an SQLSpelunker database.
+// GetRecordForId retrieves properties (or more specifically the "document") for a given ID in a SQLSpelunker database.
 func (s *SQLSpelunker) GetRecordForId(ctx context.Context, id int64, uri_args *uri.URIArgs) ([]byte, error) {
 
 	// TBD - replace this with a dedicated "spelunker" table
@@ -30,7 +30,7 @@ func (s *SQLSpelunker) GetRecordForId(ctx context.Context, id int64, uri_args *u
 	return document.PrepareSpelunkerV2Document(ctx, body)
 }
 
-// GetSPRForId retrieves the `spr.StandardPlaceResult` instance for a given ID in an SQLSpelunker database.
+// GetSPRForId retrieves the `spr.StandardPlaceResult` instance for a given ID in a SQLSpelunker database.
 func (s *SQLSpelunker) GetSPRForId(ctx context.Context, id int64, uri_args *uri.URIArgs) (wof_spr.StandardPlacesResult, error) {
 
 	cols := s.sprQueryColumnsAll(ctx)
@@ -45,7 +45,7 @@ func (s *SQLSpelunker) GetSPRForId(ctx context.Context, id int64, uri_args *uri.
 	return spr.RetrieveSPRWithRow(ctx, rsp)
 }
 
-// GetFeatureForId retrieves the GeoJSON Feature record for a given ID in an SQLSpelunker database.
+// GetFeatureForId retrieves the GeoJSON Feature record for a given ID in a SQLSpelunker database.
 func (s *SQLSpelunker) GetFeatureForId(ctx context.Context, id int64, uri_args *uri.URIArgs) ([]byte, error) {
 
 	q := fmt.Sprintf("SELECT body FROM %s WHERE id = ?", tables.GEOJSON_TABLE_NAME)

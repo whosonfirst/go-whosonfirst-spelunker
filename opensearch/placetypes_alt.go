@@ -11,6 +11,7 @@ import (
 	wof_spr "github.com/whosonfirst/go-whosonfirst-spr/v2"
 )
 
+// GetAlternatePlacetypes retrieves the list of alternate placetype ("wof:placetype_alt") in an OpenSearchSpelunker index.
 func (s *OpenSearchSpelunker) GetAlternatePlacetypes(ctx context.Context) (*spelunker.Faceting, error) {
 
 	pt_facet := spelunker.NewFacet("placetypealt")
@@ -41,12 +42,14 @@ func (s *OpenSearchSpelunker) GetAlternatePlacetypes(ctx context.Context) (*spel
 	return f[0], nil
 }
 
+// HasAlternatePlacetypes retrieves the list of Who's On First records with a given alternate placetype ("wof:placetype_alt") in an OpenSearchSpelunker index.
 func (s *OpenSearchSpelunker) HasAlternatePlacetype(ctx context.Context, pg_opts pagination.Options, pt string, filters []spelunker.Filter) (wof_spr.StandardPlacesResults, pagination.Results, error) {
 
 	q := s.hasAlternatePlacetypeQuery(pt, filters)
 	return s.searchPaginated(ctx, pg_opts, q)
 }
 
+// HasAlternatePlacetypeFaceted retrieves faceted properties for records with a given alternate placetype ("wof:placetype_alt") in an OpenSearchSpelunker index.
 func (s *OpenSearchSpelunker) HasAlternatePlacetypeFaceted(ctx context.Context, pt string, filters []spelunker.Filter, facets []*spelunker.Facet) ([]*spelunker.Faceting, error) {
 
 	q := s.hasAlternatePlacetypeFacetedQuery(pt, filters, facets)

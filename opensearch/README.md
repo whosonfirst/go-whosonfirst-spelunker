@@ -34,7 +34,7 @@ These examples assume a "local" setup meaning there is local instance of OpenSea
 For example, in one terminal window:
 
 ```
-$> cd go-whosonfirst-spelunker
+$> cd spelunker
 $> make os-local
 docker run \
 		-it \

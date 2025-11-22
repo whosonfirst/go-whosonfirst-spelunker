@@ -119,6 +119,12 @@ type Spelunker interface {
 	HasPlacetype(context.Context, pagination.Options, *placetypes.WOFPlacetype, []Filter) (spr.StandardPlacesResults, pagination.Results, error)
 	// Retrieve faceted properties for records with a given placetype.
 	HasPlacetypeFaceted(context.Context, *placetypes.WOFPlacetype, []Filter, []*Facet) ([]*Faceting, error)
+	// Retrieve the list of alternate placetype ("wof:placetype_alt") in a SQLSpelunker database.
+	GetAlternatePlacetypes(context.Context) (*Faceting, error)
+	// Retrieve the list of Who's On First records with a given alternate placetype ("wof:placetype_alt") in a SQLSpelunker database.
+	HasAlternatePlacetype(context.Context, pagination.Options, string, []Filter) (spr.StandardPlacesResults, pagination.Results, error)
+	// Retrieve faceted properties for records with a given alternate placetype ("wof:placetype_alt") in a SQLSpelunker database.
+	HasAlternatePlacetypeFaceted(context.Context, string, []Filter, []*Facet) ([]*Faceting, error)	
 	// Retrieve the list of unique concordances in a Spleunker index.
 	GetConcordances(context.Context) (*Faceting, error)
 	// Retrieve the list of records with a given concordance.

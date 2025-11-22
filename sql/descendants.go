@@ -22,7 +22,7 @@ import (
 	"github.com/whosonfirst/go-whosonfirst-sqlite-spr"
 )
 
-// GetDescendants retrieves all the Who's On First record that are a descendant of a specific Who's On First ID in an SQLSpelunker database.
+// GetDescendants retrieves all the Who's On First record that are a descendant of a specific Who's On First ID in a SQLSpelunker database.
 func (s *SQLSpelunker) GetDescendants(ctx context.Context, pg_opts pagination.Options, id int64, filters []spelunker.Filter) (wof_spr.StandardPlacesResults, pagination.Results, error) {
 
 	q_where, q_args, err := s.descendantsQueryWhere(ctx, id, filters)
@@ -150,7 +150,7 @@ func (s *SQLSpelunker) GetDescendants(ctx context.Context, pg_opts pagination.Op
 	return spr_results, pg_results, nil
 }
 
-// GetDescendantsFaceted retrieves faceted properties for records that are a descendant of a specific Who's On First ID in an SQLSpelunker database.
+// GetDescendantsFaceted retrieves faceted properties for records that are a descendant of a specific Who's On First ID in a SQLSpelunker database.
 func (s *SQLSpelunker) GetDescendantsFaceted(ctx context.Context, id int64, filters []spelunker.Filter, facets []*spelunker.Facet) ([]*spelunker.Faceting, error) {
 
 	q_where, q_args, err := s.descendantsQueryWhere(ctx, id, filters)
@@ -188,7 +188,7 @@ func (s *SQLSpelunker) GetDescendantsFaceted(ctx context.Context, id int64, filt
 	return results, nil
 }
 
-// CountDescendants returns the total number of Who's On First records that are a descendant of a specific Who's On First ID in an SQLSpelunker database.
+// CountDescendants returns the total number of Who's On First records that are a descendant of a specific Who's On First ID in a SQLSpelunker database.
 func (s *SQLSpelunker) CountDescendants(ctx context.Context, id int64) (int64, error) {
 
 	var count int64

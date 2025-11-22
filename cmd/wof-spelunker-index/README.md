@@ -16,7 +16,7 @@ Valid commands are:
 The `wof-spelunker-httpd` depends on Go language build tags. The default `cli` Makefile target to compile command line tools build the `wof-spelunker-httpd` tool with support for all the database implementations included in this package. For example:
 
 ```
-$> cd go-whosonfirst-spelunker
+$> cd spelunker
 $> make cli
 go build -mod vendor -tags="sqlite3,icu,json1,fts5,opensearch" -ldflags="-s -w" -o bin/wof-spelunker-index cmd/wof-spelunker-index/main.go
 ```
@@ -170,7 +170,7 @@ import (
         "log"
 	
         "github.com/whosonfirst/spelunker/app/index"
-        _ "github.com/YOUR_ORG/go-whosonfirst-spelunker-CUSTOM_ITERATOR"	
+        _ "github.com/YOUR_ORG/spelunker-CUSTOM_ITERATOR"	
 )
 
 func main() {

@@ -11,7 +11,7 @@ import (
 	wof_spr "github.com/whosonfirst/go-whosonfirst-spr/v2"
 )
 
-// VisitingNullIsland retrieves the list of records that are "visiting Null Island" (have a latitude, longitude value of "0.0, 0.0" in an SQLSpelunker database.
+// VisitingNullIsland retrieves the list of records that are "visiting Null Island" (have a latitude, longitude value of "0.0, 0.0" in a SQLSpelunker database.
 func (s *SQLSpelunker) VisitingNullIsland(ctx context.Context, pg_opts pagination.Options, filters []spelunker.Filter) (wof_spr.StandardPlacesResults, pagination.Results, error) {
 
 	where, args, err := s.visitingNullIslandQueryWhere(filters)
@@ -24,7 +24,7 @@ func (s *SQLSpelunker) VisitingNullIsland(ctx context.Context, pg_opts paginatio
 	return s.querySPR(ctx, pg_opts, str_where, args...)
 }
 
-// VisitingNullIslandFaceted retrieves faceted properties for records that are "visiting Null Island" (have a latitude, longitude value of "0.0, 0.0" in an SQLSpelunker database.
+// VisitingNullIslandFaceted retrieves faceted properties for records that are "visiting Null Island" (have a latitude, longitude value of "0.0, 0.0" in a SQLSpelunker database.
 func (s *SQLSpelunker) VisitingNullIslandFaceted(ctx context.Context, filters []spelunker.Filter, facets []*spelunker.Facet) ([]*spelunker.Faceting, error) {
 
 	q_where, q_args, err := s.visitingNullIslandQueryWhere(filters)

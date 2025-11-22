@@ -37,7 +37,7 @@ Valid options are:
 The `wof-spelunker-httpd` depends on Go language build tags. The default `cli` Makefile target to compile command line tools build the `wof-spelunker-httpd` tool with support for all the database implementations included in this package. For example:
 
 ```
-$> cd go-whosonfirst-spelunker
+$> cd spelunker
 $> make cli
 go build -mod vendor -tags="sqlite3,icu,json1,fts5,opensearch" -ldflags="-s -w" -o bin/wof-spelunker-httpd cmd/wof-spelunker-httpd/main.go
 ```
