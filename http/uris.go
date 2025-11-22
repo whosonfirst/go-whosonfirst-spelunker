@@ -7,7 +7,7 @@ import (
 	"reflect"
 	"strings"
 
-	"github.com/whosonfirst/go-whosonfirst-spelunker/v2"
+	"github.com/whosonfirst/spelunker/v2"
 )
 
 // URIs is a struct for defining paths (URIs) for specific Spelunker web application endpoints.

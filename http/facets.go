@@ -6,7 +6,7 @@ import (
 	"net/http"
 
 	"github.com/aaronland/go-http/v4/sanitize"
-	"github.com/whosonfirst/go-whosonfirst-spelunker/v2"
+	"github.com/whosonfirst/spelunker/v2"
 )
 
 // FiltersFromRequest derives faceting criteria from 'req' for query parameters matching 'params'.

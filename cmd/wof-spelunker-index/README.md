@@ -169,7 +169,7 @@ import (
         "context"
         "log"
 	
-        "github.com/whosonfirst/go-whosonfirst-spelunker/app/index"
+        "github.com/whosonfirst/spelunker/app/index"
         _ "github.com/YOUR_ORG/go-whosonfirst-spelunker-CUSTOM_ITERATOR"	
 )
 

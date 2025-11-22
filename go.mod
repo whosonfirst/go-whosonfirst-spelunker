@@ -1,4 +1,4 @@
-module github.com/whosonfirst/go-whosonfirst-spelunker/v2
+module github.com/whosonfirst/spelunker/v2
 
 go 1.25.0
 

@@ -9,8 +9,8 @@ import (
 
 	"github.com/aaronland/go-http/v4/sanitize"
 	"github.com/aaronland/go-http/v4/slog"
-	"github.com/whosonfirst/go-whosonfirst-spelunker/v2"
-	sp_http "github.com/whosonfirst/go-whosonfirst-spelunker/v2/http"
+	"github.com/whosonfirst/spelunker/v2"
+	sp_http "github.com/whosonfirst/spelunker/v2/http"
 )
 
 // SearchFacetedHandlerOptions defines options for invoking the `SearchFacetedHandler` method.

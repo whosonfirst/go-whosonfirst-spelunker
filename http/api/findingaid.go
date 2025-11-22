@@ -4,8 +4,8 @@ import (
 	"net/http"
 
 	"github.com/aaronland/go-http/v4/slog"
-	"github.com/whosonfirst/go-whosonfirst-spelunker/v2"
-	sp_http "github.com/whosonfirst/go-whosonfirst-spelunker/v2/http"
+	"github.com/whosonfirst/spelunker/v2"
+	sp_http "github.com/whosonfirst/spelunker/v2/http"
 	wof_http "github.com/whosonfirst/go-whosonfirst/http"
 )
 

@@ -4,5 +4,5 @@ package app
 
 import (
 	_ "github.com/mattn/go-sqlite3"
-	_ "github.com/whosonfirst/go-whosonfirst-spelunker/v2/sql"
+	_ "github.com/whosonfirst/spelunker/v2/sql"
 )

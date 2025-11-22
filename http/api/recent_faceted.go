@@ -11,8 +11,8 @@ import (
 
 	"github.com/aaronland/go-http/v4/slog"
 	"github.com/sfomuseum/iso8601duration"
-	"github.com/whosonfirst/go-whosonfirst-spelunker/v2"
-	sp_http "github.com/whosonfirst/go-whosonfirst-spelunker/v2/http"
+	"github.com/whosonfirst/spelunker/v2"
+	sp_http "github.com/whosonfirst/spelunker/v2/http"
 )
 
 // RecentFacetedHandlerOptions defines options for invoking the `RecentFacetedHandler` method.

@@ -8,7 +8,7 @@ import (
 	"regexp"
 
 	derivatives_api "github.com/whosonfirst/go-whosonfirst-derivatives/http/api"
-	"github.com/whosonfirst/go-whosonfirst-spelunker/v2/http/api"
+	"github.com/whosonfirst/spelunker/v2/http/api"
 )
 
 func findingAidHandlerFunc(ctx context.Context) (http.Handler, error) {

@@ -6,11 +6,11 @@ import (
 	"os"
 
 	_ "github.com/whosonfirst/go-whosonfirst-iterate-git/v3"
-	_ "github.com/whosonfirst/go-whosonfirst-spelunker/v2/app"
-	_ "github.com/whosonfirst/go-whosonfirst-spelunker/v2/app/index/commands/opensearch"
-	_ "github.com/whosonfirst/go-whosonfirst-spelunker/v2/app/index/commands/sql"
+	_ "github.com/whosonfirst/spelunker/v2/app"
+	_ "github.com/whosonfirst/spelunker/v2/app/index/commands/opensearch"
+	_ "github.com/whosonfirst/spelunker/v2/app/index/commands/sql"
 
-	"github.com/whosonfirst/go-whosonfirst-spelunker/v2/app/index/commands"
+	"github.com/whosonfirst/spelunker/v2/app/index/commands"
 )
 
 func usage() {

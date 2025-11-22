@@ -26,8 +26,8 @@ For example:
 import (
        "context"
 
-       "github.com/whosonfirst/go-whosonfirst-spelunker"
-       _ "github.com/whosonfirst/go-whosonfirst-spelunker/sql"       
+       "github.com/whosonfirst/spelunker"
+       _ "github.com/whosonfirst/spelunker/sql"       
 )
 
 sp, _ := spelunker.NewSpelunker(context.Background(), "sql://sqlite3?dsn=example.db")

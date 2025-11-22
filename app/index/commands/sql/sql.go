@@ -4,7 +4,7 @@ import (
 	"context"
 
 	sql_index "github.com/whosonfirst/go-whosonfirst-database/app/sql/tables/index"
-	"github.com/whosonfirst/go-whosonfirst-spelunker/v2/app/index/commands"
+	"github.com/whosonfirst/spelunker/v2/app/index/commands"
 )
 
 type IndexSQLCommand struct {

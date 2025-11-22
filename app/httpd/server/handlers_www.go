@@ -8,9 +8,9 @@ import (
 
 	"github.com/aaronland/go-http-maps/v2"
 	opensearch_http "github.com/aaronland/go-http/v4/opensearch" // as in the browser search widget not the document store
-	"github.com/whosonfirst/go-whosonfirst-spelunker/v2/http/templates/javascript"
-	"github.com/whosonfirst/go-whosonfirst-spelunker/v2/http/templates/text"
-	"github.com/whosonfirst/go-whosonfirst-spelunker/v2/http/www"
+	"github.com/whosonfirst/spelunker/v2/http/templates/javascript"
+	"github.com/whosonfirst/spelunker/v2/http/templates/text"
+	"github.com/whosonfirst/spelunker/v2/http/www"
 )
 
 func robotsTxtHandlerFunc(ctx context.Context) (http.Handler, error) {

@@ -6,7 +6,7 @@ import (
 	"fmt"
 	"net/url"
 
-	"github.com/whosonfirst/go-whosonfirst-spelunker/v2"
+	"github.com/whosonfirst/spelunker/v2"
 )
 
 // SQLSpelunker implements the `spelunker.Spelunker` interface for Who's On First records stored in a `database/sql`-backed relational database.

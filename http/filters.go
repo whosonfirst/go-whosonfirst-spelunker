@@ -6,7 +6,7 @@ import (
 	"net/http"
 
 	"github.com/aaronland/go-http/v4/sanitize"
-	"github.com/whosonfirst/go-whosonfirst-spelunker/v2"
+	"github.com/whosonfirst/spelunker/v2"
 )
 
 // DefaultFilterParams returns the default list of query parameters to examine for filtering criteria.

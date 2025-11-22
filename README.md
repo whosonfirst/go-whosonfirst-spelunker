@@ -1,4 +1,4 @@
-# go-whosonfirst-spelunker
+# spelunker
 
 Go package implementing tools and a common interface for querying (or "spelunking") an index Who's On First data.
 
@@ -34,7 +34,7 @@ That's it. Point your web browser at `http://localhost:8080` and happy spelunkin
 
 ## Documentation
 
-[![Go Reference](https://pkg.go.dev/badge/github.com/whosonfirst/go-whosonfirst-spelunker.svg)](https://pkg.go.dev/github.com/whosonfirst/go-whosonfirst-spelunker)
+[![Go Reference](https://pkg.go.dev/badge/github.com/whosonfirst/spelunker.svg)](https://pkg.go.dev/github.com/whosonfirst/spelunker)
 
 ## Tools
 
@@ -225,8 +225,8 @@ For example:
 import (
        "context"
 
-       "github.com/whosonfirst/go-whosonfirst-spelunker"
-       _ "github.com/whosonfirst/go-whosonfirst-spelunker/sql"       
+       "github.com/whosonfirst/spelunker"
+       _ "github.com/whosonfirst/spelunker/sql"       
 )
 
 sp, _ := spelunker.NewSpelunker(context.Background(), "sql://sqlite3?dsn=example.db")
@@ -249,8 +249,8 @@ import (
        "context"
        "net/url"
        
-       "github.com/whosonfirst/go-whosonfirst-spelunker"
-       _ "github.com/whosonfirst/go-whosonfirst-spelunker/opensearch"       
+       "github.com/whosonfirst/spelunker"
+       _ "github.com/whosonfirst/spelunker/opensearch"       
 )
 
 client_uri := "opensearch://localhost:9200/spelunker?require-tls=true"
@@ -275,8 +275,8 @@ import (
         "context"
         "log"
 	
-        "github.com/whosonfirst/go-whosonfirst-spelunker/app/httpd/server"
-        _ "github.com/whosonfirst/go-whosonfirst-spelunker-CUSTOM_DB"	
+        "github.com/whosonfirst/spelunker/app/httpd/server"
+        _ "github.com/whosonfirst/spelunker-CUSTOM_DB"	
 )
 
 func main() {

@@ -3,7 +3,7 @@ package funcs
 import (
 	"testing"
 
-	"github.com/whosonfirst/go-whosonfirst-spelunker/v2/http"
+	"github.com/whosonfirst/spelunker/v2/http"
 )
 
 func TestReplaceAll(t *testing.T) {
