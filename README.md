@@ -2,13 +2,9 @@
 
 Go package implementing a common interface for Who's On First "spelunker"-ing.
 
-## Documentation
+## Deprecation notice
 
-Documentation is incomplete at this time.
-
-## Important
-
-This is work in progress and you should expect things to change, break or simply not work yet.
+This package has been deprecated and superseded by the [whosonfirst/spelunker](https://github.com/whosonfirst/spelunker) package.
 
 ## Motivation
 
